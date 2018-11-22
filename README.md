@@ -1,4 +1,5 @@
 # porings
 
-The data is scraped. Current results: https://beta.observablehq.com/@kor-al/poring-family
+Current results: https://beta.observablehq.com/@kor-al/poring-family
+
 To be continued...
