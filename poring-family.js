@@ -1,11 +1,11 @@
 // URL: https://beta.observablehq.com/@kor-al/poring-family
 // Title: Poring Family
 // Author: Alisa (@kor-al)
-// Version: 1591
+// Version: 1595
 // Runtime version: 1
 
 const m0 = {
-  id: "117fdc19dab9f706@1591",
+  id: "117fdc19dab9f706@1595",
   variables: [
     {
       inputs: ["md"],
@@ -443,8 +443,11 @@ function show_img(d, j) {
     .attr("fill",  d3.color(color(d.data.group)).darker())
     .attr('y', -pie_innerR/2+10).transition().duration(500)
     .style("opacity", 1.0);
-  var img = d3.select('.central_img').attr('xlink:href', name_group['img_url']);
-  img.attr('x',-name_group['img_width']/2).attr('y',-name_group['img_height']/2).transition().duration(500).style("opacity", 1.0);
+  var img = d3.select('.central_img')
+  .attr('xlink:href', name_group['img_url'])
+  .attr('x',-name_group['img_width']/2).attr('y',-name_group['img_height']/2)
+  .attr('height',name_group['img_width']).attr('width',name_group['img_height'])
+  .transition().duration(500).style("opacity", 1.0);
 }
 )})
     },
@@ -623,7 +626,7 @@ require("d3@5")
 };
 
 const notebook = {
-  id: "117fdc19dab9f706@1591",
+  id: "117fdc19dab9f706@1595",
   modules: [m0]
 };
 
