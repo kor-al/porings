@@ -1,7 +1,7 @@
 function createSelector(data, targetSVG) {
   // d3.select(targetSVG).append('circle').attr('fill', 'red').attr('r', '100').attr('cx', 10).attr('cy', 10);
 
-  const pie_arcs = pie(data);
+  const pie_arcs = pie_group_size(data);
 
   const svg = d3.select(targetSVG)
     .attr("text-anchor", "middle")
@@ -68,7 +68,7 @@ function draw_base(targetGroups)
     .attr('class', function(d, i) {
       return 'arc' + i;
     })
-    .attr("d", arc)
+    .attr("d", pie_arc)
     .attr("fill", d => color(d.data.group))
     .attr("stroke", "white")
 
@@ -77,10 +77,10 @@ function draw_base(targetGroups)
     .attr('class', function(d, i) {
       return 'invisible_arc' + i;
     })
-    .attr("d", arc)
+    .attr("d", pie_arc)
     .style("fill", "transparent")
     .on("mouseover", function handleMouseOver(d, i) {
-      d3.select(this).attr('d', OuterArc); //.append("svg:title").text('poring group');
+      d3.select(this).attr('d', outerArc); //.append("svg:title").text('poring group');
       d3.select('.arc' + i).attr("fill", d => d3.color(color(d.data.group)).darker());
       var igroup = d3.selectAll('.group' + i);
       igroup.selectAll(".g_line").transition().duration(500)
@@ -92,7 +92,7 @@ function draw_base(targetGroups)
       d3.select('.central_text').text(d.data.group).attr("fill", color(d.data.group));
     })
     .on("mouseout", function handleMouseOut(d, i) {
-      d3.select(this).attr('d', arc);
+      d3.select(this).attr('d', pie_arc);
       d3.select('.arc' + i).attr("fill", d => color(d.data.group));
       var igroup = d3.selectAll('.group' + i)
       igroup.selectAll(".g_line").transition().duration(500)
@@ -152,7 +152,7 @@ function draw_groups(d, i) {
   circles_g.on("mouseover", function(dangle, j) {
       //to emulate overlaping mouseover on invisible arc and circles:
       //invisible arc has to be kept activated - similar code to its mouseover but delay removed
-      d3.select('.invisible_arc' + i).attr('d', OuterArc);
+      d3.select('.invisible_arc' + i).attr('d', outerArc);
       d3.select('.arc' + i).attr("fill", d => d3.color(color(d.data.group)).darker());
       var igroup = d3.selectAll('.group' + i);
       igroup.selectAll(".g_line").transition().duration(500)
@@ -253,13 +253,6 @@ function hide_img() {
 }
 
 
-function polarToCartesian(angle, radius) {
-  return {
-    x: Math.cos(angle) * radius,
-    y: Math.sin(angle) * radius
-  };
-}
-
 function p_start(angle) {
   return polarToCartesian(-Math.PI / 2 + angle, pie_outerR);
 }
@@ -341,7 +334,7 @@ function getCirclesAnchors(num, startAngle, endAngle) {
 //contains max values of circles for a fixed base
 //e.g. if base = 2 we can place max 3 circles:
 //  o
-// o o -- a base level
+// o o <-- a base level
 const sum_table = [{
     'base': 1,
     'values': 1
@@ -382,12 +375,6 @@ function getCircleCoords(anchors, R, r, startAngle) {
 }
 
 
-function polarToCartesian(angle, radius) {
-  return {
-    x: Math.cos(angle) * radius,
-    y: Math.sin(angle) * radius
-  };
-}
 
 var outerR = 200,//180,
   small_r2 = 4,//3, //mobs with similar names names
@@ -397,23 +384,19 @@ var outerR = 200,//180,
 // originY = height / 2
 // originX = width / 2
 
-var arc = d3.arc()
+var pie_arc = d3.arc()
   .innerRadius(pie_innerR)
   .outerRadius(pie_outerR)
   .cornerRadius(10)
 
-var OuterArc = d3.arc()
+var outerArc = d3.arc()
   .innerRadius(pie_innerR)
   .outerRadius(outerR + 20)
 
-var pie = d3.pie()
+var pie_group_size = d3.pie()
   .sort(null)
   .startAngle(-Math.PI / 2)
   .endAngle(-Math.PI / 2 + 2 * Math.PI)
   .value(function(d) {
     return d.group_size;
   })
-
-  function toDegrees(rad) {
-      return rad * (180/Math.PI);
-  }
