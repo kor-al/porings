@@ -48,7 +48,7 @@ function createSelector(data, targetSVG) {
     .text("")
     .style("font-size", "14px")
 
-  var arcs_group = canvas_g.append("g").attr('class', 'graph').classed('isClicked', false)
+  var arcs_group = canvas_g.append("g").attr('class', 'graph')
 
   var groups = arcs_group.selectAll("g")
     .data(pie_arcs)
@@ -76,11 +76,12 @@ function draw_base(targetGroups) {
     .attr('class', function(d, i) {
       return 'invisible_arc' + i;
     })
-    .classed('isClicked', false)
     .attr("d", pie_arc)
     .style("fill", "transparent")
-    .on("mouseover", function(d, i) { expand_invisible_arcs(d, i, delay_val = 500);})
-    .on("mouseout", shrink_invisible_arcs);
+    .on("mouseover", function(d, i) {
+      expand_invisible_arcs(d, i, delay_val = 500);
+    })
+    .on("mouseout", function(d, i) {shrink_invisible_arcs(d,i)});
 
   //draw mob groups
   var arcs_circles = targetGroups.each(draw_groups);
@@ -88,24 +89,31 @@ function draw_base(targetGroups) {
 }
 
 function expand_invisible_arcs(d, i, delay_val = 0) {
-    d3.select('.invisible_arc' + i).attr('d', outerArc).classed('isHovered', true); //.append("svg:title").text('poring group');
-    d3.select('.arc' + i).classed('isHovered', true);//.attr("fill", d => d3.color(color(d.data.group)).darker());
-    var igroup = d3.selectAll('.group' + i);
-    igroup.selectAll(".g_line").transition().duration(500)
-      .attr("x2", function(d) {
-        return p_end(d).x;
-      })
-      .attr("y2", function(d) {
-        return p_end(d).y;
-      })
-    igroup.selectAll(".g_circle").transition().delay(delay_val / 2).duration(500).attr("r", small_r)
-    igroup.selectAll(".type_circle").transition().delay(delay_val).duration(500).attr("r", small_r2)
-    d3.select('.helper').text('Genus').attr("fill", color(d.data.group));
-    d3.select('.central_text').text(d.data.group).attr("fill", color(d.data.group));
+  d3.select('.invisible_arc' + i).attr('d', outerArc); //.append("svg:title").text('poring group');
+  d3.select('.arc' + i).classed('isHovered', true); //.attr("fill", d => d3.color(color(d.data.group)).darker());
+  var igroup = d3.selectAll('.group' + i);
+  igroup.selectAll(".g_line").transition().duration(500)
+    .attr("x2", function(d) {
+      return p_end(d).x;
+    })
+    .attr("y2", function(d) {
+      return p_end(d).y;
+    })
+  igroup.selectAll(".g_circle").transition().delay(delay_val / 2).duration(500).attr("r", small_r)
+  igroup.selectAll(".type_circle").transition().delay(delay_val).duration(500).attr("r", small_r2)
+  d3.select('.helper').text('Genus').attr("fill", color(d.data.group));
+  d3.select('.central_text').text(d.data.group).attr("fill", color(d.data.group));
 }
 
-function shrink_invisible_arcs(d, i) {
-  if (!d3.select('.invisible_arc' + i).classed('isClicked')) {
+function shrink_invisible_arcs(d, i,ind_clicked = -1) {
+  // if hover mode: there is no clicks -
+  //shrink the arc with index i if not hovered
+  //if click mode: do not shrink the clicked arc
+
+  if(ind_clicked == -1){
+    ind_clicked = curClicked.group
+  }
+  if (i != ind_clicked) {
     d3.select('.invisible_arc' + i).attr('d', pie_arc);
     d3.select('.arc' + i).classed('isHovered', false);
     var igroup = d3.selectAll('.group' + i)
@@ -123,26 +131,26 @@ function shrink_invisible_arcs(d, i) {
   }
 }
 
-function hadle_mouseOver_circle(d,i,j){
-  if (!d3.select('#g_circle' + j + "_" + i).classed('isClicked')){
+function hadle_mouseOver_circle(d, i, j) {
+  if (!d3.select('#g_circle' + j + "_" + i).classed('isClicked')) {
     d3.select('#g_circle' + j + "_" + i).classed('isHovered', true);
     d3.select('#g_line' + j + "_" + i).classed('isHovered', true);
     d3.selectAll('#type_circles' + j + "_" + i).each(repeat);
     show_img(d, j);
   }
-    //updateStats("#statsDia_svg", d.data.mob_types[j].value.values);}
+  //updateStats("#statsDia_svg", d.data.mob_types[j].value.values);}
 }
 
-function hadle_mouseOut_circle(i,j){
-  if (!d3.select('#g_circle' + j + "_" + i).classed('isClicked'))
-  {        //d3.select(this).selectAll('.g_circle').attr("fill", color(d.data.group));
+function hadle_mouseOut_circle(i, j) {
+  if (!d3.select('#g_circle' + j + "_" + i).classed('isClicked')) { //d3.select(this).selectAll('.g_circle').attr("fill", color(d.data.group));
+
+
     d3.select('#g_circle' + j + "_" + i).classed('isHovered', false);
     //d3.selectAll('#type_circles' + j + "_" + i).attr("fill", color(d.data.group));
     d3.selectAll('#type_circles' + j + "_" + i).classed('isHovered', false);
     d3.selectAll('#g_line' + j + "_" + i).classed('isHovered', false);
     hide_img();
-    //reset stats diagram
-    resetStats("#statsDia_svg");
+
   }
 }
 
@@ -178,15 +186,18 @@ function draw_groups(d, i) {
     })
     .attr("stroke", color(d.data.group))
     .attr('class', 'g_line')
+    .classed('isHovered', false)
     .style("pointer-events", "none")
     .attr('id', function(angles, j) {
       return 'g_line' + j + "_" + i;
     })
 
   var circles_g = sub_arc_group.append("g")
-  .attr('id', function(angles, j) {
-    return 'g_circle' + j + "_" + i;
-  })
+    .attr('id', function(angles, j) {
+      return 'g_circle' + j + "_" + i;
+    });
+  // .classed('isClicked', false)
+  // .classed('isHovered', false);
 
   var circle = circles_g.append("circle")
     .attr("r", 0)
@@ -197,8 +208,6 @@ function draw_groups(d, i) {
       return positions[j].end.y;
     })
     .attr('class', 'g_circle')
-    .classed('isClicked', false)
-    .classed('isHovered', false)
     .attr("fill", color(d.data.group))
     .on("mouseover", function(dangle, j) {
       d3.select('.helper').text('Species').attr("fill", color(d.data.group));
@@ -210,64 +219,62 @@ function draw_groups(d, i) {
   circles_g.on("mouseover", function(dangle, j) {
       //to emulate overlaping mouseover on invisible arc and circles:
       //invisible arc has to be kept activated - similar code to its mouseover but delay removed
-      expand_invisible_arcs(d,i);
-    //   if (!d3.select('.invisible_arc' + i).classed('isClicked')) {
-    //     d3.select('.invisible_arc' + i).attr('d', outerArc);
-    //     d3.select('.arc' + i).attr("fill", d => d3.color(color(d.data.group)).darker());
-    //     var igroup = d3.selectAll('.group' + i);
-    //     igroup.selectAll(".g_line").transition().duration(500)
-    //       .attr('x2', function(a, j) {
-    //         return positions[j].end.x;
-    //       })
-    //       .attr('y2', function(a, j) {
-    //         return positions[j].end.y;
-    //       })
-    //     igroup.selectAll(".g_circle").transition().duration(500).attr("r", small_r)
-    //     igroup.selectAll(".type_circle").transition().duration(500).attr("r", small_r2)
-    //     d3.select('.central_text').text(d.data.group).attr("fill", color(d.data.group));
-    // }
+      expand_invisible_arcs(d, i);
+      //   if (!d3.select('.invisible_arc' + i).classed('isClicked')) {
+      //     d3.select('.invisible_arc' + i).attr('d', outerArc);
+      //     d3.select('.arc' + i).attr("fill", d => d3.color(color(d.data.group)).darker());
+      //     var igroup = d3.selectAll('.group' + i);
+      //     igroup.selectAll(".g_line").transition().duration(500)
+      //       .attr('x2', function(a, j) {
+      //         return positions[j].end.x;
+      //       })
+      //       .attr('y2', function(a, j) {
+      //         return positions[j].end.y;
+      //       })
+      //     igroup.selectAll(".g_circle").transition().duration(500).attr("r", small_r)
+      //     igroup.selectAll(".type_circle").transition().duration(500).attr("r", small_r2)
+      //     d3.select('.central_text').text(d.data.group).attr("fill", color(d.data.group));
+      // }
 
       //finally handle circle mouseover
-      hadle_mouseOver_circle(d,i,j);
+      hadle_mouseOver_circle(d, i, j);
 
     })
-    .on("mouseout", function(dangle, j) {hadle_mouseOut_circle(i,j);})
+    .on("mouseout", function(dangle, j) {
+      hadle_mouseOut_circle(i, j);
+    })
     .on("click", function(dangle, j) {
-      console.log('clicked');
-      console.log(i,j);
 
-      // if already active - deactivate
       var active = d3.select(this).classed('isClicked') ? false : true;
-      d3.select(this).classed('isClicked',active).classed('isHovered',active);
-      var inviz_arc = d3.select('.invisible_arc' + i);
-      inviz_arc.classed('isClicked',active);
-      //
-      if (curClicked.type != j  & curClicked.type!=null){
-        console.log('deselect prev circle');
-        d3.select('#g_circle' + curClicked.type + "_" + curClicked.group)
-        .classed('isClicked',false).classed('isHovered',false);
-        d3.select('#g_line' + curClicked.type + "_" + curClicked.group)
-        .classed('isHovered',false);
-        active = true;
+
+      //remove active selection
+      d3.selectAll('.isClicked').classed('isClicked', false);
+
+      d3.select(this).classed('isClicked', active).classed('isHovered', !active);
+      var iarc = d3.select('.arc' + i);
+      // iarc.classed('isHovered',active);
+      if (active) {
+
+        if (curClicked.group != i & curClicked.group != null) {
+          var cur_arc = d3.select('.arc' + curClicked.group);
+          cur_arc.classed('isHovered', false);
+          shrink_invisible_arcs(cur_arc.datum(),curClicked.group,i);
+        }
+
+        updateStats("#statsDia_svg", d.data.mob_types[j].value.values);
+
+        curClicked.group = i;
+        curClicked.type = j;
+        curClicked.d = iarc.datum();
+
+      } else {
+        curClicked.group = null;
+        curClicked.type = null;
+        curClicked.d = null;
+        //reset stats diagram
+        resetStats("#statsDia_svg");
       }
-
-      if (curClicked.group != i & curClicked.group!=null){
-        var cur_inviz_arc = d3.select('.invisible_arc' + curClicked.group);
-        cur_inviz_arc.classed('isClicked',false).classed('isHovered',false);
-        shrink_invisible_arcs(cur_inviz_arc.datum(), curClicked.group);
-        active = true;
-      }
-
-      //save new click
-      if (active){
-      curClicked.group = i;curClicked.type = j;curClicked.d = inviz_arc.datum();
-      updateStats("#statsDia_svg", d.data.mob_types[j].value.values);
-
-    }
-    else {
-      curClicked.group = null ;curClicked.type = null ;curClicked.d = null;
-    }
-
+      
     });
   //
   var circles_small = circles_g.append("g")
@@ -343,14 +350,13 @@ function show_img(d, j) {
 
 
 function hide_img() {
-  if (curClicked.type!=null){
+  if (curClicked.type != null) {
     show_img(curClicked.d, curClicked.type);
+  } else {
+    d3.select('.central_text').transition().duration(500).attr('y', 0)
+    d3.select('.name_text').transition().duration(500).style("opacity", 0.0)
+    d3.select('.central_img').transition().duration(500).style("opacity", 0.0);
   }
-  else{
-  d3.select('.central_text').transition().duration(500).attr('y', 0)
-  d3.select('.name_text').transition().duration(500).style("opacity", 0.0)
-  d3.select('.central_img').transition().duration(500).style("opacity", 0.0);
-}
 }
 
 
@@ -485,7 +491,11 @@ var outerR = 200, //180,
 // originY = height / 2
 // originX = width / 2
 
-var curClicked = {group: null, type:null, d: null}
+var curClicked = {
+  group: null,
+  type: null,
+  d: null
+}
 
 var pie_arc = d3.arc()
   .innerRadius(pie_innerR)

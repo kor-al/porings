@@ -23,18 +23,25 @@
 	}
 
 	.isClicked {
-		filter: brightness(20%);
+		filter: brightness(50%);
 	}
 
-	.isHovered, g_line.isHovered{
-	/* , line{ */
+	path.isClicked{
+		stroke: none;
+		filter: brightness(50%);
+	}
+	/* .isHovered, g_line.isHovered{
+	/* , line{
+		filter: brightness(80%);
+		fill: blue;
+	} */
+
+	.isHovered circle, .isHovered line{
 		filter: brightness(80%);
 	}
-
-	path.isHovered {
+	path.isHovered{
 		stroke: none;
 		filter: brightness(80%);
-		/* fill: blue; */
 	}
 
 </style>
