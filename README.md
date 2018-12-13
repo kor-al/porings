@@ -4,6 +4,6 @@ Porings are kinds of monsters from Ragnarok Online, the online game I used to pl
 
 The data has been scraped from the database (available on http://ratemyserver.net/) and preprocessed with python.
 
-Current visual results: https://beta.observablehq.com/@kor-al/poring-family  and [index.html](porings/code/index.html)
+Current visual results: https://beta.observablehq.com/@kor-al/poring-family  and [index.html](code/index.html)
 
 Graphs that compare characteristics are to come.
