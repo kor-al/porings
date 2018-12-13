@@ -131,14 +131,22 @@ function createStatsDiagram(targetSVG) {
 }
 
 
-function updateStats(targetSVG, data) {
+function resetStats(targetSVG) {
 
   var graph = d3.select(targetSVG).select('#statsDiagram');
+
+  // remove previous lines
+  remove_poly(graph);
+
+  return graph;
+}
+
+function updateStats(targetSVG, data) {
 
   const fillOpacity = 1 / (data.length + 1)
 
   // remove previous lines
-  remove_poly(graph);
+  var graph = resetStats(targetSVG);
 
   // draw new
   data.forEach(function(d, i) {

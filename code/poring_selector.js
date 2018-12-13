@@ -141,6 +141,8 @@ function hadle_mouseOut_circle(i,j){
     d3.selectAll('#type_circles' + j + "_" + i).classed('isHovered', false);
     d3.selectAll('#g_line' + j + "_" + i).classed('isHovered', false);
     hide_img();
+    //reset stats diagram
+    resetStats("#statsDia_svg");
   }
 }
 
@@ -236,17 +238,10 @@ function draw_groups(d, i) {
 
       // if already active - deactivate
       var active = d3.select(this).classed('isClicked') ? false : true;
-      d3.select(this).classed('isClicked',active);
+      d3.select(this).classed('isClicked',active).classed('isHovered',active);
       var inviz_arc = d3.select('.invisible_arc' + i);
       inviz_arc.classed('isClicked',active);
-
-      if (curClicked.group != i & curClicked.group!=null){
-        var cur_inviz_arc = d3.select('.invisible_arc' + curClicked.group);
-        cur_inviz_arc.classed('isClicked',false).classed('isHovered',false);
-        shrink_invisible_arcs(cur_inviz_arc.datum(), curClicked.group)
-        active = true;
-      }
-
+      //
       if (curClicked.type != j  & curClicked.type!=null){
         console.log('deselect prev circle');
         d3.select('#g_circle' + curClicked.type + "_" + curClicked.group)
@@ -254,7 +249,13 @@ function draw_groups(d, i) {
         d3.select('#g_line' + curClicked.type + "_" + curClicked.group)
         .classed('isHovered',false);
         active = true;
-        //d3.selectAll('#type_circles' + j + "_" + i).classed('isHovered', false);
+      }
+
+      if (curClicked.group != i & curClicked.group!=null){
+        var cur_inviz_arc = d3.select('.invisible_arc' + curClicked.group);
+        cur_inviz_arc.classed('isClicked',false).classed('isHovered',false);
+        shrink_invisible_arcs(cur_inviz_arc.datum(), curClicked.group);
+        active = true;
       }
 
       //save new click
