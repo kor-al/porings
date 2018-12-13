@@ -4,9 +4,12 @@ const maxR = 250, //radius of the biggest circle
   minStatValue = 0,
   maxStatValue = 260;
 
+const sliceAngle = 2 * Math.PI / NumStats;
+var rScale = d3.scaleSqrt().range([maxR - padding, 0]).domain([maxStatValue, 0]);
+
 const Stats = ['Vit', 'Agi', 'Str', 'Luk', 'Int', 'Dex'];
 
-function createStatsDiagram(data, targetSVG) {
+function createStatsDiagram(targetSVG) {
 
   const svg = d3.select(targetSVG)
     .attr("text-anchor", "middle")
@@ -18,11 +21,8 @@ function createStatsDiagram(data, targetSVG) {
   const canvas_g = svg.append("g")
     .attr("transform", `translate(${width / 2},${height / 2})`);
 
-  const sliceAngle = 2 * Math.PI / NumStats,
-    fillOpacity = 1 / (data.length + 1);
 
 
-  var rScale = d3.scaleSqrt().range([maxR - padding, 0]).domain([maxStatValue, 0]);
   var axisScale = d3.scaleLinear().range([0, maxR - padding]).domain([maxStatValue, 0]);
   //makes the axis go in the right direction
 
@@ -90,15 +90,58 @@ function createStatsDiagram(data, targetSVG) {
 
   //poligons
 
-  var graph = canvas_g.append('g')
+  var graph = canvas_g.append('g').attr('id', 'statsDiagram')
 
+  // data.forEach(function(d, i) {
+  //
+  //   var line0 = d3.line().x(0).y(0);
+  //
+  //   var line = d3.line()
+  //     .x(function(s, j) {
+  //       return polarToCartesian(j * sliceAngle, rScale(d[s])).x;
+  //     })
+  //     .y(function(s, j) {
+  //       return polarToCartesian(j * sliceAngle, rScale(d[s])).y;
+  //     });
+  //
+  //   graph.append("path")
+  //     .datum(Stats.concat(Stats[0]))
+  //     .attr("class", "line")
+  //     .attr("d", line0)
+  //     .attr("fill", color(d.viz_group))
+  //     .attr("fill-opacity", fillOpacity)
+  //     .on('mouseover', function(s, j) {
+  //       var poly = d3.select(this)
+  //       poly.raise()
+  //       poly.attr('fill', color(d.viz_group))
+  //       .attr("fill-opacity", 0.5)
+  //       .attr("stroke", d3.hsl(color(d.viz_group)).darker())
+  //     })
+  //     .on('mouseout', function(s, j) {
+  //       d3.select(this).attr('fill', color(d.viz_group))
+  //         .attr("stroke", color(d.viz_group))
+  //         .attr("fill-opacity", fillOpacity)
+  //     })
+  //     .transition().delay(100 * i).duration(500)
+  //     .attr("d", line)
+  //     .attr("stroke", color(d.viz_group))
+  //     .attr('stroke-width', 1)
+  // })
+
+}
+
+
+function updateStats(targetSVG, data) {
+
+  var graph = d3.select(targetSVG).select('#statsDiagram');
+
+  const fillOpacity = 1 / (data.length + 1)
+
+  // remove previous lines
+  remove_poly(graph);
+
+  // draw new
   data.forEach(function(d, i) {
-    // graph.selectAll("circle") //appending circles for each data point
-    // .data(Stats)
-    // .enter()
-    // .append('circle').attr("fill", color(d.viz_group)).attr('r', 1)
-    // .attr('cx', function(s, j){ return polarToCartesian(j*sliceAngle, rScale(d[s])).x})
-    // .attr('cy', function(s, j){ return polarToCartesian(j*sliceAngle, rScale(d[s])).y})
 
     var line0 = d3.line().x(0).y(0);
 
@@ -112,7 +155,7 @@ function createStatsDiagram(data, targetSVG) {
 
     graph.append("path")
       .datum(Stats.concat(Stats[0]))
-      .attr("class", "line")
+      .attr("class", "new_line")
       .attr("d", line0)
       .attr("fill", color(d.viz_group))
       .attr("fill-opacity", fillOpacity)
@@ -133,5 +176,17 @@ function createStatsDiagram(data, targetSVG) {
       .attr("stroke", color(d.viz_group))
       .attr('stroke-width', 1)
   })
+
+}
+
+function remove_poly(graph_selection){
+
+  var polys = graph_selection.selectAll(".new_line");
+
+  var line0 = d3.line().x(0).y(0);
+
+  polys.transition().delay(100).duration(500).attr("d", line0);
+
+  polys.remove();
 
 }

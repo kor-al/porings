@@ -21,6 +21,22 @@
 		width: 500px;
 		border: 1px solid gray;
 	}
+
+	.isClicked {
+		filter: brightness(50%);
+	}
+
+	.isHovered, g_line.isHovered{
+	/* , line{ */
+		filter: brightness(80%);
+	}
+
+	path.isHovered {
+		stroke: none;
+		filter: brightness(80%);
+		/* fill: blue; */
+	}
+
 </style>
 
 <body>
@@ -69,7 +85,10 @@
 
 			console.log(nestedData);
 			createSelector(nestedData, "#selector_svg");
-			createStatsDiagram(nestedData[0].mob_types[1].value.values, "#statsDia_svg");
+			createStatsDiagram("#statsDia_svg");
+			//updateStats("#statsDia_svg", nestedData[0].mob_types[1].value.values)
+			// nestedData[0].mob_types[1].value.values,
+			//console.log(nestedData[0].mob_types[1].value.values)
 		};
 	</script>
 </body>
