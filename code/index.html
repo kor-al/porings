@@ -3,48 +3,12 @@
 
 <head>
 	<title>Porings</title>
+	<link rel="stylesheet" href="main.css">
 	<script src="https://d3js.org/d3.v5.min.js" type="text/JavaScript"></script>
 	<script src="./utils.js" type="text/JavaScript"></script>
 	<script src="./poring_selector.js" type="text/JavaScript"></script>
 	<script src="./stats_diagram.js" type="text/JavaScript"></script>
 </head>
-<style>
-	#selector_svg {
-		/* write only numbers - to be parsed in d3 */
-    height: 500px;
-    width: 500px;
-    border: 1px solid gray;
-  }
-	#statsDia_svg {
-		/* write only numbers - to be parsed in d3 */
-		height: 500px;
-		width: 500px;
-		border: 1px solid gray;
-	}
-
-	.isClicked {
-		filter: brightness(50%);
-	}
-
-	path.isClicked{
-		stroke: none;
-		filter: brightness(50%);
-	}
-	/* .isHovered, g_line.isHovered{
-	/* , line{
-		filter: brightness(80%);
-		fill: blue;
-	} */
-
-	.isHovered circle, .isHovered line{
-		filter: brightness(80%);
-	}
-	path.isHovered{
-		stroke: none;
-		filter: brightness(80%);
-	}
-
-</style>
 
 <body>
 	<svg id="selector_svg"></svg>
@@ -52,8 +16,6 @@
 
 	<script type="text/javascript">
 		//d3.select('#selector').append('circle').attr('r', '100').attr('cx', 10).attr('cy', 10).attr('fill', 'red');
-
-
 
 
 		var data = d3.csv("https://raw.githubusercontent.com/kor-al/porings/master/poring_family.csv")
