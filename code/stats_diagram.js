@@ -91,43 +91,6 @@ function createStatsDiagram(targetSVG) {
   //poligons
 
   var graph = canvas_g.append('g').attr('id', 'statsDiagram')
-
-  // data.forEach(function(d, i) {
-  //
-  //   var line0 = d3.line().x(0).y(0);
-  //
-  //   var line = d3.line()
-  //     .x(function(s, j) {
-  //       return polarToCartesian(j * sliceAngle, rScale(d[s])).x;
-  //     })
-  //     .y(function(s, j) {
-  //       return polarToCartesian(j * sliceAngle, rScale(d[s])).y;
-  //     });
-  //
-  //   graph.append("path")
-  //     .datum(Stats.concat(Stats[0]))
-  //     .attr("class", "line")
-  //     .attr("d", line0)
-  //     .attr("fill", color(d.viz_group))
-  //     .attr("fill-opacity", fillOpacity)
-  //     .on('mouseover', function(s, j) {
-  //       var poly = d3.select(this)
-  //       poly.raise()
-  //       poly.attr('fill', color(d.viz_group))
-  //       .attr("fill-opacity", 0.5)
-  //       .attr("stroke", d3.hsl(color(d.viz_group)).darker())
-  //     })
-  //     .on('mouseout', function(s, j) {
-  //       d3.select(this).attr('fill', color(d.viz_group))
-  //         .attr("stroke", color(d.viz_group))
-  //         .attr("fill-opacity", fillOpacity)
-  //     })
-  //     .transition().delay(100 * i).duration(500)
-  //     .attr("d", line)
-  //     .attr("stroke", color(d.viz_group))
-  //     .attr('stroke-width', 1)
-  // })
-
 }
 
 
@@ -163,21 +126,17 @@ function updateStats(targetSVG, data) {
 
     graph.append("path")
       .datum(Stats.concat(Stats[0]))
-      .attr("class", "new_line")
       .attr("d", line0)
-      .attr("fill", color(d.viz_group))
+      .classed(d.viz_group, true)
+      .classed('new_poly', true)
+      //.attr("fill", color(d.viz_group))
       .attr("fill-opacity", fillOpacity)
       .on('mouseover', function(s, j) {
         var poly = d3.select(this)
-        poly.raise()
-        poly.attr('fill', color(d.viz_group))
-        .attr("fill-opacity", 0.5)
-        .attr("stroke", d3.hsl(color(d.viz_group)).darker())
+        poly.raise().attr("fill-opacity", 0.5)
       })
       .on('mouseout', function(s, j) {
-        d3.select(this).attr('fill', color(d.viz_group))
-          .attr("stroke", color(d.viz_group))
-          .attr("fill-opacity", fillOpacity)
+        d3.select(this).attr("fill-opacity", fillOpacity)
       })
       .transition().delay(100 * i).duration(500)
       .attr("d", line)
@@ -189,7 +148,7 @@ function updateStats(targetSVG, data) {
 
 function remove_poly(graph_selection){
 
-  var polys = graph_selection.selectAll(".new_line");
+  var polys = graph_selection.selectAll(".new_poly");
 
   var line0 = d3.line().x(0).y(0);
 

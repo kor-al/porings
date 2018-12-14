@@ -1,0 +1,201 @@
+.Angeling.isClicked {
+  fill: #6b7575; }
+
+.Angeling.isHovered {
+  fill: #b9c0c0; }
+
+.Angeling {
+  fill: #d4d8d8; }
+
+line.Angeling.isClicked {
+  stroke: #6b7575; }
+
+line.Angeling.isHovered {
+  stroke: #b9c0c0; }
+
+line.Angeling {
+  stroke: #d4d8d8; }
+
+.new_poly.Angeling {
+  fill: #d4d8d8; }
+
+.new_poly.Angeling:hover {
+  fill: #d4d8d8;
+  stroke: #b9c0c0; }
+
+.Poring.isClicked {
+  fill: #b41608; }
+
+.Poring.isHovered {
+  fill: #f86a5d; }
+
+.Poring {
+  fill: #fa978e; }
+
+line.Poring.isClicked {
+  stroke: #b41608; }
+
+line.Poring.isHovered {
+  stroke: #f86a5d; }
+
+line.Poring {
+  stroke: #fa978e; }
+
+.new_poly.Poring {
+  fill: #fa978e; }
+
+.new_poly.Poring:hover {
+  fill: #fa978e;
+  stroke: #f86a5d; }
+
+.Poporing.isClicked {
+  fill: #647a29; }
+
+.Poporing.isHovered {
+  fill: #b5ce6d; }
+
+.Poporing {
+  fill: #c8db93; }
+
+line.Poporing.isClicked {
+  stroke: #647a29; }
+
+line.Poporing.isHovered {
+  stroke: #b5ce6d; }
+
+line.Poporing {
+  stroke: #c8db93; }
+
+.new_poly.Poporing {
+  fill: #c8db93; }
+
+.new_poly.Poporing:hover {
+  fill: #c8db93;
+  stroke: #b5ce6d; }
+
+.Marin.isClicked {
+  fill: #4a405c; }
+
+.Marin.isHovered {
+  fill: #9589ac; }
+
+.Marin {
+  fill: #b0a7c1; }
+
+line.Marin.isClicked {
+  stroke: #4a405c; }
+
+line.Marin.isHovered {
+  stroke: #9589ac; }
+
+line.Marin {
+  stroke: #b0a7c1; }
+
+.new_poly.Marin {
+  fill: #b0a7c1; }
+
+.new_poly.Marin:hover {
+  fill: #b0a7c1;
+  stroke: #9589ac; }
+
+.Magmaring.isClicked {
+  fill: #7a2907; }
+
+.Magmaring.isHovered {
+  fill: #f26328; }
+
+.Magmaring {
+  fill: #f58658; }
+
+line.Magmaring.isClicked {
+  stroke: #7a2907; }
+
+line.Magmaring.isHovered {
+  stroke: #f26328; }
+
+line.Magmaring {
+  stroke: #f58658; }
+
+.new_poly.Magmaring {
+  fill: #f58658; }
+
+.new_poly.Magmaring:hover {
+  fill: #f58658;
+  stroke: #f26328; }
+
+.Drops.isClicked {
+  fill: #98621f; }
+
+.Drops.isHovered {
+  fill: #e1ae6f; }
+
+.Drops {
+  fill: #eac699; }
+
+line.Drops.isClicked {
+  stroke: #98621f; }
+
+line.Drops.isHovered {
+  stroke: #e1ae6f; }
+
+line.Drops {
+  stroke: #eac699; }
+
+.new_poly.Drops {
+  fill: #eac699; }
+
+.new_poly.Drops:hover {
+  fill: #eac699;
+  stroke: #e1ae6f; }
+
+.Metaling.isClicked {
+  fill: #5e2d2c; }
+
+.Metaling.isHovered {
+  fill: #ba6c69; }
+
+.Metaling {
+  fill: #ca8e8c; }
+
+line.Metaling.isClicked {
+  stroke: #5e2d2c; }
+
+line.Metaling.isHovered {
+  stroke: #ba6c69; }
+
+line.Metaling {
+  stroke: #ca8e8c; }
+
+.new_poly.Metaling {
+  fill: #ca8e8c; }
+
+.new_poly.Metaling:hover {
+  fill: #ca8e8c;
+  stroke: #ba6c69; }
+
+.Others.isClicked {
+  fill: #457795; }
+
+.Others.isHovered {
+  fill: #a0c0d3; }
+
+.Others {
+  fill: #c3d7e3; }
+
+line.Others.isClicked {
+  stroke: #457795; }
+
+line.Others.isHovered {
+  stroke: #a0c0d3; }
+
+line.Others {
+  stroke: #c3d7e3; }
+
+.new_poly.Others {
+  fill: #c3d7e3; }
+
+.new_poly.Others:hover {
+  fill: #c3d7e3;
+  stroke: #a0c0d3; }
+
+/*# sourceMappingURL=colors.css.map */

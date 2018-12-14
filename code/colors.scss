@@ -1,0 +1,46 @@
+$colors: Angeling #d4d8d8, Poring #fa978e, Poporing #c8db93, Marin #b0a7c1, Magmaring #f58658, Drops #eac699, Metaling #ca8e8c, Others #c3d7e3; // https://coderwall.com/p/mjhy5g/an-approach-for-sass-pseudo-dictionaries
+@function getColor ($colorName) {
+  // Run across the color list.
+  @each $color in $colors {
+    // If the key (first child of the current $color) is
+    // the same as the specified by params, return the value.
+    @if nth($color, 1) == $colorName {
+      @return nth($color, 2);
+    }
+  }
+}
+@each $color in $colors {
+  .#{nth($color, 1)}.isClicked {
+    fill: darken(nth($color, 2),40%);
+  }
+
+  .#{nth($color, 1)}.isHovered {
+    fill: darken(nth($color, 2),10%);
+  }
+
+  .#{nth($color, 1)} {
+    fill: nth($color, 2);
+  }
+
+  line.#{nth($color, 1)}.isClicked {
+    stroke: darken(nth($color, 2),40%);
+  }
+
+  line.#{nth($color, 1)}.isHovered {
+    stroke: darken(nth($color, 2),10%);
+  }
+
+  line.#{nth($color, 1)} {
+    stroke: nth($color, 2);
+  }
+
+  .new_poly.#{nth($color, 1)} {
+    fill: nth($color, 2);
+    //stroke :  nth($color, 2);
+  }
+
+  .new_poly.#{nth($color, 1)}:hover {
+    fill: nth($color, 2);
+    stroke: darken(nth($color, 2),10%);
+  }
+}
