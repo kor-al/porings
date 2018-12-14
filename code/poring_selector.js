@@ -23,7 +23,7 @@ function createSelector(data, targetSVG) {
   var text = canvas_g.append('text')
     .attr('x', 0)
     .attr('y', 0)
-    .attr('id','central_text')
+    .attr('id', 'central_text')
     .text("Poring Family")
     .attr('fill', '#b55758')
     .style("font-size", "16px")
@@ -33,7 +33,7 @@ function createSelector(data, targetSVG) {
   var text_help = canvas_g.append('text')
     .attr('y', height / 2 - 50)
     .attr('x', width / 2 - 50)
-    .attr('id','helper')
+    .attr('id', 'helper')
     .text("")
     .attr('fill', '#b55758')
     .style("font-size", "12px")
@@ -80,7 +80,9 @@ function draw_base(targetGroups) {
     .on("mouseover", function(d, i) {
       expand_invisible_arcs(d, i, delay_val = 500);
     })
-    .on("mouseout", function(d, i) {shrink_invisible_arcs(d,i)});
+    .on("mouseout", function(d, i) {
+      shrink_invisible_arcs(d, i)
+    });
 
   //draw mob groups
   var arcs_circles = targetGroups.each(draw_groups);
@@ -104,12 +106,12 @@ function expand_invisible_arcs(d, i, delay_val = 0) {
   d3.select('#helper').text('Genus').classed(d.data.group, true);
 }
 
-function shrink_invisible_arcs(d, i,ind_clicked = -1) {
+function shrink_invisible_arcs(d, i, ind_clicked = -1) {
   // if hover mode: there is no clicks -
   //shrink the arc with index i if not hovered
   //if click mode: do not shrink the clicked arc
 
-  if(ind_clicked == -1){
+  if (ind_clicked == -1) {
     ind_clicked = curClicked.group
   }
   if (i != ind_clicked) {
@@ -126,7 +128,7 @@ function shrink_invisible_arcs(d, i,ind_clicked = -1) {
     igroup.selectAll(".g_circle").transition().duration(500).attr("r", 0)
     igroup.selectAll(".type_circle").transition().duration(500).attr("r", 0)
     d3.select('#central_text').text("Poring Family")
-    .classed(d.data.group, false).attr('fill', '#b55758');
+      .classed(d.data.group, false).attr('fill', '#b55758');
   }
   d3.select('#helper').text('').classed(d.data.group, false);
 }
@@ -209,7 +211,7 @@ function draw_groups(d, i) {
       return positions[j].end.y;
     })
     .attr('class', 'g_circle')
-    //.classed(d.data.group, true)
+  //.classed(d.data.group, true)
 
   circles_g.on("mouseover", function(dangle, j) {
       //to emulate overlaping mouseover on invisible arc and circles:
@@ -253,10 +255,11 @@ function draw_groups(d, i) {
         if (curClicked.group != i & curClicked.group != null) {
           var cur_arc = d3.select('.arc' + curClicked.group);
           cur_arc.classed('isHovered', false);
-          shrink_invisible_arcs(d3.select('.invisible_arc' + curClicked.group).datum(),curClicked.group,i);
+          shrink_invisible_arcs(d3.select('.invisible_arc' + curClicked.group).datum(), curClicked.group, i);
         }
 
         updateStats("#statsDia_svg", d.data.mob_types[j].value.values);
+        updatePropArcs("#propsDia_svg", d.data.mob_types[j].value.values);
 
         curClicked.group = i;
         curClicked.type = j;

@@ -146,7 +146,7 @@ function updateStats(targetSVG, data) {
 
 }
 
-function remove_poly(graph_selection){
+function remove_poly(graph_selection) {
 
   var polys = graph_selection.selectAll(".new_poly");
 
