@@ -140,7 +140,7 @@ function updateStats(targetSVG, data) {
       })
       .transition().delay(100 * i).duration(500)
       .attr("d", line)
-      .attr("stroke", color(d.viz_group))
+      .attr("stroke", group2color(d.viz_group))
       .attr('stroke-width', 1)
   })
 
@@ -152,8 +152,6 @@ function remove_poly(graph_selection) {
 
   var line0 = d3.line().x(0).y(0);
 
-  polys.transition().delay(100).duration(500).attr("d", line0);
-
-  polys.remove();
+  polys.transition().delay(100).duration(500).attr("d", line0).remove();
 
 }

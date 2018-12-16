@@ -1,11 +1,30 @@
 const TotalMaxLvl = 4,
   minPropValue = -200,
-  maxPropValue = 200;
-
+  maxPropValue = 200,
+  largestR = 100, //radius of the biggest circle
+  firstR = 50,
+  arc_width = 15,
+  OriginAngle = -Math.PI / 2,
+  RightAngleLimit = OriginAngle + Math.PI,
+  LeftAngleLimit = OriginAngle - Math.PI;
 
 
 const Properties = ["Holy", "Fire", "Water", "Ghost", "Earth", "Shadow", "Undead", "Poison", "Neutral"];
 
+var level2radius = d3.scaleLinear()
+  .domain([1, TotalMaxLvl])
+  .range([firstR, largestR]);
+
+var scaleProp = d3.scaleLinear()
+  .domain([minPropValue, maxPropValue])
+  .range([LeftAngleLimit, RightAngleLimit]);
+
+const startR = level2radius(TotalMaxLvl),
+  endR = startR + (arc_width - 1) * Properties.length;
+
+var name2innerRadius = d3.scaleOrdinal()
+  .domain(Properties)
+  .range([startR, endR])
 
 var color = d3.scaleOrdinal()
   .domain(Properties)
@@ -16,6 +35,16 @@ function arc_R(R, r = 0) {
   return d3.arc()
     .innerRadius(r)
     .outerRadius(R);
+}
+
+function arc_property_attr(j, startA = null, endA = null) {
+  return {
+    cornerRadius: 14,
+    innerRadius: startR + arc_width * j,
+    outerRadius: startR + arc_width * j + arc_width,
+    startAngle: startA === null ? OriginAngle : startA,
+    endAngle: endA === null ? OriginAngle + 0.01 : endA,
+  }
 }
 //
 // // function createPropsDiagram(targetSVG) {
@@ -64,43 +93,28 @@ function createPropsArcs(targetSVG, data) {
 
   var graph = canvas_g.append('g').attr('id', 'propArcs');
 
-  }
+}
 
 
-function updatePropArcs(targetSVG, data){
+function updatePropArcs(targetSVG, data) {
 
-  const maxR = 100, //radius of the biggest circle
-    minR = 25,
-    firstR = 50,
-    arc_width = 15,
-    originAngle = -Math.PI / 2,
-    RightAngleLimit = originAngle + Math.PI,
-    LeftAngleLimit = originAngle - Math.PI;
-
-  var level2radius = d3.scaleLinear()
-    .domain([1, TotalMaxLvl])
-    .range([firstR, maxR]);
-
-  var scaleProp = d3.scaleLinear()
-        .domain([minPropValue, maxPropValue])
-        .range([LeftAngleLimit, RightAngleLimit]);
-
-  const startR = level2radius(TotalMaxLvl),
-    endR = startR + (arc_width - 1) * Properties.length;
-
-  var name2innerRadius = d3.scaleOrdinal()
-    .domain(Properties)
-    .range([startR, endR])
 
   var graph = resetPropArcs(targetSVG)
 
-  var property_arcs_groups = graph.selectAll(".property_arcs")
+  var graph_group = graph.append('g').attr("id", "arc_graph")
+
+  var property_arcs_groups = graph_group.selectAll(".property_arcs")
     .data(data)
     .enter()
     .append("g")
     .attr("class", "property_arcs")
 
 
+
+  var text_arcs_groups = graph_group.append("g").attr("class", "max_arcs")
+    .selectAll(".max_arcs")
+    .data(Properties)
+    .enter()
 
   //max values of attr
   var max_values = Properties.map(function(p) {
@@ -110,94 +124,97 @@ function updatePropArcs(targetSVG, data){
     return getMin(data, p);
   });
 
-  var arc = d3.arc().cornerRadius(14); //.startAngle(originAngle)
-
-  function arcTween() {
-    return function(d, j) {
-      var value = this.parentNode.__data__
-      var newAngle = scaleProp(value)
-      var interpolate = d3.interpolate(d.endAngle, newAngle);
-      return function(t) {
-        d.endAngle = interpolate(t);
-        return arc
-          .innerRadius(startR + arc_width * j)
-          .outerRadius(startR + arc_width * j + arc_width)
-          .startAngle(originAngle)(d);
-      };
-    };
-  }
-
-
-  var propery_arc = property_arcs_groups
+  var property_arc = property_arcs_groups
     .each(function(d, i) {
-        var theArcs_group = d3.select(this);
-        var prop_values = Properties.map(function(p) {
-          return +d[p];
+      var theArcs_group = d3.select(this);
+      var prop_values = Properties.map(function(p) {
+        return +d[p];
+      })
+
+
+      var data_groups = theArcs_group.selectAll('.arcs').data(prop_values).enter().append('g');
+
+      data_groups.append("path")
+        .attr('class', 'arcs')
+        .datum(function(value, j) {
+          return arc_property_attr(j);
+        })
+        .attr('d', d3.arc())
+        .attr('fill', function(value, j) {
+          return color(Properties[j])
+        })
+        .attr('opacity', 1 / data.length)
+        .attr('stroke', 'white')
+        .transition().duration(500)
+        .attrTween("d", function(v, j) {
+          var value = this.parentNode.__data__
+          var newAngle = scaleProp(value)
+          return arcTween(newAngle)(v, j);
         })
 
-        console.log(prop_values)
+    })
 
-        var data_groups = theArcs_group.selectAll('.arcs_' + i).data(prop_values).enter().append('g');
+  //add text arc
+  //length of the arc is l = PI * r * (opening angle of the arc) / 180 grad
+  // as we want text to have the same length
+  var text_arcs = text_arcs_groups.append("path")
+    .attr('id', function(v, j) {
+      return 'maxArc_' + j;
+    })
+    .attr('d', function(value, j) {
+      return d3.arc()(arc_property_attr(j,
+        max_values[j] >= 0 ? scaleProp(max_values[j]) : scaleProp(min_values[j]),
+        max_values[j] >= 0 ? scaleProp(max_values[j]) + Math.PI / 5 : scaleProp(min_values[j]) - Math.PI / 5));
+    })
+    .attr('fill', 'transparent')
+    .attr('stroke', 'transparent');
 
-        data_groups.append("path")
-          .attr('class', 'arcs_' + i)
-          .datum(function(value, j) {
-            return {
-              innerRadius: startR + arc_width * j,
-              outerRadius: startR + arc_width * j + arc_width,
-              startAngle: originAngle,
-              endAngle: originAngle + 0.01
-            }
-          })
-          .attr('d', arc)
-          .attr('fill', function(value, j) {
-            return color(Properties[j])
-          })
-          .attr('opacity', 1 / data.length)
-          .attr('stroke', 'white')
-          .transition().duration(500)
-          .attrTween("d", arcTween())
 
-          //add text arc
-          //length of the arc is l = PI * r * (opening angle of the arc) / 180 grad
-          // as we want text to have the same length
-          data_groups.append("path")
-              .attr('id', function(v,j){ return 'maxArc_'+j;})
-              .attr('d', arc)
-              .attr('d', function(value, j){
-                    return arc({
-            innerRadius: startR + arc_width*j,
-            outerRadius: startR + arc_width*j+arc_width,
-            startAngle: max_values[j] >= 0 ? scaleProp(max_values[j]) : scaleProp(min_values[j]),
-            endAngle: max_values[j] >= 0 ? scaleProp(max_values[j]) + Math.PI/5 : scaleProp(min_values[j])- Math.PI/5});
-          })
-              .attr('fill', 'transparent')
-              .attr('stroke', 'transparent');
-        })
-
-        var text = graph.selectAll('text').data(Properties).enter()
-        .append("text")
-        .attr("class", "PropText")
-        .attr("x", function(v,j) {
-          if(max_values[j] >= 0){
-            return 10;}
-          else{
-            return 10;}})   //Move the text from the start angle of the arc
-        .attr("dy",function(v,j) {
-          if(max_values[j] >= 0){
-            return arc_width-3;}
-          else{
-            return -4;}})   //Move the text from the start angle of the arc
-        .append("textPath") //append a textPath to the text element
-        //.attr("startOffset","50%")
-        .style("text-anchor","start")
-        .attr("xlink:href", function(v,j){return "#maxArc_"+j;})
-        .text( function(v,j){return v})
-        .attr('fill-opacity', 0)
-        .transition().delay(200).duration(500)
-        .attr('fill-opacity',1)
+  var text = graph_group.append('g').attr("class", "PropText")
+    .selectAll('text').data(Properties).enter()
+    .append("text")
+    .attr("x", function(v, j) {
+      if (max_values[j] >= 0) {
+        return 10;
+      } else {
+        return 10;
+      }
+    }) //Move the text from the start angle of the arc
+    .attr("dy", function(v, j) {
+      if (max_values[j] >= 0) {
+        return arc_width - 3;
+      } else {
+        return -4;
+      }
+    }) //Move the text from the start angle of the arc
+    .append("textPath") //append a textPath to the text element
+    //.attr("startOffset","50%")
+    .style("text-anchor", "start")
+    .attr("xlink:href", function(v, j) {
+      return "#maxArc_" + j;
+    })
+    .attr('id', function(v, j) {
+      return 'label' + j
+    })
+    .attr('fill-opacity', 0)
+    .transition().delay(500).duration(500)
+    .text(function(v, j) {
+      return v
+    })
+    .attr('fill-opacity', 1)
 
 }
+
+function arcTween(newAngle) {
+  return function(d, j) {
+    var interpolate = d3.interpolate(d.endAngle, newAngle);
+    return function(t) {
+      d.endAngle = interpolate(t);
+      return d3.arc(arc_property_attr(j))(d);
+    };
+  };
+}
+
 
 //http://bl.ocks.org/herrstucki/6199768/23f51b97bd942f6b1b7cf0b9ba76ada4cb6d1cc7
 function petalPath(d, r) {
@@ -233,20 +250,36 @@ function resetPropArcs(targetSVG) {
   // remove previous lines
   remove_arcs(graph);
 
+
   return graph;
 }
 
 
 function remove_arcs(graph_selection) {
 
-  var arcs = graph_selection.selectAll(".property_arcs");
+  var graph = graph_selection.select("#arc_graph");
+  var max_arcs = graph_selection.selectAll(".max_arcs");
+  var text = graph_selection.selectAll(".PropText");
 
-  // var line0 = d3.line().x(0).y(0);
-  //
-  // polys.transition().delay(100).duration(500).attr("d", line0);
+  var arcs = graph_selection.selectAll(".arcs");
 
+  var count = 0,
+    totalArcs = arcs.size();
 
+  text.remove();
 
-  arcs.remove();
+  arcs.each(function(d, i) {
+    d3.select(this)
+      .attr('d', d3.arc())
+      .transition().duration(500)
+      .attrTween("d", arcTween(OriginAngle))
+      .on('end', function() {
+        console.log(count, totalArcs);
+        count++;
+        if (count == totalArcs) {
+          graph.remove();
+        }
+      })
+  })
 
 }
