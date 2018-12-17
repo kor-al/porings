@@ -133,10 +133,10 @@ function updateStats(targetSVG, data) {
       .attr("fill-opacity", fillOpacity)
       .on('mouseover', function(s, j) {
         var poly = d3.select(this)
-        poly.raise().attr("fill-opacity", 0.5)
+        poly.raise()//.attr("fill-opacity", 0.5)
       })
       .on('mouseout', function(s, j) {
-        d3.select(this).attr("fill-opacity", fillOpacity)
+        d3.select(this)//.attr("fill-opacity", fillOpacity)
       })
       .transition().delay(100 * i).duration(500)
       .attr("d", line)

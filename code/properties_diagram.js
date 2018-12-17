@@ -3,13 +3,14 @@ const TotalMaxLvl = 4,
   maxPropValue = 200,
   largestR = 100, //radius of the biggest circle
   firstR = 50,
+  level1R = 25,
   arc_width = 15,
   OriginAngle = -Math.PI / 2,
   RightAngleLimit = OriginAngle + Math.PI,
-  LeftAngleLimit = OriginAngle - Math.PI;
+  LeftAngleLimit = OriginAngle - Math.PI,
+  helper_pad = 20,
+  NumArcs = 3;
 
-
-const Properties = ["Holy", "Fire", "Water", "Ghost", "Earth", "Shadow", "Undead", "Poison", "Neutral"];
 
 var level2radius = d3.scaleLinear()
   .domain([1, TotalMaxLvl])
@@ -22,13 +23,13 @@ var scaleProp = d3.scaleLinear()
 const startR = level2radius(TotalMaxLvl),
   endR = startR + (arc_width - 1) * Properties.length;
 
+var scaleCircle = d3.scaleLinear()
+  .domain([0, NumArcs])
+  .range([0, 2 * Math.PI]);
+
 var name2innerRadius = d3.scaleOrdinal()
   .domain(Properties)
   .range([startR, endR])
-
-var color = d3.scaleOrdinal()
-  .domain(Properties)
-  .range(["#ff5500", "#b3f0ff", "#9999ff", "#d6d6c2", "#cccccc", "#ccffff", "#adebad", "#ff9999", "#c2d6d6"]);
 
 
 function arc_R(R, r = 0) {
@@ -46,39 +47,8 @@ function arc_property_attr(j, startA = null, endA = null) {
     endAngle: endA === null ? OriginAngle + 0.01 : endA,
   }
 }
-//
-// // function createPropsDiagram(targetSVG) {
-// //
-// //   const svg = d3.select(targetSVG)
-// //     .attr("text-anchor", "middle")
-// //     .style("font", "12px sans-serif");
-// //
-// //   const width = parseInt(svg.style("width")),
-// //     height = parseInt(svg.style("height"))
-// //
-// //   const canvas_g = svg.append("g")
-// //     .attr("transform", `translate(${width / 2},${height / 2})`);
-// // }
-//
-// function layout_eqPie() {
-//   function processEqPie(data) {
-//     var pie = d3.pie()
-//       .sort(null)
-//       .startAngle(0)
-//       .endAngle(0 + 2 * Math.PI)
-//       .padAngle(.02)
-//       .value(function(d) {
-//         return d.weight;
-//       })
-//
-//     return pie(data);
-//   }
-//   return processEqPie;
-// }
-//
 
-
-function createPropsArcs(targetSVG, data) {
+function createPropsDiagram(targetSVG) {
 
   const svg = d3.select(targetSVG)
     .attr("text-anchor", "middle")
@@ -91,13 +61,159 @@ function createPropsArcs(targetSVG, data) {
     .attr("transform", `translate(${width / 2},${height / 2})`);
 
 
-  var graph = canvas_g.append('g').attr('id', 'propArcs');
+  var arcs_graph = canvas_g.append('g').attr('id', 'propArcs');
+
+  var diagram = canvas_g.append('g').attr('id', 'propDia');
+
+  // AXIS
+
+  var radialAxis = diagram.append('g')
+    .attr('class', 'r axis')
+    .selectAll('circle')
+    .data(d3.range(1, TotalMaxLvl + 1))
+    .enter()
+    .append('circle')
+    .attr('r', (d, i) => level2radius(d))
+    .attr('fill', "#d9d9d9")
+    .attr('opacity', 1 / TotalMaxLvl);
+
+  // var axialAxis = canvas_g.append('g')
+  //   .attr('class', 'a axis')
+  //   .selectAll('g')
+  //     .data(d3.range(NumArcs))
+  //     .enter().append('g')
+  //       .attr('transform', d => 'rotate(' + (toDegrees(scaleCircle(d))-90) + ')');
+
+}
+
+function layout_eqPie() {
+  function processEqPie(data) {
+    var pie = d3.pie()
+      .sort(null)
+      .startAngle(0)
+      .endAngle(0 + 2 * Math.PI)
+      .padAngle(.02)
+      .value(function(d) {
+        return d.weight;
+      })
+
+    return pie(data);
+  }
+  return processEqPie;
+}
+
+function updatePropDia(targetSVG, data) {
+
+  // data manipulation
+  var MaxLvl = getMax(data, 'PropertyLevel');
+
+  var tdata = data.map(function(d) {
+    return {
+      weight: 1,
+      monster: d
+    };
+  })
+
+  var graph = resetPropDia(targetSVG)
+
+  var graph_group = graph.append('g').attr("id", "dia_graph")
+  var helper_group = graph_group.append('g').attr('id', 'propHelper');
+
+  var CurMaxRadius = level2radius(MaxLvl)
+
+  var pie_group = graph_group.append("g").attr('id', 'flower');
+
+  var circle = pie_group.append('circle')
+    .attr('r', 0).attr('cy', 0).attr('cx', 0)
+    .attr("id", "circle_bkg")
+    .style("fill", "transparent") // function(d,i) { return colorProp(d.data.monster.viz_group);})
+    .style("stroke", "#ff9999")
+    .attr('stroke-width', 2)
+    .transition().duration(1000).attr('r', CurMaxRadius)
+
+  var pie_arcs = layout_eqPie()(tdata);
+
+  var petals = pie_group.selectAll(".petal").data(pie_arcs)
+    .enter()
+    .append("path")
+    .attr("class", "petal")
+    .attr("transform", function(d) {
+      return rot((d.startAngle + d.endAngle) / 2);
+    })
+    //.attr("d", function(d,i) {return petalPath(d,-minR);})
+    .attr("d", function(d, i) {
+      if (data.length > 1) {
+        return petalPath(d, 0);
+      } else {
+        return arc_R(10)(d);
+      }
+    })
+    .style("stroke", "white")
+    .attr("fill", function(d, i) {
+      return colorProp(d.data.monster.PropertyName);
+    })
+    .on('mouseover', function(d, i) {
+      d3.select(this).attr('fill', d3.hsl(colorProp(d.data.monster.PropertyName)).darker());
+      d3.select('#helper_text')
+        .text(d.data.monster.PropertyName)
+        .attr('fill', d3.hsl(colorProp(d.data.monster.PropertyName)).darker());
+    })
+    .on('mouseout', function(d, i) {
+      d3.select(this).attr('fill', colorProp(d.data.monster.PropertyName));
+      d3.select('#helper_text')
+        .text("");
+    });
+
+  pie_group.transition().duration(1000)
+    .attr("transform", function(d) {
+      return rot(2 * Math.PI / 2);
+    })
+
+  petals.transition().duration(1000)
+    .attr("d", function(d, i) {
+      if (tdata.length > 1) {
+        return petalPath(d, level2radius(d.data.monster.PropertyLevel));
+      } else {
+        return arc_R(level2radius(d.data.monster.PropertyLevel))(d);
+      }
+    })
+
+  // helper
+
+  helper_group.append('text')
+    .attr('id', 'helper_max_level_text')
+    .attr('y', largestR)
+    .attr('x', largestR)
+    .style("fill", "transparent")
+    .text("Max: " + MaxLvl + " Level")
+    .transition().delay(500).duration(500)
+    .style("fill", "#ff9999");
+
+  helper_group.append('text')
+    .attr('id', 'helper_text')
+    .attr('y', largestR + helper_pad)
+    .attr('x', largestR)
+    .text("")
+
+
+  helper_group.append('line')
+    .attr('id', 'helper_line')
+    .attr('x1', polarToCartesian(Math.PI * 1 / 4, CurMaxRadius).x)
+    .attr('y1', polarToCartesian(Math.PI * 1 / 4, CurMaxRadius).y)
+    .attr('x2', polarToCartesian(Math.PI * 1 / 4, CurMaxRadius).x)
+    .attr('y2', polarToCartesian(Math.PI * 1 / 4, CurMaxRadius).y)
+    .attr('stroke-width', 2)
+    .attr('stroke', "#ff9999")
+    .transition().delay(500).duration(500)
+    .attr('x2', polarToCartesian(Math.PI * 1 / 4, largestR + helper_pad).x)
+    .attr('y2', polarToCartesian(Math.PI * 1 / 4, largestR + helper_pad).y);
+
+    console.log(helper_group )
 
 }
 
 
 function updatePropArcs(targetSVG, data) {
-
 
   var graph = resetPropArcs(targetSVG)
 
@@ -141,11 +257,11 @@ function updatePropArcs(targetSVG, data) {
         })
         .attr('d', d3.arc())
         .attr('fill', function(value, j) {
-          return color(Properties[j])
+          return colorProp(Properties[j])
         })
         .attr('opacity', 1 / data.length)
         .attr('stroke', 'white')
-        .transition().duration(500)
+        .transition().duration(1000)
         .attrTween("d", function(v, j) {
           var value = this.parentNode.__data__
           var newAngle = scaleProp(value)
@@ -197,7 +313,7 @@ function updatePropArcs(targetSVG, data) {
       return 'label' + j
     })
     .attr('fill-opacity', 0)
-    .transition().delay(500).duration(500)
+    .transition().delay(1000).duration(500)
     .text(function(v, j) {
       return v
     })
@@ -219,8 +335,8 @@ function arcTween(newAngle) {
 //http://bl.ocks.org/herrstucki/6199768/23f51b97bd942f6b1b7cf0b9ba76ada4cb6d1cc7
 function petalPath(d, r) {
   var angle = (d.endAngle - d.startAngle) / 2,
-    s = polarToCartesian(-angle, minR),
-    e = polarToCartesian(angle, minR),
+    s = polarToCartesian(-angle, level1R),
+    e = polarToCartesian(angle, level1R),
     //r = minR + r,//size(d.data.size),
     m = {
       x: r,
@@ -254,6 +370,61 @@ function resetPropArcs(targetSVG) {
   return graph;
 }
 
+function resetPropDia(targetSVG) {
+
+  var graph = d3.select(targetSVG).select('#propDia');
+
+  // remove previous lines
+  remove_dia(graph);
+
+  return graph;
+}
+
+
+function remove_dia(graph_selection) {
+
+  var graph = graph_selection.select("#dia_graph");
+
+  if (!graph.size()){
+    return;
+  }
+
+  var petals = graph.selectAll('.petal');
+  const petalsNum = graph.size();
+
+  var helper_line = graph.select('#helper_line');
+
+  helper_line
+  .transition().duration(500)
+  .attr('x2', helper_line.attr('x1'))
+  .attr('y2', helper_line.attr('y1'))
+  .remove();
+
+  graph.select('#helper_max_level_text').transition().duration(200)
+  .style("fill", "transparent");//.remove();
+
+
+  graph.select('#circle_bkg').transition().delay(500).duration(1000).attr("r", 0).remove();
+
+  petals.transition().delay(500).duration(1000)
+      .attr("d", function(d, i) {
+        if (petalsNum > 1) {
+          return petalPath(d, 0);
+        } else {
+          return arc_R(10)(d);
+        }
+      });
+
+  graph.select('#flower').transition().delay(500).duration(1000)
+        .attr("transform", function(d) {
+          return rot(2 * Math.PI / 2);
+        })
+        .on('end', function(){
+          graph.remove();
+        })
+
+}
+
 
 function remove_arcs(graph_selection) {
 
@@ -271,10 +442,9 @@ function remove_arcs(graph_selection) {
   arcs.each(function(d, i) {
     d3.select(this)
       .attr('d', d3.arc())
-      .transition().duration(500)
+      .transition().duration(1000)
       .attrTween("d", arcTween(OriginAngle))
       .on('end', function() {
-        console.log(count, totalArcs);
         count++;
         if (count == totalArcs) {
           graph.remove();

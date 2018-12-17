@@ -56,9 +56,10 @@
       });
 
       console.log(nestedData);
-      createSelector(nestedData, "#selector_svg");
       createStatsDiagram("#statsDia_svg");
-			createPropsArcs("#propsDia_svg", nestedData[0].mob_types[1].value.values);
+      createPropsDiagram("#propsDia_svg");
+      createSelector(nestedData, "#selector_svg");
+
       //updateStats("#statsDia_svg", nestedData[0].mob_types[1].value.values)
       // nestedData[0].mob_types[1].value.values,
       //console.log(nestedData[0].mob_types[1].value.values)
