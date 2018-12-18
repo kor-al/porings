@@ -16,12 +16,25 @@ line.Angeling.isHovered {
 line.Angeling {
   stroke: #d4d8d8; }
 
-.new_poly.Angeling {
-  fill: #d4d8d8; }
-
-.new_poly.Angeling:hover {
+.poly.Angeling.isHovered {
   fill: #d4d8d8;
   stroke: #b9c0c0; }
+
+.poly.Angeling {
+  fill: #d4d8d8; }
+
+.attack_path.Angeling {
+  fill: #2b2727; }
+
+.def_arc.Angeling {
+  fill: #d4d8d8; }
+
+.attack_path.Angeling:hover {
+  fill: #100f0f; }
+
+.def_arc.Angeling:hover {
+  fill: #b9c0c0;
+  fill-opacity: 0.8; }
 
 .Poring.isClicked {
   fill: #b41608; }
@@ -41,12 +54,25 @@ line.Poring.isHovered {
 line.Poring {
   stroke: #fa978e; }
 
-.new_poly.Poring {
-  fill: #fa978e; }
-
-.new_poly.Poring:hover {
+.poly.Poring.isHovered {
   fill: #fa978e;
   stroke: #f86a5d; }
+
+.poly.Poring {
+  fill: #fa978e; }
+
+.attack_path.Poring {
+  fill: #056871; }
+
+.def_arc.Poring {
+  fill: #fa978e; }
+
+.attack_path.Poring:hover {
+  fill: #033b40; }
+
+.def_arc.Poring:hover {
+  fill: #f86a5d;
+  fill-opacity: 0.8; }
 
 .Poporing.isClicked {
   fill: #647a29; }
@@ -66,12 +92,25 @@ line.Poporing.isHovered {
 line.Poporing {
   stroke: #c8db93; }
 
-.new_poly.Poporing {
-  fill: #c8db93; }
-
-.new_poly.Poporing:hover {
+.poly.Poporing.isHovered {
   fill: #c8db93;
   stroke: #b5ce6d; }
+
+.poly.Poporing {
+  fill: #c8db93; }
+
+.attack_path.Poporing {
+  fill: #37246c; }
+
+.def_arc.Poporing {
+  fill: #c8db93; }
+
+.attack_path.Poporing:hover {
+  fill: #241746; }
+
+.def_arc.Poporing:hover {
+  fill: #b5ce6d;
+  fill-opacity: 0.8; }
 
 .Marin.isClicked {
   fill: #4a405c; }
@@ -91,12 +130,25 @@ line.Marin.isHovered {
 line.Marin {
   stroke: #b0a7c1; }
 
-.new_poly.Marin {
-  fill: #b0a7c1; }
-
-.new_poly.Marin:hover {
+.poly.Marin.isHovered {
   fill: #b0a7c1;
   stroke: #9589ac; }
+
+.poly.Marin {
+  fill: #b0a7c1; }
+
+.attack_path.Marin {
+  fill: #4f583e; }
+
+.def_arc.Marin {
+  fill: #b0a7c1; }
+
+.attack_path.Marin:hover {
+  fill: #343a29; }
+
+.def_arc.Marin:hover {
+  fill: #9589ac;
+  fill-opacity: 0.8; }
 
 .Magmaring.isClicked {
   fill: #7a2907; }
@@ -116,12 +168,25 @@ line.Magmaring.isHovered {
 line.Magmaring {
   stroke: #f58658; }
 
-.new_poly.Magmaring {
-  fill: #f58658; }
-
-.new_poly.Magmaring:hover {
+.poly.Magmaring.isHovered {
   fill: #f58658;
   stroke: #f26328; }
+
+.poly.Magmaring {
+  fill: #f58658; }
+
+.attack_path.Magmaring {
+  fill: #0a79a7; }
+
+.def_arc.Magmaring {
+  fill: #f58658; }
+
+.attack_path.Magmaring:hover {
+  fill: #075677; }
+
+.def_arc.Magmaring:hover {
+  fill: #f26328;
+  fill-opacity: 0.8; }
 
 .Drops.isClicked {
   fill: #98621f; }
@@ -141,12 +206,25 @@ line.Drops.isHovered {
 line.Drops {
   stroke: #eac699; }
 
-.new_poly.Drops {
-  fill: #eac699; }
-
-.new_poly.Drops:hover {
+.poly.Drops.isHovered {
   fill: #eac699;
   stroke: #e1ae6f; }
+
+.poly.Drops {
+  fill: #eac699; }
+
+.attack_path.Drops {
+  fill: #153966; }
+
+.def_arc.Drops {
+  fill: #eac699; }
+
+.attack_path.Drops:hover {
+  fill: #0c213c; }
+
+.def_arc.Drops:hover {
+  fill: #e1ae6f;
+  fill-opacity: 0.8; }
 
 .Metaling.isClicked {
   fill: #5e2d2c; }
@@ -166,12 +244,25 @@ line.Metaling.isHovered {
 line.Metaling {
   stroke: #ca8e8c; }
 
-.new_poly.Metaling {
-  fill: #ca8e8c; }
-
-.new_poly.Metaling:hover {
+.poly.Metaling.isHovered {
   fill: #ca8e8c;
   stroke: #ba6c69; }
+
+.poly.Metaling {
+  fill: #ca8e8c; }
+
+.attack_path.Metaling {
+  fill: #357173; }
+
+.def_arc.Metaling {
+  fill: #ca8e8c; }
+
+.attack_path.Metaling:hover {
+  fill: #254f50; }
+
+.def_arc.Metaling:hover {
+  fill: #ba6c69;
+  fill-opacity: 0.8; }
 
 .Others.isClicked {
   fill: #457795; }
@@ -191,11 +282,24 @@ line.Others.isHovered {
 line.Others {
   stroke: #c3d7e3; }
 
-.new_poly.Others {
-  fill: #c3d7e3; }
-
-.new_poly.Others:hover {
+.poly.Others.isHovered {
   fill: #c3d7e3;
   stroke: #a0c0d3; }
+
+.poly.Others {
+  fill: #c3d7e3; }
+
+.attack_path.Others {
+  fill: #3c281c; }
+
+.def_arc.Others {
+  fill: #c3d7e3; }
+
+.attack_path.Others:hover {
+  fill: #19110c; }
+
+.def_arc.Others:hover {
+  fill: #a0c0d3;
+  fill-opacity: 0.8; }
 
 /*# sourceMappingURL=colors.css.map */

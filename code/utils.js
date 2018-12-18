@@ -44,3 +44,13 @@ function getMin(d,variable = 'PropertyLevel') {
   var minCallback = ( min, cur ) => Math.min( min, +cur[variable] );
   return +d.reduce( minCallback, Infinity );
 }
+
+
+function format_value(v){
+  if ((v / 1000) >= 1) {
+    v = Math.ceil(v / 1000) + "K";
+  } else {
+    v = Math.ceil(v);
+  }
+  return v
+}

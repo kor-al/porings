@@ -111,6 +111,8 @@ function updateStats(targetSVG, data) {
   // remove previous lines
   var graph = resetStats(targetSVG);
 
+  var graph_group = graph.append('g').attr("id", "stats_graph")
+
   // draw new
   data.forEach(function(d, i) {
 
@@ -124,19 +126,21 @@ function updateStats(targetSVG, data) {
         return polarToCartesian(j * sliceAngle, rScale(d[s])).y;
       });
 
-    graph.append("path")
+    graph_group.append("path")
       .datum(Stats.concat(Stats[0]))
       .attr("d", line0)
       .classed(d.viz_group, true)
-      .classed('new_poly', true)
+      .classed('poly', true)
       //.attr("fill", color(d.viz_group))
       .attr("fill-opacity", fillOpacity)
       .on('mouseover', function(s, j) {
         var poly = d3.select(this)
         poly.raise()//.attr("fill-opacity", 0.5)
+        .classed('isHovered', true)
       })
       .on('mouseout', function(s, j) {
         d3.select(this)//.attr("fill-opacity", fillOpacity)
+        .classed('isHovered', false)
       })
       .transition().delay(100 * i).duration(500)
       .attr("d", line)
@@ -148,10 +152,16 @@ function updateStats(targetSVG, data) {
 
 function remove_poly(graph_selection) {
 
-  var polys = graph_selection.selectAll(".new_poly");
+  var graph = graph_selection.selectAll("#stats_graph")
+
+  var polys = graph.selectAll(".poly");
 
   var line0 = d3.line().x(0).y(0);
 
-  polys.transition().delay(100).duration(500).attr("d", line0).remove();
+  polys.transition().delay(100).duration(500).attr("d", line0)
+  .on('end', function(){graph.remove()});
+
+
+
 
 }

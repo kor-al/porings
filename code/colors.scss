@@ -9,6 +9,10 @@ $colors: Angeling #d4d8d8, Poring #fa978e, Poporing #c8db93, Marin #b0a7c1, Magm
     }
   }
 }
+
+
+
+
 @each $color in $colors {
   .#{nth($color, 1)}.isClicked {
     fill: darken(nth($color, 2),40%);
@@ -34,13 +38,32 @@ $colors: Angeling #d4d8d8, Poring #fa978e, Poporing #c8db93, Marin #b0a7c1, Magm
     stroke: nth($color, 2);
   }
 
-  .new_poly.#{nth($color, 1)} {
+  .poly.#{nth($color, 1)}.isHovered{
+    fill: nth($color, 2);
+    stroke: darken(nth($color, 2),10%);
+  }
+
+  .poly.#{nth($color, 1)} {
     fill: nth($color, 2);
     //stroke :  nth($color, 2);
   }
 
-  .new_poly.#{nth($color, 1)}:hover {
-    fill: nth($color, 2);
-    stroke: darken(nth($color, 2),10%);
+  .attack_path.#{nth($color, 1)} {
+    fill: invert(nth($color, 2));
   }
+
+  .def_arc.#{nth($color, 1)} {
+    fill: nth($color, 2);
+  }
+
+  .attack_path.#{nth($color, 1)}:hover {
+    fill: darken(invert(nth($color, 2)),10%);
+  }
+
+  .def_arc.#{nth($color, 1)}:hover {
+    fill: darken(nth($color, 2),10%);
+    fill-opacity: 0.8;
+  }
+
+
 }
