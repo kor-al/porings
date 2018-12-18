@@ -23,6 +23,8 @@ var scaleProp = d3.scaleLinear()
 const startR = level2radius(TotalMaxLvl),
   endR = startR + (arc_width - 1) * Properties.length;
 
+var CurMaxRadius = startR;
+
 var scaleCircle = d3.scaleLinear()
   .domain([0, NumArcs])
   .range([0, 2 * Math.PI]);
@@ -119,7 +121,7 @@ function updatePropDia(targetSVG, data) {
   var graph_group = graph.append('g').attr("id", "dia_graph")
   var helper_group = graph_group.append('g').attr('id', 'propHelper');
 
-  var CurMaxRadius = level2radius(MaxLvl)
+  CurMaxRadius = level2radius(MaxLvl)
 
   var pie_group = graph_group.append("g").attr('id', 'flower');
 
@@ -208,7 +210,6 @@ function updatePropDia(targetSVG, data) {
     .attr('x2', polarToCartesian(Math.PI * 1 / 4, largestR + helper_pad).x)
     .attr('y2', polarToCartesian(Math.PI * 1 / 4, largestR + helper_pad).y);
 
-    console.log(helper_group )
 
 }
 
@@ -375,15 +376,15 @@ function resetPropDia(targetSVG) {
   var graph = d3.select(targetSVG).select('#propDia');
 
   // remove previous lines
-  remove_dia(graph);
+  removePropDia(graph);
 
   return graph;
 }
 
 
-function remove_dia(graph_selection) {
+function removePropDia(graph_selection) {
 
-  var graph = graph_selection.select("#dia_graph");
+  var graph = graph_selection.selectAll("#dia_graph");
 
   if (!graph.size()){
     return;
@@ -394,41 +395,30 @@ function remove_dia(graph_selection) {
 
   var helper_line = graph.select('#helper_line');
 
+
   helper_line
   .transition().duration(500)
-  .attr('x2', helper_line.attr('x1'))
-  .attr('y2', helper_line.attr('y1'))
+  .attr('x2', polarToCartesian(Math.PI * 1 / 4, CurMaxRadius).x)
+  .attr('y2', polarToCartesian(Math.PI * 1 / 4, CurMaxRadius).y)
   .remove();
 
   graph.select('#helper_max_level_text').transition().duration(200)
-  .style("fill", "transparent");//.remove();
+  .style("fill", "transparent");
 
+  petals.remove();
 
-  graph.select('#circle_bkg').transition().delay(500).duration(1000).attr("r", 0).remove();
-
-  petals.transition().delay(500).duration(1000)
-      .attr("d", function(d, i) {
-        if (petalsNum > 1) {
-          return petalPath(d, 0);
-        } else {
-          return arc_R(10)(d);
-        }
-      });
-
-  graph.select('#flower').transition().delay(500).duration(1000)
-        .attr("transform", function(d) {
-          return rot(2 * Math.PI / 2);
-        })
-        .on('end', function(){
-          graph.remove();
-        })
+  graph.select('#circle_bkg').transition().duration(1000)
+  .attr("r", 0)
+  .on('end', function(){
+    graph.remove();
+  });
 
 }
 
 
 function remove_arcs(graph_selection) {
 
-  var graph = graph_selection.select("#arc_graph");
+  var graph = graph_selection.selectAll("#arc_graph");
   var max_arcs = graph_selection.selectAll(".max_arcs");
   var text = graph_selection.selectAll(".PropText");
 

@@ -10,12 +10,14 @@
   <script src="./poring_selector.js" type="text/JavaScript"></script>
   <script src="./stats_diagram.js" type="text/JavaScript"></script>
 	<script src="./properties_diagram.js" type="text/JavaScript"></script>
+  <script src="./damage_diagram.js" type="text/JavaScript"></script>
 </head>
 
 <body>
   <svg id="selector_svg"></svg>
   <svg id="statsDia_svg"></svg>
 	<svg id="propsDia_svg"></svg>
+  <svg id="damageDia_svg"></svg>
 
   <script type="text/javascript">
     //d3.select('#selector').append('circle').attr('r', '100').attr('cx', 10).attr('cy', 10).attr('fill', 'red');
@@ -58,6 +60,7 @@
       console.log(nestedData);
       createStatsDiagram("#statsDia_svg");
       createPropsDiagram("#propsDia_svg");
+      createDamageDiagram("#damageDia_svg");
       createSelector(nestedData, "#selector_svg");
 
       //updateStats("#statsDia_svg", nestedData[0].mob_types[1].value.values)

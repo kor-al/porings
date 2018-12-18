@@ -261,6 +261,7 @@ function draw_groups(d, i) {
         updateStats("#statsDia_svg", d.data.mob_types[j].value.values);
         updatePropArcs("#propsDia_svg", d.data.mob_types[j].value.values);
         updatePropDia("#propsDia_svg", d.data.mob_types[j].value.values);
+        updateDamageDia("#damageDia_svg", d.data.mob_types[j].value.values);
 
         curClicked.group = i;
         curClicked.type = j;
@@ -273,6 +274,8 @@ function draw_groups(d, i) {
         //reset stats diagram
         resetStats("#statsDia_svg");
         resetPropArcs("#propsDia_svg");
+        resetPropDia("#propsDia_svg");
+        resetDamageDia("#damageDia_svg");
       }
 
     });
