@@ -11,13 +11,34 @@
   <script src="./stats_diagram.js" type="text/JavaScript"></script>
 	<script src="./properties_diagram.js" type="text/JavaScript"></script>
   <script src="./damage_diagram.js" type="text/JavaScript"></script>
+  <script src="./dist_diagram.js" type="text/JavaScript"></script>
 </head>
 
 <body>
   <svg id="selector_svg"></svg>
-  <svg id="statsDia_svg"></svg>
+  <!-- <svg id="statsDia_svg"></svg>
 	<svg id="propsDia_svg"></svg>
-  <svg id="damageDia_svg"></svg>
+  <svg id="damageDia_svg"></svg>-->
+  <svg id="distDia_svg"></svg>
+
+<form>
+  <div>
+  <input type="radio" id="choiceAll"
+           name="feature" value="All" checked>
+  <label for="choiceAll">Show All</label>
+  <input type="radio" id="choiceRace"
+         name="feature" value="Race">
+  <label for="choiceRace">By Race</label>
+  <input type="radio" id="choiceSpeed"
+         name="feature" value="WalkSpeed">
+  <label for="choiceSpeed">By Speed</label>
+  <input type="radio" id="choiceSize"
+         name="feature" value="Size">
+<label for="choiceSize">By Size</label>
+</div>
+</form>
+
+
 
   <script type="text/javascript">
     //d3.select('#selector').append('circle').attr('r', '100').attr('cx', 10).attr('cy', 10).attr('fill', 'red');
@@ -58,14 +79,13 @@
       });
 
       console.log(nestedData);
-      createStatsDiagram("#statsDia_svg");
-      createPropsDiagram("#propsDia_svg");
-      createDamageDiagram("#damageDia_svg");
+      // createStatsDiagram("#statsDia_svg");
+      // createPropsDiagram("#propsDia_svg");
+      // createDamageDiagram("#damageDia_svg");
+      createDistDiagram("#distDia_svg",inData);
       createSelector(nestedData, "#selector_svg");
+      handle_buttons(inData);
 
-      //updateStats("#statsDia_svg", nestedData[0].mob_types[1].value.values)
-      // nestedData[0].mob_types[1].value.values,
-      //console.log(nestedData[0].mob_types[1].value.values)
     };
   </script>
 </body>
