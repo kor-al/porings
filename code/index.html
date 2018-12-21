@@ -21,10 +21,10 @@
   <svg id="damageDia_svg"></svg>-->
   <svg id="distDia_svg"></svg>
 
-<form>
+<!-- <form>
   <div>
   <input type="radio" id="choiceAll"
-           name="feature" value="All" checked>
+           name="feature" value="All" checked="checked" >
   <label for="choiceAll">Show All</label>
   <input type="radio" id="choiceRace"
          name="feature" value="Race">
@@ -35,12 +35,19 @@
   <input type="radio" id="choiceSize"
          name="feature" value="Size">
 <label for="choiceSize">By Size</label>
+<input type="radio" id="choiceLevel"
+       name="feature" value="Level">
+<label for="choiceLevel">By Level</label>
 </div>
-</form>
+</form> -->
 
 
 
   <script type="text/javascript">
+  create_buttons()
+  reset_buttons()
+
+
     //d3.select('#selector').append('circle').attr('r', '100').attr('cx', 10).attr('cy', 10).attr('fill', 'red');
 
 
