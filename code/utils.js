@@ -46,11 +46,12 @@ function getMin(d,variable = 'PropertyLevel') {
 }
 
 
-function format_value(v){
+function format_value(v, keep_float = false){
   if ((v / 1000) >= 1) {
     v = Math.ceil(v / 1000) + "K";
   } else {
-    v = Math.ceil(v);
+    if (!keep_float)
+        v = Math.ceil(v);
   }
   return v
 }

@@ -48,6 +48,16 @@ function createDistDiagram(targetSVG, data) {
     .attr("class", function(d) {
       return 'node ' + d.viz_group
     })
+    .append("svg:title") // TITLE APPENDED HERE
+    .text(function(d) { return d.name; });
+
+  // node.on('mouseover', function(d,i){
+  //   //show_selected_type(d.viz_group, d.name);
+  // })
+  //
+  // node.on('mouseout', function(d,i){
+  //   //hide_selected_type(d.viz_group, d.name);
+  // })
 
 }
 
@@ -123,7 +133,9 @@ function updateDistDiagram(data, choice) {
 
       //AXIS
       var ticks = unique.filter(function(d, i) {
+        if (unique.length>12)
         return !(i % 5);
+        else{return !(i % 2)}
       });
       console.log(unique)
       console.log(ticks)
@@ -138,7 +150,7 @@ function updateDistDiagram(data, choice) {
           .attr('width', containerW / 2 + centerScale(+t))
         console.log(centerScale(+t))
         ticks_text.append('text').attr('y', containerH / 2 - 20).attr('x', centerScale(+t))
-        .text(format_value(Math.ceil(t)))
+        .text(format_value(t, true))
       })
     }
   }
@@ -173,6 +185,8 @@ function updateDistDiagram(data, choice) {
         d.y = containerW / 2 + d.y
         return d.y = Math.max(radius, Math.min(containerH - radius, d.y)) - containerH / 2;
       });
+
+
   }
 
   function show_grid() {

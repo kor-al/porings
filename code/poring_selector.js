@@ -55,7 +55,7 @@ function createSelector(data, targetSVG) {
     .enter()
     .append("g")
     .attr('class', function(d, i) {
-      return 'group' + i;
+      return 'group' + i + ' ' + 'pie_groups';
     })
 
   draw_base(groups);
@@ -142,6 +142,37 @@ function hadle_mouseOver_circle(d, i, j) {
     show_img(d, j);
   }
   //updateStats("#statsDia_svg", d.data.mob_types[j].value.values);}
+}
+
+function find_type(group, type){
+  var circles = d3.selectAll('.pie_groups')
+  var targetGroup, targetType, targetArc;
+  circles.each(function(k,i){
+    if (k.data.group == group){
+      targetGroup = i;
+      for (let m = 0; m< k.data.group_size; m++)
+      {
+        if (k.data.mob_types[m].key == type){
+          targetType = m;
+          targetArc = k;
+        }
+    }
+  }
+})
+return [targetArc, targetGroup, targetType];
+}
+
+function show_selected_type(group, type){
+  var target = find_type(group, type)
+  expand_invisible_arcs(target[0], target[1]);
+  hadle_mouseOver_circle(target[0], target[1], target[2]);
+}
+
+function hide_selected_type(group, type){
+  var target = find_type(group, type)
+  console.log('hise', target[1], target[2])
+  hadle_mouseOut_circle(target[1], target[2]);
+  shrink_invisible_arcs(target[0], target[1])
 }
 
 function hadle_mouseOut_circle(i, j) {
