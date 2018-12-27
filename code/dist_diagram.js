@@ -14,7 +14,8 @@ const discrete_features = d3.set(["Size", "Race", "WalkSpeed", "DelayAfterHit", 
 ])
 const quant_features = d3.set(["Level", "Def", "AtkDelay", "HP"]);
 const circleRadius = 150,
-  circleTextPadding = 25;
+  circleTextPadding = 25,
+  threshold = 0.01;
 
 
 
@@ -53,14 +54,14 @@ function createDistDiagram(targetSVG, data) {
 function updateDistDiagram(data, choice) {
 
 
-
+  var labels_shown = false;
   var graph = d3.select('#distDia');
   var grid = d3.select('#grid');
   var node = graph.selectAll('.node');
   //d3.selectAll('.group_label').transition().duration(200).attr('fill-opacity', 0).remove()
 
   var simulation = d3.forceSimulation(data)
-    .force('charge', d3.forceManyBody().strength(0))
+    .force('charge', d3.forceManyBody().strength(5))
     .force('center', d3.forceCenter(0, 0));
 
 
@@ -68,6 +69,8 @@ function updateDistDiagram(data, choice) {
   var centerScale;
 
   d3.selectAll('.group_label').remove()
+  var labels = graph.append('g').classed('group_label', true);
+
   if (choice == 'All') {
     simulation.force('x', d3.forceX().x(xCenter));
   } else {
@@ -75,6 +78,12 @@ function updateDistDiagram(data, choice) {
       var unique = d3.set(data.map(function(d) {
         return d[choice];
       })).values()
+
+      labels.selectAll('.label_text').data(unique).enter()
+      .append('text')
+      .attr('id',function(d,i) { console.log(d,i); return 'label_text' + i})
+
+      console.log(labels)
 
       isDiscrete = true;
 
@@ -138,14 +147,20 @@ function updateDistDiagram(data, choice) {
   simulation.force('collision', d3.forceCollide().radius(function(d) {
       return rScale(d.Size) + 1;
     }))
-    .on('tick', ticked)
-    .on('end', show_grid);
+    .on('tick', ticked);
+    //.on('end', show_grid);
 
 
   function ticked() {
     // without boundaries
     // node.attr("cx", d => d.x)
     //   .attr("cy", d => d.y);
+
+    // console.log(this.alpha())
+    if (this.alpha() < 0.5 & !labels_shown){
+      labels_shown = true;
+      show_grid();
+    }
 
     //now WITH boundaries
     node.attr("cx", function(d) {
@@ -161,7 +176,6 @@ function updateDistDiagram(data, choice) {
   }
 
   function show_grid() {
-    var labels = graph.append('g').attr('id', 'group_labels');
 
     if (isDiscrete) {
 
@@ -202,22 +216,39 @@ function updateDistDiagram(data, choice) {
           cx: (p.value.xRange[1] + p.value.xRange[0]) / 2,
           cy: (p.value.yRange[1] + p.value.yRange[0]) / 2
         }
-        // console.log(groupR, groupC)
+        // console.log(groupR, groupC, circleTextPadding)
         // graph.append('circle').attr('r', groupR).attr('cx', groupC.cx).attr('cy', groupC.cy)
         var label_angle = -Math.PI / 3; //(groupC.cx > 0) ? -Math.PI/3 : Math.PI/3;
         var anchor = polarToCartesian(label_angle, groupR + circleTextPadding)
-        labels.append('text')
+        labels.select('#label_text' + i)
           .attr('x', groupC.cx + anchor.x)
           .attr('y', groupC.cy + anchor.y)
           .text(unique[i])
           .attr('fill-opacity', 0)
-          .classed('group_label', true)
+          .classed('label_text', true)
           .transition().duration(500).attr('fill-opacity', 1)
       })
 
 
     }
   }
+}
+
+function highlightDistDiagram(targetSVG, selectedVal,isType= true){
+  var graph = d3.select(targetSVG);
+  var node = graph.selectAll('.node');
+  console.log(selectedVal)
+  node.each(function(d,i){
+    console.log(d3.select(this))
+    if (d.name ==selectedVal)
+    {d3.select(this).classed('isHovered', true)}
+    else {d3.select(this).classed('isHovered', false)}
+  })
+}
+
+function removeHighlightDistDiagram(targetSVG){
+  var graph = d3.select(targetSVG);
+  var node = graph.selectAll('.node').classed('isHovered', false);
 }
 
 

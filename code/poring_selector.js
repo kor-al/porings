@@ -262,6 +262,7 @@ function draw_groups(d, i) {
         updatePropArcs("#propsDia_svg", d.data.mob_types[j].value.values);
         updatePropDia("#propsDia_svg", d.data.mob_types[j].value.values);
         updateDamageDia("#damageDia_svg", d.data.mob_types[j].value.values);
+        highlightDistDiagram("#distDia_svg", d.data.mob_types[j].key);
 
         curClicked.group = i;
         curClicked.type = j;
@@ -276,6 +277,7 @@ function draw_groups(d, i) {
         resetPropArcs("#propsDia_svg");
         resetPropDia("#propsDia_svg");
         resetDamageDia("#damageDia_svg");
+        removeHighlightDistDiagram("#distDia_svg")
       }
 
     });
