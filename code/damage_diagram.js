@@ -68,7 +68,7 @@ function createDamageDiagram(targetSVG) {
     // .attr('id', 'atk_label')
     .attr('text-anchor', 'end')
     .attr('y', -5).attr('x', innerScale(MinDef) - 5)
-    .text('Attack')
+    .text('Def')
 
 
 
@@ -93,7 +93,7 @@ function createDamageDiagram(targetSVG) {
 
   def_grid.append('text')
     .attr('fill', "#cccccc").attr('y', +15).attr('x', innerScale(MinDef) + 15)
-    .text('Def')
+    .text('Atk')
 
   def_grid.selectAll('.def_ticks').data(def_ticks).enter()
     .append('text').attr('fill', "#cccccc")

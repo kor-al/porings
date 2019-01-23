@@ -8,7 +8,7 @@ var xCenter = 0;
 var containerH = 0,
   containerW = 0;
 // const minAngle, maxAngle =
-var rScale = d3.scalePoint().range([3, 10]).domain(Sizes)
+var rScaleDist = d3.scalePoint().range([3, 10]).domain(Sizes)
 const discrete_features = d3.set(["Size", "Race", "WalkSpeed", "DelayAfterHit", "PropertyName",
   "PropertyLevel"
 ])
@@ -43,7 +43,7 @@ function createDistDiagram(targetSVG, data) {
     .data(data)
     .enter().append("circle")
     .attr('r', function(d) {
-      return rScale(d.Size)
+      return rScaleDist(d.Size)
     })
     .attr("class", function(d) {
       return 'node ' + d.viz_group
@@ -157,7 +157,7 @@ function updateDistDiagram(data, choice) {
 
 
   simulation.force('collision', d3.forceCollide().radius(function(d) {
-      return rScale(d.Size) + 1;
+      return rScaleDist(d.Size) + 1;
     }))
     .on('tick', ticked);
     //.on('end', show_grid);
@@ -176,12 +176,12 @@ function updateDistDiagram(data, choice) {
 
     //now WITH boundaries
     node.attr("cx", function(d) {
-        var radius = rScale(d.Size)
+        var radius = rScaleDist(d.Size)
         d.x = containerW / 2 + d.x
         return d.x = Math.max(radius, Math.min(containerW - radius, d.x)) - containerW / 2;
       })
       .attr("cy", function(d) {
-        var radius = rScale(d.Size)
+        var radius = rScaleDist(d.Size)
         d.y = containerW / 2 + d.y
         return d.y = Math.max(radius, Math.min(containerH - radius, d.y)) - containerH / 2;
       });

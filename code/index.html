@@ -16,85 +16,13 @@
 
 <body>
   <svg id="selector_svg"></svg>
-  <!-- <svg id="statsDia_svg"></svg>
+  <svg id="statsDia_svg"></svg>
 	<svg id="propsDia_svg"></svg>
-  <svg id="damageDia_svg"></svg>-->
+  <svg id="damageDia_svg"></svg>
   <svg id="distDia_svg"></svg>
 
-<!-- <form>
-  <div>
-  <input type="radio" id="choiceAll"
-           name="feature" value="All" checked="checked" >
-  <label for="choiceAll">Show All</label>
-  <input type="radio" id="choiceRace"
-         name="feature" value="Race">
-  <label for="choiceRace">By Race</label>
-  <input type="radio" id="choiceSpeed"
-         name="feature" value="WalkSpeed">
-  <label for="choiceSpeed">By Speed</label>
-  <input type="radio" id="choiceSize"
-         name="feature" value="Size">
-<label for="choiceSize">By Size</label>
-<input type="radio" id="choiceLevel"
-       name="feature" value="Level">
-<label for="choiceLevel">By Level</label>
-</div>
-</form> -->
+  <script src="./script.js"></script>
 
-
-
-  <script type="text/javascript">
-  create_buttons()
-  reset_buttons()
-
-
-    //d3.select('#selector').append('circle').attr('r', '100').attr('cx', 10).attr('cy', 10).attr('fill', 'red');
-
-
-    var data = d3.csv("https://raw.githubusercontent.com/kor-al/porings/master/poring_family.csv")
-      .then(function(data) {
-        main(data);
-      });
-
-
-
-    function main(inData) {
-
-      var nestedData = d3.nest()
-        .key(function(d) {
-          return d.viz_group;
-        })
-        .key(function(d) {
-          return d.name;
-        })
-        .rollup(function(leaves) {
-          return {
-            "length": leaves.length,
-            "values": leaves
-          }
-        })
-        .entries(inData)
-        .map(function(d) {
-          return {
-            group: d.key,
-            mob_types: d.values
-          };
-        });
-
-      nestedData.forEach(function(d) {
-        d.group_size = d.mob_types.length
-      });
-
-      console.log(nestedData);
-      // createStatsDiagram("#statsDia_svg");
-      // createPropsDiagram("#propsDia_svg");
-      // createDamageDiagram("#damageDia_svg");
-      createDistDiagram("#distDia_svg",inData);
-      createSelector(nestedData, "#selector_svg");
-      handle_buttons(inData);
-
-    };
-  </script>
 </body>
 
 </html>
