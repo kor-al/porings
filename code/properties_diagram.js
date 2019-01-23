@@ -34,12 +34,6 @@ var name2innerRadius = d3.scaleOrdinal()
   .range([startR, endR])
 
 
-function arc_R(R, r = 0) {
-  return d3.arc()
-    .innerRadius(r)
-    .outerRadius(R);
-}
-
 function arc_property_attr(j, startA = null, endA = null) {
   return {
     cornerRadius: 14,

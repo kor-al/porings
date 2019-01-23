@@ -20,6 +20,12 @@ var colorProp = d3.scaleOrdinal()
   .range(["#ffb3ff", "#ffd699", "#ccf2ff", "#ccccff", "#e6ccb3", "#d1b3ff", "#ff9999", "#99ff99", "#d9e6f2"]);
 
 
+function arc_R(R, r = 0) {
+    return d3.arc()
+      .innerRadius(r)
+      .outerRadius(R);
+  }
+
 function rot(angle) {
     return "rotate(" + (angle / Math.PI * 180) + ")";
   }

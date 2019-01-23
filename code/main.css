@@ -11,3 +11,11 @@
 		width: 500px;
 		border: 1px solid gray;
 	}
+
+
+	#selector-container, #statsDiagram-container, #damageDiagram-container{
+		/* write only numbers - to be parsed in d3 */
+		height: 500px;
+		width: 500px;
+		border: 1px solid gray;
+	}

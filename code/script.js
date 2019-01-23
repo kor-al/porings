@@ -1,8 +1,6 @@
-create_buttons()
-reset_buttons()
+// create_buttons()
+// reset_buttons()
 
-
-  //d3.select('#selector').append('circle').attr('r', '100').attr('cx', 10).attr('cy', 10).attr('fill', 'red');
 
 
   var data = d3.csv("https://raw.githubusercontent.com/kor-al/porings/master/poring_family.csv")
@@ -40,11 +38,30 @@ reset_buttons()
     });
 
     console.log(nestedData);
-    createStatsDiagram("#statsDia_svg");
-    createPropsDiagram("#propsDia_svg");
-    createDamageDiagram("#damageDia_svg");
-    createDistDiagram("#distDia_svg",inData);
-    createSelector(nestedData, "#selector_svg");
-    handle_buttons(inData);
+
+    const statsdia = new StatsDiagram({
+      element: document.querySelector('#statsDiagram-container'),
+      data: nestedData
+    });
+
+    const damagedia = new DamageDiagram({
+      element: document.querySelector('#damageDiagram-container'),
+      data: nestedData
+    });
+
+    const selector = new PoringSelector({
+      element: document.querySelector('#selector-container'),
+      data: nestedData,
+      graphs : {statsDiagram: statsdia,
+                damageDiagram: damagedia }
+    });
+
+
+    //createStatsDiagram("#statsDia_svg");
+    //createPropsDiagram("#propsDia_svg");
+    //createDamageDiagram("#damageDia_svg");
+    //createDistDiagram("#distDia_svg",inData);
+    //createSelector(nestedData, "#selector_svg", {statsDiagram: statsdia});
+    //handle_buttons(inData);
 
   };
