@@ -363,6 +363,8 @@ class PoringSelector {
 
           that.graphs.statsDiagram.update(d.data.mob_types[j].value.values);
           that.graphs.damageDiagram.update(d.data.mob_types[j].value.values);
+          that.graphs.propsDiagram.update(d.data.mob_types[j].value.values);
+          that.graphs.distDiagram.highlight(d.data.mob_types[j].key);
           // updateStats("#statsDia_svg", d.data.mob_types[j].value.values);
           // updatePropArcs("#propsDia_svg", d.data.mob_types[j].value.values);
           // updatePropDia("#propsDia_svg", d.data.mob_types[j].value.values);
@@ -380,11 +382,12 @@ class PoringSelector {
           //reset stats diagram
           that.graphs.statsDiagram.reset();
           that.graphs.damageDiagram.reset();
+          that.graphs.propsDiagram.reset();
           // resetStats("#statsDia_svg");
           // resetPropArcs("#propsDia_svg");
           // resetPropDia("#propsDia_svg");
           // resetDamageDia("#damageDia_svg");
-          // removeHighlightDistDiagram("#distDia_svg")
+          that.graphs.distDiagram.removeHighlight();
         }
 
       });

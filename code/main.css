@@ -1,21 +1,23 @@
+#selector_svg {
+  /* write only numbers - to be parsed in d3 */
+  height: 500px;
+  width: 500px;
+  border: 1px solid gray;
+}
 
-	#selector_svg {
-		/* write only numbers - to be parsed in d3 */
-    height: 500px;
-    width: 500px;
-    border: 1px solid gray;
-  }
-	#statsDia_svg, #propsDia_svg, #damageDia_svg,#distDia_svg {
-		/* write only numbers - to be parsed in d3 */
-		height: 500px;
-		width: 500px;
-		border: 1px solid gray;
-	}
+#statsDia_svg, #propsDia_svg, #damageDia_svg, #distDia_svg {
+  /* write only numbers - to be parsed in d3 */
+  height: 500px;
+  width: 500px;
+  border: 1px solid gray;
+}
 
-
-	#selector-container, #statsDiagram-container, #damageDiagram-container{
-		/* write only numbers - to be parsed in d3 */
-		height: 500px;
-		width: 500px;
-		border: 1px solid gray;
-	}
+#selector-container,
+#statsDiagram-container,
+#damageDiagram-container,
+#distDiagram-container,
+#propsDiagram-container {
+  height: 500px;
+  width: 500px;
+  border: 1px solid gray;
+}

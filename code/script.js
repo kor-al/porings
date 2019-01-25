@@ -49,12 +49,28 @@
       data: nestedData
     });
 
+    const propsdia = new PropsDiagram({
+      element: document.querySelector('#propsDiagram-container'),
+      data: nestedData
+    });
+
+    const distdia = new DistDiagram({
+      element: document.querySelector('#distDiagram-container'),
+      data: inData,
+      button_element: document.querySelector('body')
+    });
+
+
     const selector = new PoringSelector({
       element: document.querySelector('#selector-container'),
       data: nestedData,
       graphs : {statsDiagram: statsdia,
-                damageDiagram: damagedia }
+                damageDiagram: damagedia,
+                propsDiagram: propsdia,
+                 distDiagram: distdia }
     });
+
+
 
 
     //createStatsDiagram("#statsDia_svg");
