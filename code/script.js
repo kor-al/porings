@@ -3,7 +3,7 @@
 
 
 
-  var data = d3.csv("https://raw.githubusercontent.com/kor-al/porings/master/poring_family.csv")
+  var data = d3.csv("../poring_family_facts.csv")
     .then(function(data) {
       main(data);
     });
@@ -37,7 +37,7 @@
       d.group_size = d.mob_types.length
     });
 
-    console.log(nestedData);
+    // console.log(nestedData);
 
     const statsdia = new StatsDiagram({
       element: document.querySelector('#statsDiagram-container'),
@@ -60,6 +60,9 @@
       button_element: document.querySelector('body')
     });
 
+    const facts_elem = new FactsBox({
+      element: document.querySelector('#mobFacts-container')
+    });
 
     const selector = new PoringSelector({
       element: document.querySelector('#selector-container'),
@@ -67,7 +70,8 @@
       graphs : {statsDiagram: statsdia,
                 damageDiagram: damagedia,
                 propsDiagram: propsdia,
-                 distDiagram: distdia }
+                 distDiagram: distdia ,
+                 factsBox: facts_elem}
     });
 
 

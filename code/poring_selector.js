@@ -365,11 +365,7 @@ class PoringSelector {
           that.graphs.damageDiagram.update(d.data.mob_types[j].value.values);
           that.graphs.propsDiagram.update(d.data.mob_types[j].value.values);
           that.graphs.distDiagram.highlight(d.data.mob_types[j].key);
-          // updateStats("#statsDia_svg", d.data.mob_types[j].value.values);
-          // updatePropArcs("#propsDia_svg", d.data.mob_types[j].value.values);
-          // updatePropDia("#propsDia_svg", d.data.mob_types[j].value.values);
-          // updateDamageDia("#damageDia_svg", d.data.mob_types[j].value.values);
-          // highlightDistDiagram("#distDia_svg", d.data.mob_types[j].key);
+          that.graphs.factsBox.update(d.data.mob_types[j].value.values[0]); //take only one mob of the type
 
           that.curClicked.group = i;
           that.curClicked.type = j;
@@ -379,15 +375,12 @@ class PoringSelector {
           that.curClicked.group = null;
           that.curClicked.type = null;
           that.curClicked.d = null;
-          //reset stats diagram
+          //reset diagrams
           that.graphs.statsDiagram.reset();
           that.graphs.damageDiagram.reset();
           that.graphs.propsDiagram.reset();
-          // resetStats("#statsDia_svg");
-          // resetPropArcs("#propsDia_svg");
-          // resetPropDia("#propsDia_svg");
-          // resetDamageDia("#damageDia_svg");
           that.graphs.distDiagram.removeHighlight();
+          that.graphs.factsBox.reset();
         }
 
       });
