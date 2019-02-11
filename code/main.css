@@ -3,12 +3,47 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   /* background: #fac7c2;*/
   background: rgb(243, 243, 243);
-  max-width: 1600px;
+  max-width: 1700px;
 }
 
-.descr{
-  display: block;
+.header-wrapper{
+  background:#ebebeb;
+  margin: 0  0 30px 0;
+}
+
+.header-text-wrapper{
   width: 40%;
+  padding: 50px;
+  vertical-align: top;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.distDiagram-wrapper{
+  display: inline-block;
+  box-sizing: border-box;
+  /* width: 40%; */
+}
+
+#distDiagram-container
+ {
+  height: inherit;
+  height: 500px;
+  width: 500px;
+  margin-left: auto ;
+  margin-right: auto ;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.distButtons-wrapper{
+  vertical-align: middle;
+  /* margin: 150px 0 0 0; */
+  display: inline-block;
+}
+
+.distButtons-wrapper label{
+  display: block;
 }
 
 
@@ -160,12 +195,6 @@ body {
   border-radius: 65% 35% 36% 64% / 55% 52% 48% 45%;
 } 
 
-#distDiagram-container
- {
-  visibility: hidden;
-  height: 500px;
-  width: 500px;
-}
 
 @media(max-width: 1300px){
   .damageDiagram-wrapper{
@@ -173,3 +202,9 @@ body {
   }
 
 }
+
+
+@media(max-width: 800px){
+  .header-text-wrapper{
+    width: 100%;
+  }

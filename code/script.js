@@ -1,7 +1,3 @@
-// create_buttons()
-// reset_buttons()
-
-
 
   var data = d3.csv("../poring_family_facts.csv")
     .then(function(data) {
@@ -57,7 +53,7 @@
     const distdia = new DistDiagram({
       element: document.querySelector('#distDiagram-container'),
       data: inData,
-      button_element: document.querySelector('body')
+      button_element: document.querySelector('#dist-buttons')
     });
 
     const facts_elem = new FactsBox({

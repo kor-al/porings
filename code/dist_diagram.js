@@ -307,7 +307,7 @@ class DistDiagram {
     // Create the shape selectors
     var that = this;
 
-    this.buttons = d3.select(this.button_element).append("form")
+    this.buttons = d3.select(this.button_element)
       .selectAll("label")
       .data(this.Choices)
       .enter()
