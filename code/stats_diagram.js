@@ -5,7 +5,7 @@ class StatsDiagram{
         this.data = opts.data;
         this.element = opts.element;
 
-        this.maxR = 250, //radius of the biggest circle
+        this.maxR = 225, //radius of the biggest circle
         this.padding = 50,
         this.Stats = ['Vit', 'Agi', 'Str', 'Luk', 'Int', 'Dex'],
         this.minStatValue = 0,
