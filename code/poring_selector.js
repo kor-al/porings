@@ -129,7 +129,7 @@ class PoringSelector {
       .style("opacity", 0.0)
       .attr('class', 'name_text')
       .text("")
-      .style("font-size", "14px")
+      .style("font-size", "12px")
 
     var arcs_group = this.plot.append("g").attr('class', 'graph')
 

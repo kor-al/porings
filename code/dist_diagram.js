@@ -87,6 +87,7 @@ class DistDiagram {
         return 'node ' + d.viz_group
       })
       .append("svg:title") // TITLE APPENDED HERE
+      .classed('tooltip', true)
       .text(function(d) {
         return d.name;
       });

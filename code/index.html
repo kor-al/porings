@@ -14,63 +14,133 @@
   <script src="./dist_diagram.js" type="text/JavaScript"></script>
   <script src="./facts_box.js" type="text/JavaScript"></script>
 
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300, 400,800" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css?family=Raleway:100,300, 400" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300, 400,800" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,300, 400" rel="stylesheet">
 </head>
 
 <body>
-  <div class = 'main-wrapper'>
-  <div class='header-wrapper'>
-    <div class="header-text-wrapper">
-      <h1>Porings</h1>
-      <h2>Visual Analysis of Poring-like Creatures from Ragnarok Online</h2>
-      <p class='intro'> Porings are gelatinous monsters from Ragnarok Online.
-        For many players, small pink cute porings are the first monsters that they encounter in the game. 
-        It appears that there are many other porings scattered around the world of Rune Midgard. 
-        Moreover, although a few monsters bear other names, they look quite similar to porings in some way.
-        So far, creatures of the poring family could be described as drop-shaped (to some degree) and
-        moving by bouncing. However, the poring species drastically vary in their behavour and characteristics.
-      </p>
-    </div>
-    <div class="distDiagram-wrapper">
-      <div id="distDiagram-container"></div>
-      <div class="distButtons-wrapper">
-          <form id="dist-buttons"></form>
+  <div class='main-wrapper'>
+    <header>
+      <div class='header-wrapper'>
+        <div class="header-text-wrapper">
+          <h1>Porings</h1>
+          <h2>Visual Analysis of Poring-like Creatures from Ragnarok Online</h2>
+          <p class='intro'> Porings are gelatinous monsters from Ragnarok Online.
+            For many players, small pink cute porings are the first monsters that they encounter in the game.
+            It appears that there are many other porings scattered around the world of Rune Midgard.
+            Moreover, although a few monsters bear other names, they look quite similar to porings in some way.
+            So far, creatures of the poring family could be described as drop-shaped (to some degree) and
+            moving by bouncing. However, the poring species drastically vary in their behavour and characteristics.
+          </p>
+        </div>
+        <div class="distDiagram-wrapper">
+          <div id="distDiagram-container"></div>
+          <div class="distButtons-wrapper">
+            <form id="dist-buttons"></form>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </header>
+    <section class='content'>
 
-  <div class="content-wrapper">
-    <!-- <div class="mobFacts-wrapper"> -->
-      <div id="mobFacts-container">
-        <p class="factText">
+      <div class="content-wrapper">
+        <!-- <div class="mobFacts-wrapper"> -->
+        <div id="mobFacts-container">
+          <p class="factText">
             Explore the variety of porings! <br>
-            Each genus of the poring family includes certain species. But even creatures of one species have slightly different characteristics! 
-            Poring 'types' (denoted by the smallest dots) combine creatures of one species sharing the same characteristics.
-      </p>
+            Each genus of the poring family includes certain species. But even creatures of one species have slightly
+            different characteristics!
+            Poring 'types' (denoted by the smallest dots) combine creatures of one species sharing the same
+            characteristics.
+          </p>
+        </div>
+        <!-- </div> -->
+        <div class="selector-wrapper">
+          <!-- <div class="selector-drop2"></div> -->
+          <div class="selector-drop"></div>
+          <div id="selector-container"></div>
+        </div>
+        <div class="statsDiagram-wrapper">
+          <div class="statsDiagram-drop"></div>
+          <div id="statsDiagram-container"></div>
+        </div>
+        <div class="propsDiagram-wrapper">
+          <div class="propsDiagram-drop"></div>
+          <div id="propsDiagram-container"></div>
+        </div>
+        <div class="damageDiagram-wrapper">
+          <div class="damageDiagram-drop"></div>
+          <div id="damageDiagram-container"></div>
+        </div>
       </div>
-    <!-- </div> -->
-    <div class="selector-wrapper">
-      <!-- <div class="selector-drop2"></div> -->
-      <div class="selector-drop"></div>
-      <div id="selector-container"></div>
-    </div>
-    <div class="statsDiagram-wrapper">
-      <div class="statsDiagram-drop"></div>
-      <div id="statsDiagram-container"></div>
-    </div>
-    <div class="propsDiagram-wrapper">
-      <div class="propsDiagram-drop"></div>
-      <div id="propsDiagram-container"></div>
-    </div>
-    <div class="damageDiagram-wrapper">
-      <div class="damageDiagram-drop"></div>
-      <div id="damageDiagram-container"></div>
-    </div>
-  </div>
+    </section>
+    <section class='howto'>
+      <div class='howto-wrapper'>
+        <div class="about">
+          <h3>About Ragnarok Online</h3>
+          Ragnarok Online is a Korean MMORPG game based on the manhwa Ragnarok by Lee Myung-jin.
+          The game was released by Gravity in 2002.<sup><a href="https://ragnarok.gamepedia.com/Ragnarok_Wiki">1</a></sup><br>
+          Ragnarok is set in the World of Midgard consisting of three countries: Rune-Midgarts, the Schwarzwald
+          Republic, and the Arunafeltz States.<br><br>
+          Players are invited to create characters of the Norman race and explore the World through quests and events.
+          On their jorney, players encounter various demons and creatures, porings among them.<br><br>
+          To improve characters' characteristics, players have to level up their characters, upgrade their skills as
+          well as choose their equipment.In general, stats and elements show combat abilities and features of characters or creatures.
+        </div>
+        <div class='stats'>
+          <h3>Stats</h3>
+          There are six basic stats that describe combat abilities:
+          <sup><a href="https://strategywiki.org/wiki/Ragnarok_Online/Leveling_Stats_and_Skills">2</a></sup><br>
+          <ul>
+            <li><span class="span-bold"> Strength</span> increases attack strength in melee combat and weight limit.<br>
+            <li><span class="span-bold">Agility</span> increases attack speed and dodge rate.<br>
+            <li><span class="span-bold">Vitality</span> increases physical defense, maximum HP and HP recovery rate.<br>
+            <li><span class="span-bold">Intelligence</span> increases magic attack, magic defense and maximum SP.<br>
+            <li><span class="span-bold">Dexterity</span> increases accuracy, ranged attack strength and minimum damage
+              dealt, and lowers the cast time for some skills and spells.<br>
+            <li> <span class="span-bold">Luck</span> increases Critical hits and perfect dodge rate.<br>
+          </ul>
+        </div>
+        <div class="element"></div>
+        <h3>Elements</h3>
+        Elements are properties that can strengthen, weaken, or nullify attacks when they interact.
+        <sup><a href="https://irowiki.org/wiki/Element">3</a></sup><br>
+        Every player and monster has an element and, with the exception of the Neutral element, every element has both
+        strengths and weaknesses to other elements.<br>
+        There are ten different elements: <span class="span-bold">Neutral, Water, Earth, Fire, Wind, Poison, Holy, Shadow, Ghost, Undead</span>.<br>
+        Some attacks, such as the melee attacks of monsters, have no element and are completely unaffected by elemental
+        modifiers.<br><br>
+        Elements can be grouped into two types: attacking and defending. Defending elements are separated into four
+        levels; the resistances and weaknesses of a defending element are amplified relative to its level. Attacking
+        elements are not separated into levels.<br>
+        Players have both an attacking and defending element but a player's defending element is always Level 1.<br>
+        Monsters have only a defending element, but can inflict elemental attacks using skills.<br>
+        The numbers on the diagram are in percentage; they show how much damage is dealt to a creature with a
+        particular elemental attack.<br>
+        <div class="combat">
+          <h3>Derived Stats</h3>
+          Derived stats are functions of basic stats.
+          <sup><a href="https://strategywiki.org/wiki/Ragnarok_Online/Leveling_Stats_and_Skills">2</a></sup><br>
+          There are many of them in the game, for example, Maximum Hit Points (health),
+          Maximum Spell Points (stamina), Attack Power (Atk), Magical Attack Power (MAtk), Degence (Def), Magical
+          Degence (MDef), Accuracy, Dodge, Attack Speed etc.
+        </div>
+      </div>
 
-  <script src="./script.js"></script>
-</div>
+    </section>
+    <footer>
+      All the data and monsters' pictures are from <a href="http://ratemyserver.net/">ratemyserver.net</a>,
+      <a href="http://db.irowiki.org">iRO wiki</a>, <a href="https://ragnarok.gamepedia.com/Ragnarok_Wiki">Ragnarök
+        Wiki</a>,
+      and <a href="https://www.roguard.net/">ROGuard </a> Ragnarok Databases.<br>
+      Made by Alisa
+      <a href="https://github.com/kor-al/porings">
+        <span class='heart_icon'>&#10084;</span>
+      </a>
+    </footer>
+
+    <script src="./script.js"></script>
+  </div>
 </body>
 
 </html>
