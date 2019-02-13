@@ -5,8 +5,8 @@ class StatsDiagram{
         this.data = opts.data;
         this.element = opts.element;
 
-        this.maxR = 225, //radius of the biggest circle
-        this.padding = 50,
+        this.maxR = 225* 0.8, //radius of the biggest circle
+        this.padding = 50* 0.8,
         this.Stats = ['Vit', 'Agi', 'Str', 'Luk', 'Int', 'Dex'],
         this.minStatValue = 0,
         this.maxStatValue = 260;
@@ -22,18 +22,12 @@ class StatsDiagram{
         // define width, height and margin
         this.width = this.element.offsetWidth;
         this.height =this.element.offsetHeight;
-        // this.margin = {
-        //     top: 20,
-        //     right: 75,
-        //     bottom: 45,
-        //     left: 50
-        // };
 
         // set up parent element and SVG
         this.element.innerHTML = '';
         const svg = d3.select(this.element).append('svg')
         .attr("text-anchor", "middle")
-        .style("font", "12px sans-serif")
+        .style("font-size", "12px")
         .attr('width',  this.width)
         .attr('height', this.height);
 

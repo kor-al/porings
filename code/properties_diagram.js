@@ -8,14 +8,14 @@ class PropsDiagram {
     this.TotalMaxLvl = 4,
       this.minPropValue = -200,
       this.maxPropValue = 200,
-      this.largestR = 100, //radius of the biggest circle
-      this.firstR = 50,
-      this.level1R = 25,
-      this.arc_width = 15,
+      this.largestR = 100* 0.8, //radius of the biggest circle
+      this.firstR = 50* 0.8,
+      this.level1R = 25* 0.8,
+      this.arc_width = 15* 0.8,
       this.OriginAngle = -Math.PI / 2,
       this.RightAngleLimit =   this.OriginAngle + Math.PI,
       this.LeftAngleLimit =   this.OriginAngle - Math.PI,
-      this.helper_pad = 20,
+      this.helper_pad = 20* 0.8,
       this.NumArcs = 3;
 
     // create the chart
@@ -31,7 +31,7 @@ class PropsDiagram {
     this.element.innerHTML = '';
     const svg = d3.select(this.element).append('svg')
       .attr("text-anchor", "middle")
-      .style("font", "12px sans-serif")
+      .style("font-size", "12px")
       .attr('width', this.width)
       .attr('height', this.height);
 

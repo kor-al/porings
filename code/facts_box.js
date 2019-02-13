@@ -13,14 +13,16 @@ class FactsBox{
 
         var div = d3.select(this.element);
 
-        this.text = div.append('p').classed('factText', true).append("text");
+        // this.text = div.append('p').classed('factText', true).append("text");
+        this.text = div.select('.factText');
+        this.start_text = this.text.html();
+        console.log(this.text.html())
         this.list = div.append('div').classed('factList-container', true).append('ul').classed('factList', true);
     }
 
     update(data){
-        console.log(data['facts'])
-        this.reset()
-        this.text.text(data['facts']);
+        this.list.html("");
+        this.text.html(data['facts']);
 
         if(data['passive'] == 1) this.list.append('li').append("text").text('passive');
         if(data['passive'] == 0) this.list.append('li').append("text").text('agressive');
@@ -32,7 +34,9 @@ class FactsBox{
 
     reset()
     {
-        this.text.text("");
+        // this.text = this.text.html(this.start_text);
+        // this.text.html("");
+        this.text.html(this.start_text)
         this.list.html("");
     }
 

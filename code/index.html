@@ -13,20 +13,23 @@
   <script src="./damage_diagram.js" type="text/JavaScript"></script>
   <script src="./dist_diagram.js" type="text/JavaScript"></script>
   <script src="./facts_box.js" type="text/JavaScript"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300, 400,800" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,300, 400" rel="stylesheet"> 
 </head>
 
 <body>
+  <div class = 'main-wrapper'>
   <div class='header-wrapper'>
     <div class="header-text-wrapper">
       <h1>Porings</h1>
-      <h2>Visual Analysis of Poring Monsters from Ragnarok Online</h2>
-      <p class='intro'>Porings are gelatinous monsters from Ragnarok Online.
-        Usually, pink friendly porings are the first monsters that most novices encounter as soon as they start the
-        game.
-        However, there is a wide variety of poring in the the world of Rune Midgard.
-        Generally, the poring family could be defined to consist of monsters that are (to some degree) drop-shaped and
-        move by bouncing.
-        The porings drastically vary in their behavour and characteristics.
+      <h2>Visual Analysis of Poring-like Creatures from Ragnarok Online</h2>
+      <p class='intro'> Porings are gelatinous monsters from Ragnarok Online.
+        For many players, small pink cute porings are the first monsters that they encounter in the game. 
+        It appears that there are many other porings scattered around the world of Rune Midgard. 
+        Moreover, although a few monsters bear other names, they look quite similar to porings in some way.
+        So far, creatures of the poring family could be described as drop-shaped (to some degree) and
+        moving by bouncing. However, the poring species drastically vary in their behavour and characteristics.
       </p>
     </div>
     <div class="distDiagram-wrapper">
@@ -38,9 +41,15 @@
   </div>
 
   <div class="content-wrapper">
-    <div class="mobFacts-wrapper">
-      <div id="mobFacts-container"></div>
-    </div>
+    <!-- <div class="mobFacts-wrapper"> -->
+      <div id="mobFacts-container">
+        <p class="factText">
+            Explore the variety of porings! <br>
+            Each genus of the poring family includes certain species. But even creatures of one species have slightly different characteristics! 
+            Poring 'types' (denoted by the smallest dots) combine creatures of one species sharing the same characteristics.
+      </p>
+      </div>
+    <!-- </div> -->
     <div class="selector-wrapper">
       <!-- <div class="selector-drop2"></div> -->
       <div class="selector-drop"></div>
@@ -61,7 +70,7 @@
   </div>
 
   <script src="./script.js"></script>
-
+</div>
 </body>
 
 </html>

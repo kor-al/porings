@@ -6,11 +6,11 @@ class PoringSelector {
     this.element = opts.element;
     this.graphs = opts.graphs;
 
-    this.outerR = 210, //180,
-      this.small_r2 = 4, //3, //mobs with similar names names
-      this.small_r = 12, //10,
-      this.pie_innerR = 110, //110,
-      this.pie_outerR = 130; //130;
+    this.outerR = 210 * 0.8, //180,
+      this.small_r2 = 4 * 0.8, //mobs with similar names names
+      this.small_r = 12 * 0.8, //10,
+      this.pie_innerR = 110 * 0.8, //110,
+      this.pie_outerR = 130 * 0.8; //130;
     // originY = height / 2
     // originX = width / 2
 
@@ -34,7 +34,7 @@ class PoringSelector {
 
     this.outerArc = d3.arc()
       .innerRadius(this.pie_innerR)
-      .outerRadius(this.outerR + 20)
+      .outerRadius(this.outerR + 20*0.8)
 
     this.pie_group_size = d3.pie()
       .sort(null)
@@ -79,7 +79,7 @@ class PoringSelector {
     this.element.innerHTML = '';
     const svg = d3.select(this.element).append('svg')
       .attr("text-anchor", "middle")
-      .style("font", "12px sans-serif")
+      .style("font-size", "12px")
       .attr('width', this.width)
       .attr('height', this.height);
 

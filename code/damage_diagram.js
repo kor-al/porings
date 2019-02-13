@@ -5,11 +5,11 @@ class DamageDiagram {
     this.data = opts.data;
     this.element = opts.element;
 
-    this.heartMaxR = 30,
-      this.borderMobR = 100,
-      this.maxAttackR = 250,
+    this.heartMaxR = 30*0.8,
+      this.borderMobR = 100*0.8,
+      this.maxAttackR = 250*0.8,
       this.numPoints = 30, //# of random values of attack
-      this.atk_padding = 30,
+      this.atk_padding = 30*0.8,
       this.MinDef = 0,
       this.MaxDef = 255,
       this.MaxLogHP = 20;
@@ -27,7 +27,7 @@ class DamageDiagram {
     this.element.innerHTML = '';
     const svg = d3.select(this.element).append('svg')
       .attr("text-anchor", "middle")
-      .style("font", "12px sans-serif")
+      .style("font-size", "12px")
       .attr('width', this.width)
       .attr('height', this.height);
 

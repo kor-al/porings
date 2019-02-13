@@ -1,80 +1,150 @@
 body { 
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
   /* background: #fac7c2;*/
+  width: 100%;
+}
+
+.main-wrapper{
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
   background: rgb(243, 243, 243);
-  max-width: 1700px;
+}
+
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    color: #324e3d;
+    margin-top: 0;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 22px;
+  color: #2d533c;
+   /* grey; */
 }
 
 .header-wrapper{
-  background:#ebebeb;
-  margin: 0  0 30px 0;
+  background: #fadfe5;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  max-width: 1700px;
+  justify-content: space-between;
+  /* justify-content: center; */
+  padding-top: 50px;
+  vertical-align: top;
 }
 
 .header-text-wrapper{
-  width: 40%;
-  padding: 50px;
-  vertical-align: top;
-  display: inline-block;
+  padding: 0 50px;
+  /* display: inline-block; */
+  width:45%;
+  margin: 0;
   box-sizing: border-box;
 }
 
 .distDiagram-wrapper{
-  display: inline-block;
+  /* display: inline-block; */
   box-sizing: border-box;
-  /* width: 40%; */
+  min-width: 55%;
+  text-align: right;
+  display: inline-flex;
+  /* justify-content: space-between; */
 }
 
 #distDiagram-container
  {
-  height: inherit;
-  height: 500px;
-  width: 500px;
-  margin-left: auto ;
-  margin-right: auto ;
-  display: inline-block;
-  vertical-align: middle;
+  height: 400px;
+  width: 400px;
+  margin: 0 auto;
+  /* display: inline-block; */
+  
 }
 
 .distButtons-wrapper{
-  vertical-align: middle;
-  /* margin: 150px 0 0 0; */
-  display: inline-block;
+  vertical-align: top;
+  /* display: inline-block; */
+  padding: 0 50px 0 0 ;
 }
 
-.distButtons-wrapper label{
+.distButtons-wrapper span {
   display: block;
+  color: #629677;
+  font-size: 80%;
+}
+
+.intro {
+  font-weight: 400;
+  color: #629677;
+  line-height: 1.5em;
+  font-family: "Raleway", sans-serif;
+   /* grey; */
+}
+
+
+/* from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio */
+
+label {
+  margin-right: 15px;
+  line-height: 1.5em;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  outline: none;
+  margin-right: 5px;
+
+  position: relative;
+  top: 4px;
+}
+
+input:checked {
+  border: 6px solid black;
 }
 
 
 .content-wrapper{
-  width: 100%;
+
   display: flex;
   flex-flow: row wrap;
-  /* justify-content: center; */
   justify-content: center;
+  padding-top:50px;
 }
 
-.mobFacts-wrapper{
-  position: relative;
-  height: 350px;
-  width: 350px;
-  margin:auto;
-}
+/* .mobFacts-wrapper{
+
+} */
 
 #mobFacts-container
 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height:inherit;
-  width: inherit;
+  position: relative;
+  height: 280px;
+  width: 280px;
+  margin: 0 auto auto 0;
+  padding: 0 30px 0 50px;
+  box-sizing: border-box;
+  vertical-align: bottom;
+
 }
 
 .selector-wrapper {
   position: relative;
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   margin: auto;
   margin:auto;
 }
@@ -93,13 +163,13 @@ body {
 .selector-drop
 {
   display: block;
-  width: 490px;
-  height: 490px;
+  width: 400px;
+  height: 400px;
   background: white;
   border-radius: 45% 55% 54% 46% / 55% 48% 52% 45%; 
 } 
 
-.selector-drop2
+/* .selector-drop2
 {
   position: absolute;
   top: -10px;
@@ -111,21 +181,22 @@ body {
   border-color:  rgba(255, 255, 255, 1);
   background: rgba(255, 255, 255, 0.5);
   border-radius: 45% 55% 54% 46% / 55% 48% 52% 45%; 
-}
+} */
 
 
 .statsDiagram-wrapper{
   position: relative;
-  height: 500px;
-  width: 500px;
-  margin:auto;
+  height: 400px;
+  width: 400px;
+  margin: 0 auto;
+  display: inline-block;
 }
 
 .statsDiagram-drop
 {
   display: block;
-  width: 475px;
-  height: 475px;
+  width: 375px;
+  height: 375px;
   background: white;
   border-radius: 45% 55% 44% 56% / 55% 48% 52% 45%; 
 } 
@@ -141,9 +212,10 @@ body {
 
 .propsDiagram-wrapper{
   position: relative;
-  height: 500px;
-  width: 500px;
-  margin:auto;
+  height: 400px;
+  width: 400px;
+  margin: auto;
+  padding: 0;
   /* margin: -5% auto auto 5%; */
 }
 
@@ -152,8 +224,8 @@ body {
   left: 0;
   top: 0;
   display: block;
-  width: 500px;
-  height: 475px;
+  width: 400px;
+  height: 375px;
   background: white;
   border-radius: 35% 65% 45% 55% / 45% 38% 62% 55%; 
   box-shadow: inset 0px -20px 100px rgba(255, 255, 255, 0.6);
@@ -170,9 +242,12 @@ body {
 
 .damageDiagram-wrapper{
   position: relative;
-  height: 500px;
-  width: 500px;
-  margin: -2% auto auto -15%;
+  height: 400px;
+  width: 400px;
+  margin: auto;
+  padding: 0 15% 0 0;
+   /* -2% auto auto auto; */
+  /* margin: -2% auto auto -15%; */
 }
 
 
@@ -189,22 +264,60 @@ body {
 .damageDiagram-drop
 {
   display: block;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   background: white;
   border-radius: 65% 35% 36% 64% / 55% 52% 48% 45%;
 } 
 
 
-@media(max-width: 1300px){
+@media(max-width: 1060px){
   .damageDiagram-wrapper{
-    margin: auto;
+    padding: 0;
+  }
+
+  .header-text-wrapper{
+    width: 40%;
+  }
+
+  .selector-wrapper{
+    margin-bottom: 5%;
   }
 
 }
 
-
-@media(max-width: 800px){
+@media(max-width: 980px){
   .header-text-wrapper{
     width: 100%;
   }
+
+  .distDiagram-wrapper{
+    width:100%;
+  }
+
+  .header-wrapper{
+     justify-content: center;
+  }
+
+  .distButtons-wrapper{
+    padding-top: 50px;
+  }
+}
+ 
+
+@media(max-width: 590px){
+
+  .distDiagram-wrapper{
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  
+  .distButtons-wrapper{
+    padding-top: 0;
+    padding-bottom: 50px;
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2
+  }
+
+}

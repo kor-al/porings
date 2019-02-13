@@ -22,7 +22,7 @@ class DistDiagram {
       "PropertyLevel"
     ])
     this.quant_features = d3.set(["Level", "Def", "AtkDelay", "HP"]);
-    this.circleRadius = 150,
+    this.circleRadius = 150*0.9,
       this.circleTextPadding = 25,
       this.threshold = 0.01;
 
@@ -41,7 +41,7 @@ class DistDiagram {
     this.element.innerHTML = '';
     const svg = d3.select(this.element).append('svg')
       .attr("text-anchor", "middle")
-      .style("font", "12px sans-serif")
+      .style("font-size", "12px")
       .attr('width', this.width)
       .attr('height', this.height);
 
@@ -307,15 +307,17 @@ class DistDiagram {
     // Create the shape selectors
     var that = this;
 
-    this.buttons = d3.select(this.button_element)
-      .selectAll("label")
-      .data(this.Choices)
-      .enter()
-      .append("label")
-      .text(function(d) {
-        return d == 'All' ? 'Show ' + d : 'By ' + d;
-      })
-      .insert("input")
+    var labelEnter = d3.select(this.button_element)
+    .selectAll("span")
+    .data(this.Choices)
+    .enter().append("span");
+      
+    labelEnter.append("label")
+    .text(function(d) {
+      return d == 'All' ? 'Show ' + d : 'By ' + d;
+    })
+
+    this.buttons = labelEnter.append("input")
       .attr('type', 'radio')
       .attr('class', 'radioChoice')
       .attr('name', 'sorting_mode')
@@ -325,6 +327,8 @@ class DistDiagram {
       .property("checked", function(d, i) {
         return d === that.curChoice;
       });
+
+    
   }
 
   handleButtons() {
