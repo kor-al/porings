@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: "Raleway", sans-serif;
   font-size: 14px;
-  /* background:rgb(255, 223, 228); */
+  /* background: rgb(255, 223, 228);  */
    /* #fac7c2; */
   width: 100%;
 }
@@ -85,11 +85,6 @@ h3 {
   font-size: 80%;
 }
 
-svg title:hover {
-  border: grey;
-  background: lightsteelblue;	
-  color: white;
-}
 
 .intro {
   font-weight: 400;
@@ -147,8 +142,9 @@ input:checked {
 #mobFacts-container
 {
   position: relative;
-  height: 280px;
-  width: 250px;
+  height: 280px; 
+  width: 25%;
+  /* width: 250px; */
   margin: 0 auto auto 0;
   padding: 0 30px 0 50px;
   box-sizing: border-box;
@@ -185,19 +181,18 @@ input:checked {
   border-radius: 45% 55% 54% 46% / 55% 48% 52% 45%; 
 } 
 
-/* .selector-drop2
+.selector-drop2
 {
   position: absolute;
-  top: -10px;
-  left: -30px;
+  top: -25%;
+  left: -25%;
   z-index: -1;
-  width: 600px;
-  height: 600px;
-  border-width: 30px;
-  border-color:  rgba(255, 255, 255, 1);
-  background: rgba(255, 255, 255, 0.5);
+  width: 800px;
+  height: 800px;
+  /* border-color:  rgba(255, 255, 255); */
+  background: rgba(243, 243, 243, 0.692);
   border-radius: 45% 55% 54% 46% / 55% 48% 52% 45%; 
-} */
+}
 
 
 .statsDiagram-wrapper{
@@ -206,6 +201,19 @@ input:checked {
   width: 400px;
   margin: 0 auto;
   display: inline-block;
+}
+
+.statsDiagram-drop2
+{
+  position: absolute;
+  top: -15%;
+  left: -25%;
+  z-index: -1;
+  width: 600px;
+  height: 600px;
+  /* border-color:  rgba(255, 255, 255); */
+  background:  rgba(248, 248, 248, 0.815);
+  border-radius: 45% 55% 44% 56% / 55% 48% 52% 45%; 
 }
 
 .statsDiagram-drop
@@ -244,8 +252,18 @@ input:checked {
   height: 375px;
   background: white;
   border-radius: 35% 65% 45% 55% / 45% 38% 62% 55%; 
-  box-shadow: inset 0px -20px 100px rgba(255, 255, 255, 0.6);
 } 
+
+.propsDiagram-drop2{
+  position: absolute;
+  top: -15%;
+  left: -30%;
+  z-index: -1;
+  width: 600px;
+  height: 600px;
+  background: rgba(245, 245, 245, 0.699);
+  border-radius: 35% 65% 45% 55% / 45% 38% 62% 55%; 
+}
 
 #propsDiagram-container
  {
@@ -286,6 +304,18 @@ input:checked {
   border-radius: 65% 35% 36% 64% / 55% 52% 48% 45%;
 } 
 
+.damageDiagram-drop2
+{
+  position: absolute;
+  top: -15%;
+  left: -30%;
+  z-index: -2;
+  width: 800px;
+  height: 800px;
+  background: rgba(243, 243, 243, 0.897);
+  border-radius: 65% 35% 36% 64% / 55% 52% 48% 45%;
+} 
+
 .howto-wrapper{
   background-color:rgb(228, 228, 228); 
   padding: 50px;
@@ -322,13 +352,15 @@ a, a:visited, a:hover, a:active {
   color: rgb(117, 1, 1);
 }
 
-@media(max-width: 1060px){
+@media(max-width: 1100px){
   .damageDiagram-wrapper{
     padding: 0;
   }
 
   #mobFacts-container{
-    width: 400px;
+    width: 45%;
+    height: 280px;
+    margin: 0 0 0 0 ;
   }
 
   .header-text-wrapper{
@@ -337,6 +369,16 @@ a, a:visited, a:hover, a:active {
 
   .selector-wrapper{
     margin-bottom: 5%;
+    margin-left: auto;
+  }
+
+  .statsDiagram-wrapper{
+    margin-top: -20%;
+  }
+
+  .damageDiagram-wrapper{
+    margin-top: -20%;
+    margin-left: 13%;
   }
 
 }
@@ -348,7 +390,9 @@ a, a:visited, a:hover, a:active {
 
   #mobFacts-container{
     width: 100%;
-    height: 200px;
+    height: 150px;
+    vertical-align: middle;
+    margin: 0 auto;
   }
 
   .distDiagram-wrapper{
@@ -362,6 +406,15 @@ a, a:visited, a:hover, a:active {
   .distButtons-wrapper{
     padding-top: 50px;
   }
+
+  .statsDiagram-wrapper{
+    margin:auto;
+  }
+
+  .damageDiagram-wrapper{
+    margin:auto
+  }
+
 }
  
 
