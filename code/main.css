@@ -61,12 +61,13 @@ h3 {
   min-width: 55%;
   text-align: right;
   display: inline-flex;
+  vertical-align: top;
   /* justify-content: space-between; */
 }
 
 #distDiagram-container
  {
-  height: 400px;
+  height: 300px;
   width: 400px;
   margin: 0 auto;
   /* display: inline-block; */
@@ -158,7 +159,6 @@ input:checked {
   height: 400px;
   width: 400px;
   margin: auto;
-  margin:auto;
 }
 
 
@@ -236,8 +236,8 @@ input:checked {
 
 .propsDiagram-wrapper{
   position: relative;
-  height: 400px;
-  width: 400px;
+  height: 425px;
+  width: 440px;
   margin: auto;
   padding: 0;
   /* margin: -5% auto auto 5%; */
@@ -248,10 +248,10 @@ input:checked {
   left: 0;
   top: 0;
   display: block;
-  width: 400px;
-  height: 375px;
+  width: 440px;
+  height: 425px;
   background: white;
-  border-radius: 35% 65% 45% 55% / 45% 38% 62% 55%; 
+  border-radius: 60% 40% 57% 43% / 48% 49% 51% 52%  ; 
 } 
 
 .propsDiagram-drop2{

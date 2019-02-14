@@ -36,18 +36,15 @@
     // console.log(nestedData);
 
     const statsdia = new StatsDiagram({
-      element: document.querySelector('#statsDiagram-container'),
-      data: nestedData
+      element: document.querySelector('#statsDiagram-container')
     });
 
     const damagedia = new DamageDiagram({
-      element: document.querySelector('#damageDiagram-container'),
-      data: nestedData
+      element: document.querySelector('#damageDiagram-container')
     });
 
     const propsdia = new PropsDiagram({
-      element: document.querySelector('#propsDiagram-container'),
-      data: nestedData
+      element: document.querySelector('#propsDiagram-container')
     });
 
     const distdia = new DistDiagram({

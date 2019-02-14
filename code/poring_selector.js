@@ -11,8 +11,7 @@ class PoringSelector {
       this.small_r = 12 * 0.8, //10,
       this.pie_innerR = 110 * 0.8, //110,
       this.pie_outerR = 130 * 0.8; //130;
-    // originY = height / 2
-    // originX = width / 2
+    this.helper_padding = 40;
 
     this.curClicked = {
       group: null,
@@ -114,8 +113,8 @@ class PoringSelector {
 
     //text helper
     var text_help = this.plot.append('text')
-      .attr('y', this.height / 2 - 50)
-      .attr('x', this.width / 2 - 50)
+      .attr('y', this.height / 2 - this.helper_padding)
+      .attr('x', this.width / 2 - this.helper_padding)
       .attr('id', 'helper')
       .text("")
       .attr('fill', '#b55758')
@@ -408,12 +407,13 @@ class PoringSelector {
           })
           .attr('r', 0)
           .attr("transform", "rotate(" + toDegrees(dangle) + "," + circleij_x + "," + circleij_y + ")")
-          .on("mouseover", function(dangle, j) {
-            d3.select('#helper').text('Observed types');
-          })
-          .on("mouseout", function(dangle, j) {
-            d3.select('#helper').text('');
-          })
+          // .on("mouseover", function(dangle, j) {
+          //   console.log('small circle mouse over')
+          //   d3.select('#helper').text('Observed types');
+          // })
+          // .on("mouseout", function(dangle, j) {
+          //   d3.select('#helper').text('');
+          // })
       })
 
   }

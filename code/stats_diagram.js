@@ -2,7 +2,6 @@ class StatsDiagram{
 
     constructor(opts) {
         // load in arguments from config object
-        this.data = opts.data;
         this.element = opts.element;
 
         this.maxR = 225* 0.8, //radius of the biggest circle
@@ -78,11 +77,13 @@ class StatsDiagram{
          .text(function(d, i) {
            return i % 2 ? '' : d
          })
+         .attr("font-weight", 'bold')
 
        grid.selectAll('.axis').data(d3.range(0, this.NumStats)).enter()
          .append('line')
          .attr('class', 'axis')
          .attr("stroke", "#cccccc")
+         .attr('opacity', 0.5)
          .attr('x2', function(d, i) {
            return polarToCartesian(i * that.sliceAngle, that.maxR - that.padding).x
          })
@@ -98,6 +99,7 @@ class StatsDiagram{
          .append('text')
          .attr('class', 'axis_label')
          .attr("fill", "#cccccc")
+         .attr("font-weight", 'bold')
          .attr('x', function(d, i) {
            return polarToCartesian(i * that.sliceAngle, that.maxR - 2 * that.padding / 3).x
          })

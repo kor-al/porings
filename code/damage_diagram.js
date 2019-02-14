@@ -2,7 +2,6 @@ class DamageDiagram {
 
   constructor(opts) {
     // load in arguments from config object
-    this.data = opts.data;
     this.element = opts.element;
 
     this.heartMaxR = 30*0.8,
@@ -106,6 +105,7 @@ class DamageDiagram {
       // .attr('id', 'atk_label')
       .attr('text-anchor', 'end')
       .attr('y', -5).attr('x', this.innerScale(this.MinDef) - 5)
+      .attr('font-weight', 'bold')
       .text('Def')
 
 
@@ -125,6 +125,7 @@ class DamageDiagram {
 
     def_grid.append('text')
       .attr('fill', "#cccccc").attr('y', +15).attr('x', this.innerScale(this.MinDef) + 15)
+      .attr('font-weight', 'bold')
       .text('Atk')
 
     def_grid.selectAll('.def_ticks').data(def_ticks).enter()
@@ -148,13 +149,14 @@ class DamageDiagram {
       .attr('y', -this.xScale(this.MaxLogHP) - 5)
       .attr('id', 'maxTick')
       .attr('text-anchor', 'start')
-      .text('Max');
+      .text('');
 
 
     hp_grid.append('text').attr('fill', "#cccccc")
       .attr('x', -15)
       .attr('y', -this.xScale(this.MaxLogHP) - 5)
-      .text("HP")
+      .attr('font-weight', 'bold')
+      .text("Max HP")
 
     range_helper.append('text')
       .attr('id', 'helper_var')
@@ -274,7 +276,7 @@ class DamageDiagram {
         helper_var_range.text(extentDef[0] + ' - ' + extentDef[1])
       })
       .on("mouseout", function(d) {
-        helper.transition().duration(100).style('fill-opacity', 0)
+        helper.style('fill-opacity', 0)
       })
       .transition().duration(1000)
       .attr('d', function(d) {
@@ -292,7 +294,7 @@ class DamageDiagram {
           ' - ' + format_value(Math.exp(extentLogHP[1])))
       })
       .on("mouseout", function(d) {
-        helper.transition().duration(100).style('fill-opacity', 0)
+        helper.style('fill-opacity', 0)
       })
       .transition().duration(1000)
       .attr('d', function(d) {
@@ -336,7 +338,7 @@ class DamageDiagram {
             ' - ' + format_value(d.upLim))
         })
         .on("mouseout", function() {
-          helper.transition().duration(100).style('fill-opacity', 0)
+          helper.style('fill-opacity', 0)
         })
         .transition().duration(1000)
         .attr('d', pathData);
@@ -355,8 +357,6 @@ class DamageDiagram {
     this.graph.select('#atk_line')
       .transition().duration(200)
       .attr('x1', this.borderMobR).remove()
-
-    this.graph.select('#maxTick').text('Max');
 
     this.graph.selectAll('.HP_circle').transition().duration(500)
       .attr('r', 0).remove();
