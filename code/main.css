@@ -474,6 +474,9 @@ a:active {
 
 
 @media(max-width: 590px) {
+  .content-wrapper{
+    overflow: hidden;
+  }
 
   #mobFacts-container {
     width: 100%;
