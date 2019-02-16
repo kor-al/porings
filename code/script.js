@@ -6,8 +6,8 @@
   //   });
 
   Promise.all([
-    d3.csv("../poring_family.csv"),
-    d3.json("../facts.json"),
+    d3.csv("../viz_data/poring_family.csv"),
+    d3.json("../viz_data/facts.json"),
 ]).then(function(files) {
   main(files[0], files[1]);
 })
