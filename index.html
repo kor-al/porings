@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Porings</title>
   <link rel="stylesheet" href="./code/main.css">
   <link rel="stylesheet" href="./code/colors.css">
@@ -67,12 +69,12 @@
           <div id="statsDiagram-container"></div>
         </div>
         <div class="propsDiagram-wrapper">
-            <!-- <div class="propsDiagram-drop2"></div> -->
+          <!-- <div class="propsDiagram-drop2"></div> -->
           <div class="propsDiagram-drop"></div>
           <div id="propsDiagram-container"></div>
         </div>
         <div class="damageDiagram-wrapper">
-            <!-- <div class="damageDiagram-drop2"></div> -->
+          <!-- <div class="damageDiagram-drop2"></div> -->
           <div class="damageDiagram-drop"></div>
           <div id="damageDiagram-container"></div>
         </div>
@@ -81,25 +83,28 @@
     <section class='howto'>
       <div class='howto-wrapper'>
         <div class="about">
+          <img class='annotation selector-annotation' src="./images/Artboard 1.png">
           <h3>About Ragnarok Online</h3>
-          <img class = 'selector-annotation' src="./images/Artboard 1.png">
           Ragnarok Online is a Korean MMORPG game based on the manhwa Ragnarok by Lee Myung-jin.
           The game was released by Gravity in 2002.<sup><a href="https://ragnarok.gamepedia.com/Ragnarok_Wiki">1</a></sup><br>
           Ragnarok is set in the World of Midgard consisting of three countries: Rune-Midgarts, the Schwarzwald
           Republic, and the Arunafeltz States.<br>
           Players are invited to create characters and explore the World through quests and events.<br><br>
-          On their jorney, players encounter various demons and creatures, porings among them. 
-          Since there is no systematization of monsters in the game, 
-          this visualization is just a loose attempt to structure the variety of porings. 
-          By analogy with the biological classification, all the porings could be combined into the Poring Family. 
-          This Family includes genera (poporings, porings, ghostrings) consisting of species (golder porings, bomp porings).
-          According to databases, some species have several types. The difference between them could be seen on the charts.   
+          On their jorney, players encounter various demons and creatures, porings among them.
+          Since there is no systematization of monsters in the game,
+          this visualization is just a loose attempt to structure the variety of porings.
+          By analogy with the biological classification, all the porings could be combined into the Poring Family.
+          This Family includes genera (poporings, porings, ghostrings) consisting of species (golder porings, bomp
+          porings).
+          According to databases, some species have several types. The difference between them could be seen on the
+          charts.
           <br><br>
           To advance through the game, players have to level up their characters, upgrade their skills as
-          well as wisely choose their equipment. In general, stats and elements show combat abilities and features of characters and creatures.
+          well as wisely choose their equipment. In general, stats and elements show combat abilities and features of
+          characters and creatures.
         </div>
         <div class='stats'>
-          <img class = 'stats-annotation' src="./images/Artboard 4.png">
+          <img class='annotation stats-annotation' src="./images/Artboard 4.png">
           <h3>Stats</h3>
           There are six basic stats that describe combat abilities:
           <sup><a href="https://strategywiki.org/wiki/Ragnarok_Online/Leveling_Stats_and_Skills">2</a></sup><br>
@@ -112,31 +117,37 @@
               dealt, and lowers the cast time for some skills and spells.<br>
             <li> <span class="span-bold">Luck</span> increases Critical hits and perfect dodge rate.<br>
           </ul>
-        ...there are much more detail about their effects in Ragnarok databases.<br>
-        All the creatures have these stats fixed on different levels. Here, they are illustrated on the radial diagram.
+          ...there are much more detail about their effects in Ragnarok databases.<br>
+          All the creatures have these stats fixed on different levels. Here, they are illustrated on the radial
+          diagram.
         </div>
-        <img class = 'elem-annotation' src="./images/Artboard 2.png">
         <div class="element">
-        <h3>Elements</h3>
-        Elements are properties that can strengthen, weaken, or nullify attacks when they interact.
-        <sup><a href="https://irowiki.org/wiki/Element">3</a></sup><br>
-        Every player and monster has an element and, with the exception of the Neutral element, every element has both
-        strengths and weaknesses to other elements.<br>
-        There are ten different elements: <span class="span-bold">Neutral, Water, Earth, Fire, Wind, Poison, Holy, Shadow, Ghost, Undead</span>.<br>
-        Some attacks, such as the melee attacks of monsters, have no element and are completely unaffected by elemental
-        modifiers.<br><br>
-        Elements can be grouped into two types: attacking and defending. Defending elements are separated into four
-        levels; the resistances and weaknesses of a defending element are amplified relative to its level. Attacking
-        elements are not separated into levels.<br>
-        Players have both an attacking and defending element but a player's defending element is always Level 1.<br>
-        Monsters have only a defending element, but can inflict elemental attacks using skills.<br><br>
-        Here, the central part of the diagram contains elemental data <span class="span-bold">about creatures</span> of a species,
-        while the outer part demonstrates how effective elemental attacks are <span class="span-bold">against these creatures</span>.
-        The numbers on the diagram are in percentage; they show how much damage is dealt to a creature with a
-        particular elemental attack.<br>
-      </div>
-        <img class = 'combat-annotation' src="./images/Artboard 3.png">
+          <img class='annotation elem-annotation' src="./images/Artboard 2.png">
+          <h3>Elements</h3>
+          Elements are properties that can strengthen, weaken, or nullify attacks when they interact.
+          <sup><a href="https://irowiki.org/wiki/Element">3</a></sup><br>
+          Every player and monster has an element and, with the exception of the Neutral element, every element has
+          both
+          strengths and weaknesses to other elements.<br>
+          There are ten different elements: <span class="span-bold">Neutral, Water, Earth, Fire, Wind, Poison, Holy,
+            Shadow, Ghost, Undead</span>.<br>
+          Some attacks, such as the melee attacks of monsters, have no element and are completely unaffected by
+          elemental
+          modifiers.<br><br>
+          Elements can be grouped into two types: attacking and defending. Defending elements are separated into four
+          levels; the resistances and weaknesses of a defending element are amplified relative to its level. Attacking
+          elements are not separated into levels.<br>
+          Players have both an attacking and defending element but a player's defending element is always Level 1.<br>
+          Monsters have only a defending element, but can inflict elemental attacks using skills.<br><br>
+          Here, the central part of the diagram contains elemental data <span class="span-bold">about creatures</span>
+          of a species,
+          while the outer part demonstrates how effective elemental attacks are <span class="span-bold">against these
+            creatures</span>.
+          The numbers on the diagram are in percentage; they show how much damage is dealt to a creature with a
+          particular elemental attack.<br>
+        </div>
         <div class="combat">
+          <img class='annotation combat-annotation' src="./images/Artboard 3.png">
           <h3>Derived Stats</h3>
           Derived stats are functions of basic stats.
           <sup><a href="https://strategywiki.org/wiki/Ragnarok_Online/Leveling_Stats_and_Skills">2</a></sup><br>
@@ -144,26 +155,25 @@
           Maximum Spell Points (stamina), Attack Power (Atk), Magical Attack Power (MAtk), Degence (Def), Magical
           Degence (MDef), Accuracy, Dodge, Attack Speed etc.<br><br>
 
-          Not to mention, these stats are direct measures of combat abilities and, therefore, couldn't be ignored. 
-          The diagram represents a basic rough model of a monster, where the key variables are displayed: defence, attack and health (hit points, HP). 
-          Because attack power is usually somehow distributed between minimal and maximal limits, 
-          it is shown as an outer arc of variable thickness.
-          In this regard, defence is more straightforward: just one number shows creature's 'toughness' against damage. 
-          Defence intensity is also represented as an arc but growing inwards from borders. 
-          Health levels are denoted by central circles.
+          Not to mention, these stats are direct measures of combat abilities and, therefore, couldn't be ignored. <br>
+          The diagram represents a basic rough model of a monster, where the key variables are displayed: defence,
+          attack and health (hit points, HP).<br>
+          Because attack power is usually somehow distributed between minimal and maximal limits,
+          it is shown as an outer arc of variable thickness. In this regard, defence is more straightforward: just one
+          number shows creature's 'toughness' against damage.
+          Defence intensity is also represented as an arc but growing inwards from borders. Health levels are denoted
+          by central circles.
         </div>
       </div>
 
     </section>
     <footer>
-      All the data and monsters' pictures are from <a href="http://ratemyserver.net/">ratemyserver.net</a>,
+      All the data and pictures of monsters are from <a href="http://ratemyserver.net/">ratemyserver.net</a>,
       <a href="http://db.irowiki.org">iRO wiki</a>, <a href="https://ragnarok.gamepedia.com/Ragnarok_Wiki">Ragnarök
         Wiki</a>,
       and <a href="https://www.roguard.net/">ROGuard </a> Ragnarok Databases.<br>
-      Made by Alisa
-      <a href="https://github.com/kor-al/porings">
-        <span class='heart_icon'>&#10084;</span>
-      </a>
+      Code and visualization by Alisa Korinevskaya
+      (<a href="https://github.com/kor-al/porings">GitHub Repo</a>)
     </footer>
 
     <script src="./code/script.js"></script>
