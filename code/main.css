@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: "Raleway", sans-serif;
   font-size: 14px;
   /* background: rgb(255, 223, 228);  */
@@ -382,12 +383,6 @@ a:active {
 
 @media(max-width: 1100px) {
 
-  .main-wrapper{
-    margin: 0;
-    padding: 0;
-  }
-
-
   .damageDiagram-wrapper {
     padding: 0;
   }
@@ -521,7 +516,7 @@ a:active {
   }
 
   .stats-annotation{
-    width:250px;
+    width:240px;
   }
 
 }

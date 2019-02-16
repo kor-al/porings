@@ -274,7 +274,7 @@ class DamageDiagram {
           .style('fill', function () {
             return theArc.style('fill');
           })
-        helper_var.text("Defence")
+        helper_var.text("Defense")
         helper_var_range.text(extentDef[0] + ' - ' + extentDef[1])
       })
       .on("mouseout", function (d) {
