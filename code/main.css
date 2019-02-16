@@ -381,6 +381,13 @@ a:active {
 }
 
 @media(max-width: 1100px) {
+
+  .main-wrapper{
+    margin: 0;
+    padding: 0;
+  }
+
+
   .damageDiagram-wrapper {
     padding: 0;
   }
