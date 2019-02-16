@@ -1,25 +1,46 @@
-$colors: Angeling #d4d8d8, Poring #fa978e, Poporing #c8db93, Marin #b0a7c1, Magmaring #f58658, Drops #eac699, Metaling #ca8e8c, Others #c3d7e3; // https://coderwall.com/p/mjhy5g/an-approach-for-sass-pseudo-dictionaries
-@function getColor ($colorName) {
-  // Run across the color list.
-  @each $color in $colors {
-    // If the key (first child of the current $color) is
-    // the same as the specified by params, return the value.
-    @if nth($color, 1) == $colorName {
-      @return nth($color, 2);
-    }
-  }
-}
+$colors: 
+Angeling #d4d8d8,
+Poring #fa978e,
+Poporing #c8db93,
+Marin #b0a7c1,
+Magmaring #f58658,
+Drops #eac699,
+Metaling #ca8e8c,
+Others #c3d7e3;
+// https://coderwall.com/p/mjhy5g/an-approach-for-sass-pseudo-dictionaries
 
+// @function getColor ($colorName) {
+//   // Run across the color list.
+//   @each $color in $colors {
+//     // If the key (first child of the current $color) is
+//     // the same as the specified by params, return the value.
+//     @if nth($color, 1) == $colorName {
+//       @return nth($color, 2);
+//     }
+//   }
+// }
+
+$colorsProps: 
+Holy rgb(250, 184, 233),
+Fire #F59C42,
+Water rgb(194, 243, 253),
+Ghost #A2AAB3,
+Wind #BADEE8,
+Earth#DFBF9F,
+Shadow rgb(184, 157, 247),
+Undead #ED97AE,
+Poison rgb(210, 255, 164),
+Neutral #D9DDF2;
 
 
 
 @each $color in $colors {
   .#{nth($color, 1)}.isClicked {
-    fill: darken(nth($color, 2),40%);
+    fill: darken(nth($color, 2), 40%);
   }
 
   .#{nth($color, 1)}.isHovered {
-    fill: darken(nth($color, 2),10%);
+    fill: darken(nth($color, 2), 10%);
   }
 
   .#{nth($color, 1)} {
@@ -27,20 +48,20 @@ $colors: Angeling #d4d8d8, Poring #fa978e, Poporing #c8db93, Marin #b0a7c1, Magm
   }
 
   line.#{nth($color, 1)}.isClicked {
-    stroke: darken(nth($color, 2),40%);
+    stroke: darken(nth($color, 2), 40%);
   }
 
   line.#{nth($color, 1)}.isHovered {
-    stroke: darken(nth($color, 2),10%);
+    stroke: darken(nth($color, 2), 10%);
   }
 
   line.#{nth($color, 1)} {
     stroke: nth($color, 2);
   }
 
-  .poly.#{nth($color, 1)}.isHovered{
+  .poly.#{nth($color, 1)}.isHovered {
     fill: nth($color, 2);
-    stroke: darken(nth($color, 2),10%);
+    stroke: darken(nth($color, 2), 10%);
   }
 
   .poly.#{nth($color, 1)} {
@@ -57,13 +78,37 @@ $colors: Angeling #d4d8d8, Poring #fa978e, Poporing #c8db93, Marin #b0a7c1, Magm
   }
 
   .attack_path.#{nth($color, 1)}:hover {
-    fill: darken(invert(nth($color, 2)),10%);
+    fill: darken(invert(nth($color, 2)), 10%);
   }
 
   .def_arc.#{nth($color, 1)}:hover {
-    fill: darken(nth($color, 2),10%);
+    fill: darken(nth($color, 2), 10%);
     fill-opacity: 0.8;
   }
 
 
+}
+
+
+@each $color in $colorsProps {
+  // .#{nth($color, 1)}.isClicked {
+  //   fill: darken(nth($color, 2), 40%);
+  // }
+
+  // .#{nth($color, 1)}.isHovered {
+  //   fill: darken(nth($color, 2), 10%);
+  // }
+
+  .#{nth($color, 1)} {
+    fill: nth($color, 2);
+  }
+
+  .#{nth($color, 1)}:hover {
+    fill: darken(nth($color, 2), 10%);
+  }
+
+  text.#{nth($color, 1)} {
+    // fill: darken(nth($color, 2), 10%);
+    stroke: darken(nth($color, 2), 10%);
+  }
 }

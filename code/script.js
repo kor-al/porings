@@ -1,18 +1,19 @@
-create_buttons()
-reset_buttons()
+
+  
+  // d3.csv("../poring_family_facts.csv")
+  // .then(function(data) {
+  //     main(data);
+  //   });
+
+  Promise.all([
+    d3.csv("../poring_family.csv"),
+    d3.json("../facts.json"),
+]).then(function(files) {
+  main(files[0], files[1]);
+})
 
 
-  //d3.select('#selector').append('circle').attr('r', '100').attr('cx', 10).attr('cy', 10).attr('fill', 'red');
-
-
-  var data = d3.csv("https://raw.githubusercontent.com/kor-al/porings/master/poring_family.csv")
-    .then(function(data) {
-      main(data);
-    });
-
-
-
-  function main(inData) {
+  function main(inData, factsData) {
 
     var nestedData = d3.nest()
       .key(function(d) {
@@ -39,12 +40,39 @@ reset_buttons()
       d.group_size = d.mob_types.length
     });
 
-    console.log(nestedData);
-    createStatsDiagram("#statsDia_svg");
-    createPropsDiagram("#propsDia_svg");
-    createDamageDiagram("#damageDia_svg");
-    createDistDiagram("#distDia_svg",inData);
-    createSelector(nestedData, "#selector_svg");
-    handle_buttons(inData);
+    // console.log(nestedData);
+
+    const statsdia = new StatsDiagram({
+      element: document.querySelector('#statsDiagram-container')
+    });
+
+    const damagedia = new DamageDiagram({
+      element: document.querySelector('#damageDiagram-container')
+    });
+
+    const propsdia = new PropsDiagram({
+      element: document.querySelector('#propsDiagram-container')
+    });
+
+    const distdia = new DistDiagram({
+      element: document.querySelector('#distDiagram-container'),
+      data: inData,
+      button_element: document.querySelector('#dist-buttons')
+    });
+
+    const facts_elem = new FactsBox({
+      element: document.querySelector('#mobFacts-container'),
+      facts_data: factsData
+    });
+
+    const selector = new PoringSelector({
+      element: document.querySelector('#selector-container'),
+      data: nestedData,
+      graphs : {statsDiagram: statsdia,
+                damageDiagram: damagedia,
+                propsDiagram: propsdia,
+                 distDiagram: distdia ,
+                 factsBox: facts_elem}
+    });
 
   };

@@ -1,305 +1,520 @@
 .Angeling.isClicked {
-  fill: #6b7575; }
+  fill: #6b7575;
+}
 
 .Angeling.isHovered {
-  fill: #b9c0c0; }
+  fill: #b9c0c0;
+}
 
 .Angeling {
-  fill: #d4d8d8; }
+  fill: #d4d8d8;
+}
 
 line.Angeling.isClicked {
-  stroke: #6b7575; }
+  stroke: #6b7575;
+}
 
 line.Angeling.isHovered {
-  stroke: #b9c0c0; }
+  stroke: #b9c0c0;
+}
 
 line.Angeling {
-  stroke: #d4d8d8; }
+  stroke: #d4d8d8;
+}
 
 .poly.Angeling.isHovered {
   fill: #d4d8d8;
-  stroke: #b9c0c0; }
+  stroke: #b9c0c0;
+}
 
 .poly.Angeling {
-  fill: #d4d8d8; }
+  fill: #d4d8d8;
+}
 
 .attack_path.Angeling {
-  fill: #2b2727; }
+  fill: #2b2727;
+}
 
 .def_arc.Angeling {
-  fill: #d4d8d8; }
+  fill: #d4d8d8;
+}
 
 .attack_path.Angeling:hover {
-  fill: #100f0f; }
+  fill: #100f0f;
+}
 
 .def_arc.Angeling:hover {
   fill: #b9c0c0;
-  fill-opacity: 0.8; }
+  fill-opacity: 0.8;
+}
 
 .Poring.isClicked {
-  fill: #b41608; }
+  fill: #b41608;
+}
 
 .Poring.isHovered {
-  fill: #f86a5d; }
+  fill: #f86a5d;
+}
 
 .Poring {
-  fill: #fa978e; }
+  fill: #fa978e;
+}
 
 line.Poring.isClicked {
-  stroke: #b41608; }
+  stroke: #b41608;
+}
 
 line.Poring.isHovered {
-  stroke: #f86a5d; }
+  stroke: #f86a5d;
+}
 
 line.Poring {
-  stroke: #fa978e; }
+  stroke: #fa978e;
+}
 
 .poly.Poring.isHovered {
   fill: #fa978e;
-  stroke: #f86a5d; }
+  stroke: #f86a5d;
+}
 
 .poly.Poring {
-  fill: #fa978e; }
+  fill: #fa978e;
+}
 
 .attack_path.Poring {
-  fill: #056871; }
+  fill: #056871;
+}
 
 .def_arc.Poring {
-  fill: #fa978e; }
+  fill: #fa978e;
+}
 
 .attack_path.Poring:hover {
-  fill: #033b40; }
+  fill: #033b40;
+}
 
 .def_arc.Poring:hover {
   fill: #f86a5d;
-  fill-opacity: 0.8; }
+  fill-opacity: 0.8;
+}
 
 .Poporing.isClicked {
-  fill: #647a29; }
+  fill: #647a29;
+}
 
 .Poporing.isHovered {
-  fill: #b5ce6d; }
+  fill: #b5ce6d;
+}
 
 .Poporing {
-  fill: #c8db93; }
+  fill: #c8db93;
+}
 
 line.Poporing.isClicked {
-  stroke: #647a29; }
+  stroke: #647a29;
+}
 
 line.Poporing.isHovered {
-  stroke: #b5ce6d; }
+  stroke: #b5ce6d;
+}
 
 line.Poporing {
-  stroke: #c8db93; }
+  stroke: #c8db93;
+}
 
 .poly.Poporing.isHovered {
   fill: #c8db93;
-  stroke: #b5ce6d; }
+  stroke: #b5ce6d;
+}
 
 .poly.Poporing {
-  fill: #c8db93; }
+  fill: #c8db93;
+}
 
 .attack_path.Poporing {
-  fill: #37246c; }
+  fill: #37246c;
+}
 
 .def_arc.Poporing {
-  fill: #c8db93; }
+  fill: #c8db93;
+}
 
 .attack_path.Poporing:hover {
-  fill: #241746; }
+  fill: #241746;
+}
 
 .def_arc.Poporing:hover {
   fill: #b5ce6d;
-  fill-opacity: 0.8; }
+  fill-opacity: 0.8;
+}
 
 .Marin.isClicked {
-  fill: #4a405c; }
+  fill: #4a405c;
+}
 
 .Marin.isHovered {
-  fill: #9589ac; }
+  fill: #9589ac;
+}
 
 .Marin {
-  fill: #b0a7c1; }
+  fill: #b0a7c1;
+}
 
 line.Marin.isClicked {
-  stroke: #4a405c; }
+  stroke: #4a405c;
+}
 
 line.Marin.isHovered {
-  stroke: #9589ac; }
+  stroke: #9589ac;
+}
 
 line.Marin {
-  stroke: #b0a7c1; }
+  stroke: #b0a7c1;
+}
 
 .poly.Marin.isHovered {
   fill: #b0a7c1;
-  stroke: #9589ac; }
+  stroke: #9589ac;
+}
 
 .poly.Marin {
-  fill: #b0a7c1; }
+  fill: #b0a7c1;
+}
 
 .attack_path.Marin {
-  fill: #4f583e; }
+  fill: #4f583e;
+}
 
 .def_arc.Marin {
-  fill: #b0a7c1; }
+  fill: #b0a7c1;
+}
 
 .attack_path.Marin:hover {
-  fill: #343a29; }
+  fill: #343a29;
+}
 
 .def_arc.Marin:hover {
   fill: #9589ac;
-  fill-opacity: 0.8; }
+  fill-opacity: 0.8;
+}
 
 .Magmaring.isClicked {
-  fill: #7a2907; }
+  fill: #7a2907;
+}
 
 .Magmaring.isHovered {
-  fill: #f26328; }
+  fill: #f26328;
+}
 
 .Magmaring {
-  fill: #f58658; }
+  fill: #f58658;
+}
 
 line.Magmaring.isClicked {
-  stroke: #7a2907; }
+  stroke: #7a2907;
+}
 
 line.Magmaring.isHovered {
-  stroke: #f26328; }
+  stroke: #f26328;
+}
 
 line.Magmaring {
-  stroke: #f58658; }
+  stroke: #f58658;
+}
 
 .poly.Magmaring.isHovered {
   fill: #f58658;
-  stroke: #f26328; }
+  stroke: #f26328;
+}
 
 .poly.Magmaring {
-  fill: #f58658; }
+  fill: #f58658;
+}
 
 .attack_path.Magmaring {
-  fill: #0a79a7; }
+  fill: #0a79a7;
+}
 
 .def_arc.Magmaring {
-  fill: #f58658; }
+  fill: #f58658;
+}
 
 .attack_path.Magmaring:hover {
-  fill: #075677; }
+  fill: #075677;
+}
 
 .def_arc.Magmaring:hover {
   fill: #f26328;
-  fill-opacity: 0.8; }
+  fill-opacity: 0.8;
+}
 
 .Drops.isClicked {
-  fill: #98621f; }
+  fill: #98621f;
+}
 
 .Drops.isHovered {
-  fill: #e1ae6f; }
+  fill: #e1ae6f;
+}
 
 .Drops {
-  fill: #eac699; }
+  fill: #eac699;
+}
 
 line.Drops.isClicked {
-  stroke: #98621f; }
+  stroke: #98621f;
+}
 
 line.Drops.isHovered {
-  stroke: #e1ae6f; }
+  stroke: #e1ae6f;
+}
 
 line.Drops {
-  stroke: #eac699; }
+  stroke: #eac699;
+}
 
 .poly.Drops.isHovered {
   fill: #eac699;
-  stroke: #e1ae6f; }
+  stroke: #e1ae6f;
+}
 
 .poly.Drops {
-  fill: #eac699; }
+  fill: #eac699;
+}
 
 .attack_path.Drops {
-  fill: #153966; }
+  fill: #153966;
+}
 
 .def_arc.Drops {
-  fill: #eac699; }
+  fill: #eac699;
+}
 
 .attack_path.Drops:hover {
-  fill: #0c213c; }
+  fill: #0c213c;
+}
 
 .def_arc.Drops:hover {
   fill: #e1ae6f;
-  fill-opacity: 0.8; }
+  fill-opacity: 0.8;
+}
 
 .Metaling.isClicked {
-  fill: #5e2d2c; }
+  fill: #5e2d2c;
+}
 
 .Metaling.isHovered {
-  fill: #ba6c69; }
+  fill: #ba6c69;
+}
 
 .Metaling {
-  fill: #ca8e8c; }
+  fill: #ca8e8c;
+}
 
 line.Metaling.isClicked {
-  stroke: #5e2d2c; }
+  stroke: #5e2d2c;
+}
 
 line.Metaling.isHovered {
-  stroke: #ba6c69; }
+  stroke: #ba6c69;
+}
 
 line.Metaling {
-  stroke: #ca8e8c; }
+  stroke: #ca8e8c;
+}
 
 .poly.Metaling.isHovered {
   fill: #ca8e8c;
-  stroke: #ba6c69; }
+  stroke: #ba6c69;
+}
 
 .poly.Metaling {
-  fill: #ca8e8c; }
+  fill: #ca8e8c;
+}
 
 .attack_path.Metaling {
-  fill: #357173; }
+  fill: #357173;
+}
 
 .def_arc.Metaling {
-  fill: #ca8e8c; }
+  fill: #ca8e8c;
+}
 
 .attack_path.Metaling:hover {
-  fill: #254f50; }
+  fill: #254f50;
+}
 
 .def_arc.Metaling:hover {
   fill: #ba6c69;
-  fill-opacity: 0.8; }
+  fill-opacity: 0.8;
+}
 
 .Others.isClicked {
-  fill: #457795; }
+  fill: #457795;
+}
 
 .Others.isHovered {
-  fill: #a0c0d3; }
+  fill: #a0c0d3;
+}
 
 .Others {
-  fill: #c3d7e3; }
+  fill: #c3d7e3;
+}
 
 line.Others.isClicked {
-  stroke: #457795; }
+  stroke: #457795;
+}
 
 line.Others.isHovered {
-  stroke: #a0c0d3; }
+  stroke: #a0c0d3;
+}
 
 line.Others {
-  stroke: #c3d7e3; }
+  stroke: #c3d7e3;
+}
 
 .poly.Others.isHovered {
   fill: #c3d7e3;
-  stroke: #a0c0d3; }
+  stroke: #a0c0d3;
+}
 
 .poly.Others {
-  fill: #c3d7e3; }
+  fill: #c3d7e3;
+}
 
 .attack_path.Others {
-  fill: #3c281c; }
+  fill: #3c281c;
+}
 
 .def_arc.Others {
-  fill: #c3d7e3; }
+  fill: #c3d7e3;
+}
 
 .attack_path.Others:hover {
-  fill: #19110c; }
+  fill: #19110c;
+}
 
 .def_arc.Others:hover {
   fill: #a0c0d3;
-  fill-opacity: 0.8; }
+  fill-opacity: 0.8;
+}
 
+.Holy {
+  fill: #fab8e9;
+}
+
+.Holy:hover {
+  fill: #f788da;
+}
+
+text.Holy {
+  stroke: #f788da;
+}
+
+.Fire {
+  fill: #F59C42;
+}
+
+.Fire:hover {
+  fill: #f28312;
+}
+
+text.Fire {
+  stroke: #f28312;
+}
+
+.Water {
+  fill: #c2f3fd;
+}
+
+.Water:hover {
+  fill: #91e9fb;
+}
+
+text.Water {
+  stroke: #91e9fb;
+}
+
+.Ghost {
+  fill: #A2AAB3;
+}
+
+.Ghost:hover {
+  fill: #86909c;
+}
+
+text.Ghost {
+  stroke: #86909c;
+}
+
+.Wind {
+  fill: #BADEE8;
+}
+
+.Wind:hover {
+  fill: #94ccdb;
+}
+
+text.Wind {
+  stroke: #94ccdb;
+}
+
+.Earth {
+  fill: #DFBF9F;
+}
+
+.Earth:hover {
+  fill: #d2a679;
+}
+
+text.Earth {
+  stroke: #d2a679;
+}
+
+.Shadow {
+  fill: #b89df7;
+}
+
+.Shadow:hover {
+  fill: #966ef3;
+}
+
+text.Shadow {
+  stroke: #966ef3;
+}
+
+.Undead {
+  fill: #ED97AE;
+}
+
+.Undead:hover {
+  fill: #e56c8c;
+}
+
+text.Undead {
+  stroke: #e56c8c;
+}
+
+.Poison {
+  fill: #d2ffa4;
+}
+
+.Poison:hover {
+  fill: #b9ff71;
+}
+
+text.Poison {
+  stroke: #b9ff71;
+}
+
+.Neutral {
+  fill: #D9DDF2;
+}
+
+.Neutral:hover {
+  fill: #b3bbe5;
+}
+
+text.Neutral {
+  stroke: #b3bbe5;
+}
 /*# sourceMappingURL=colors.css.map */

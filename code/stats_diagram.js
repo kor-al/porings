@@ -1,167 +1,174 @@
-const maxR = 250, //radius of the biggest circle
-  padding = 50,
-  NumStats = 6,
-  minStatValue = 0,
-  maxStatValue = 260;
+class StatsDiagram{
 
-const sliceAngle = 2 * Math.PI / NumStats;
-var rScale = d3.scaleSqrt().range([maxR - padding, 0]).domain([maxStatValue, 0]);
+    constructor(opts) {
+        // load in arguments from config object
+        this.element = opts.element;
 
-const Stats = ['Vit', 'Agi', 'Str', 'Luk', 'Int', 'Dex'];
+        this.maxR = 225* 0.8, //radius of the biggest circle
+        this.padding = 50* 0.8,
+        this.Stats = ['Vit', 'Agi', 'Str', 'Luk', 'Int', 'Dex'],
+        this.minStatValue = 0,
+        this.maxStatValue = 260;
 
-function createStatsDiagram(targetSVG) {
+        this.NumStats = this.Stats.length;
+        this.sliceAngle = 2 * Math.PI / this.NumStats;
 
-  const svg = d3.select(targetSVG)
-    .attr("text-anchor", "middle")
-    .style("font", "12px sans-serif");
+        // create the chart
+        this.draw();
+    }
 
-  const width = parseInt(svg.style("width")),
-    height = parseInt(svg.style("height"))
+    draw() {
+        // define width, height and margin
+        this.width = this.element.offsetWidth;
+        this.height =this.element.offsetHeight;
 
-  const canvas_g = svg.append("g")
-    .attr("transform", `translate(${width / 2},${height / 2})`);
+        // set up parent element and SVG
+        this.element.innerHTML = '';
+        const svg = d3.select(this.element).append('svg')
+        .attr("text-anchor", "middle")
+        .style("font-size", "12px")
+        .attr('width',  this.width)
+        .attr('height', this.height);
 
+        // we'll actually be appending to a <g> element
+        this.plot = svg.append("g")
+              .attr("transform", `translate(${this.width / 2},${this.height / 2})`);
 
+        // // create the other stuff
+        this.createScales();
+        this.createGrid();
+        this.createDataGroup();
+    }
 
-  var axisScale = d3.scaleLinear().range([0, maxR - padding]).domain([maxStatValue, 0]);
-  //makes the axis go in the right direction
+    createScales() {
+      this.rScale = d3.scaleSqrt().range([this.maxR - this.padding, 0]).domain([this.maxStatValue, 0]);
+      //makes the axis go in the right direction
+      this.axisScale = d3.scaleLinear().range([0, this.maxR - this.padding]).domain([this.maxStatValue, 0]);
+   }
 
-  var ticks = d3.range(10, maxStatValue + 10, 50)
+   createGrid(){
 
-  //circles grid
-  //function(d, i){ return polarToCartesian(i*sliceAngle, rScale(d)).x;
-  //function(d, i){ return polarToCartesian(i*sliceAngle, rScale(d)).y;
+     var ticks = d3.range(10, this.maxStatValue + 10, 50);
 
-  var grid = canvas_g.append('g')
+     var grid = this.plot.append('g').attr('id', 'grid')
+     var circle_grid = grid.selectAll('.circle_grid').data(ticks).enter().append('g')
 
-  var circle_grid = grid.selectAll('.circle_grid').data(ticks).enter().append('g')
+     const that = this;
 
-  circle_grid.append('circle')
-    .attr('class', '.circle_grid')
-    .attr('fill', "#cccccc")
-    .attr("opacity", 1 / NumStats)
-    .attr('r', function(d, i) {
-      return rScale(d);
-    })
-    .attr({
-      cx: 0,
-      cy: 0
-    });
+     circle_grid.append('circle')
+         .attr('class', 'circle_grid')
+         .attr('fill', "#cccccc")
+         .attr("opacity", 1 / this.NumStats)
+         .attr('r', function(d, i) {
+           return that.rScale(d);
+         })
+         .attr({
+           cx: 0,
+           cy: 0
+         });
 
-  // //add ticks
-  circle_grid.append('text').attr('fill', "#cccccc")
-    .attr('class', '.circle_grid')
-    .attr('x', function(d, i) {
-      return rScale(d) - 10
-    })
-    .attr('y', 0)
-    .text(function(d, i) {
-      return i % 2 ? '' : d
-    })
+       // //add ticks
+       circle_grid.append('text').attr('fill', "#cccccc")
+         .attr('class', 'circle_tick')
+         .attr('x', function(d, i) {
+           return that.rScale(d) - 10
+         })
+         .attr('y', -5)
+         .text(function(d, i) {
+           return i % 2 ? '' : d
+         })
+         .attr("font-weight", 'bold')
 
-  grid.selectAll('line').data(d3.range(0, NumStats)).enter()
-    .append('line')
-    .attr('class', 'grid')
-    .attr("stroke", "#cccccc")
-    .attr('x2', function(d, i) {
-      return polarToCartesian(i * sliceAngle, maxR - padding).x
-    })
-    .attr('y2', function(d, i) {
-      return polarToCartesian(i * sliceAngle, maxR - padding).y
-    })
-    .attr({
-      x1: 0,
-      y1: 0
-    });
+       grid.selectAll('.axis').data(d3.range(0, this.NumStats)).enter()
+         .append('line')
+         .attr('class', 'axis')
+         .attr("stroke", "#cccccc")
+         .attr('opacity', 0.5)
+         .attr('x2', function(d, i) {
+           return polarToCartesian(i * that.sliceAngle, that.maxR - that.padding).x
+         })
+         .attr('y2', function(d, i) {
+           return polarToCartesian(i * that.sliceAngle, that.maxR - that.padding).y
+         })
+         .attr({
+           x1: 0,
+           y1: 0
+         });
 
-  grid.selectAll('.label').data(Stats).enter()
-    .append('text')
-    .attr('class', 'label')
-    .attr("fill", "#cccccc")
-    .attr('x', function(d, i) {
-      return polarToCartesian(i * sliceAngle, maxR - 2 * padding / 3).x
-    })
-    .attr('y', function(d, i) {
-      return polarToCartesian(i * sliceAngle, maxR - 2 * padding / 3).y
-    })
-    .text(function(d, i) {
-      return d;
-    });
+       grid.selectAll('.axis_label').data(this.Stats).enter()
+         .append('text')
+         .attr('class', 'axis_label')
+         .attr("fill", "#cccccc")
+         .attr("font-weight", 'bold')
+         .attr('x', function(d, i) {
+           return polarToCartesian(i * that.sliceAngle, that.maxR - 2 * that.padding / 3).x
+         })
+         .attr('y', function(d, i) {
+           return polarToCartesian(i * that.sliceAngle, that.maxR - 2 * that.padding / 3).y
+         })
+         .text(function(d, i) {
+           return d;
+         });
 
-  //poligons
+   }
 
-  var graph = canvas_g.append('g').attr('id', 'statsDiagram')
-}
+   createDataGroup(){
+     this.graph = this.plot.append('g').attr('id', 'data_viz')
+   }
 
+   reset(){
 
-function resetStats(targetSVG) {
+     var polys = this.graph.selectAll(".poly");
 
-  var graph = d3.select(targetSVG).select('#statsDiagram');
+     var line0 = d3.line().x(0).y(0);
 
-  // remove previous lines
-  remove_poly(graph);
+     polys.transition().delay(100).duration(500)
+     .attr("d", line0).remove();
 
-  return graph;
-}
+   }
 
-function updateStats(targetSVG, data) {
+   update(data) {
 
-  const fillOpacity = 1 / (data.length + 1)
+     const fillOpacity = 1 / (data.length + 1);
+     const that = this;
 
-  // remove previous lines
-  var graph = resetStats(targetSVG);
+    // remove previous lines
+     this.reset();
 
-  var graph_group = graph.append('g').attr("id", "stats_graph")
+     data.forEach(function(d, i) {
 
-  // draw new
-  data.forEach(function(d, i) {
+         var line0 = d3.line().x(0).y(0);
 
-    var line0 = d3.line().x(0).y(0);
+         var line = d3.line()
+           .x(function(s, j) {
+             return polarToCartesian(j * that.sliceAngle, that.rScale(d[s])).x;
+           })
+           .y(function(s, j) {
+             return polarToCartesian(j * that.sliceAngle, that.rScale(d[s])).y;
+           });
 
-    var line = d3.line()
-      .x(function(s, j) {
-        return polarToCartesian(j * sliceAngle, rScale(d[s])).x;
-      })
-      .y(function(s, j) {
-        return polarToCartesian(j * sliceAngle, rScale(d[s])).y;
-      });
+         that.graph.append("path")
+           .datum(that.Stats.concat(that.Stats[0]))
+           .attr("d", line0)
+           .classed(d.viz_group, true)
+           .classed('poly', true)
+           //.attr("fill", color(d.viz_group))
+           .attr("fill-opacity", fillOpacity)
+           .on('mouseover', function(s, j) {
+             var poly = d3.select(this)
+             poly.raise()//.attr("fill-opacity", 0.5)
+             .classed('isHovered', true)
+           })
+           .on('mouseout', function(s, j) {
+             d3.select(this)//.attr("fill-opacity", fillOpacity)
+             .classed('isHovered', false)
+           })
+           .transition().delay(100 * i).duration(500)
+           .attr("d", line)
+           .attr("stroke", group2color(d.viz_group))
+           .attr('stroke-width', 1)
+       })
 
-    graph_group.append("path")
-      .datum(Stats.concat(Stats[0]))
-      .attr("d", line0)
-      .classed(d.viz_group, true)
-      .classed('poly', true)
-      //.attr("fill", color(d.viz_group))
-      .attr("fill-opacity", fillOpacity)
-      .on('mouseover', function(s, j) {
-        var poly = d3.select(this)
-        poly.raise()//.attr("fill-opacity", 0.5)
-        .classed('isHovered', true)
-      })
-      .on('mouseout', function(s, j) {
-        d3.select(this)//.attr("fill-opacity", fillOpacity)
-        .classed('isHovered', false)
-      })
-      .transition().delay(100 * i).duration(500)
-      .attr("d", line)
-      .attr("stroke", group2color(d.viz_group))
-      .attr('stroke-width', 1)
-  })
-
-}
-
-function remove_poly(graph_selection) {
-
-  var graph = graph_selection.selectAll("#stats_graph")
-
-  var polys = graph.selectAll(".poly");
-
-  var line0 = d3.line().x(0).y(0);
-
-  polys.transition().delay(100).duration(500).attr("d", line0)
-  .on('end', function(){graph.remove()});
-
-
-
+     }
 
 }

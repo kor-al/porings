@@ -1,13 +1,473 @@
+body { 
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  /* background: rgb(255, 223, 228);  */
+   /* #fac7c2; */
+  width: 100%;
+}
 
-	#selector_svg {
-		/* write only numbers - to be parsed in d3 */
-    height: 500px;
-    width: 500px;
-    border: 1px solid gray;
+.main-wrapper{
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  background: rgb(243, 243, 243);
+  /* rgb(240, 248, 230); */
+}
+
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    color: #324e3d;
+    margin-top: 0;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 22px;
+  color: #2d533c;
+   /* grey; */
+}
+
+h3 {
+  color: #2d533c;
+   /* grey; */
+}
+
+.header-wrapper{
+  background: rgb(255, 223, 228);
+  /* rgb(240, 201, 214); */
+  /* rgb(255, 223, 228); */
+  /* #fadfe5; */
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  max-width: 1700px;
+  justify-content: space-between;
+  /* justify-content: center; */
+  vertical-align: top;
+}
+
+.header-text-wrapper{
+  padding: 50px;
+  /* padding-top: 50px; */
+  /* display: inline-block; */
+  width:45%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.distDiagram-wrapper{
+  /* display: inline-block; */
+  box-sizing: border-box;
+  min-width: 55%;
+  text-align: right;
+  display: inline-flex;
+  vertical-align: top;
+  /* justify-content: space-between; */
+}
+
+#distDiagram-container
+ {
+  height: 400px;
+  width: 400px;
+  margin: 0 auto;
+  /* display: inline-block; */
+  
+}
+
+.distButtons-wrapper{
+  vertical-align: bottom;
+  /* display: inline-block; */
+  padding: 50px 50px 0 0 ;
+}
+
+.distButtons-wrapper span {
+  display: block;
+  color: #629677;
+  font-size: 80%;
+  /* margin-top:50px; */
+}
+
+
+.intro {
+  font-weight: 400;
+  color: #629677;
+  line-height: 1.5em;
+  font-family: "Raleway", sans-serif;
+   /* grey; */
+}
+
+
+
+/* from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio */
+
+label {
+  margin-right: 15px;
+  line-height: 1.5em;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  outline: none;
+  margin-right: 5px;
+
+  position: relative;
+  top: 4px;
+}
+
+input:checked {
+  border: 6px solid #2d533c;
+   /* black; */
+}
+
+
+.content-wrapper{
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding:50px 0;
+}
+
+/* .mobFacts-wrapper{
+
+} */
+
+#mobFacts-container
+{
+  position: relative;
+  height: 280px; 
+  width: 25%;
+  /* width: 250px; */
+  margin: 0 auto auto 0;
+  padding: 0 30px 0 50px;
+  box-sizing: border-box;
+  vertical-align: bottom;
+  color: #2d533c;
+
+}
+
+.selector-wrapper {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  margin: auto;
+}
+
+
+#selector-container
+ {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: inherit;
+  width: inherit;
+}
+
+
+.selector-drop
+{
+  display: block;
+  width: 400px;
+  height: 400px;
+  background: white;
+  border-radius: 45% 55% 54% 46% / 55% 48% 52% 45%; 
+} 
+
+.selector-drop2
+{
+  position: absolute;
+  top: -25%;
+  left: -25%;
+  z-index: -1;
+  width: 800px;
+  height: 800px;
+  /* border-color:  rgba(255, 255, 255); */
+  background: rgba(243, 243, 243, 0.692);
+  border-radius: 45% 55% 54% 46% / 55% 48% 52% 45%; 
+}
+
+
+.statsDiagram-wrapper{
+  position: relative;
+  height: 400px;
+  width: 400px;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.statsDiagram-drop2
+{
+  position: absolute;
+  top: -15%;
+  left: -25%;
+  z-index: -1;
+  width: 600px;
+  height: 600px;
+  /* border-color:  rgba(255, 255, 255); */
+  background:  rgba(248, 248, 248, 0.815);
+  border-radius: 45% 55% 44% 56% / 55% 48% 52% 45%; 
+}
+
+.statsDiagram-drop
+{
+  display: block;
+  width: 375px;
+  height: 375px;
+  background: white;
+  border-radius: 45% 55% 44% 56% / 55% 48% 52% 45%; 
+} 
+
+#statsDiagram-container
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: inherit;
+  width: inherit;
+}
+
+.propsDiagram-wrapper{
+  position: relative;
+  height: 440px;
+  width: 450px;
+  margin: auto;
+  padding: 0;
+  /* margin: -5% auto auto 5%; */
+}
+
+.propsDiagram-drop
+{
+  display: block;
+  width: 450px;
+  height: 435px;
+  background: white;
+  border-radius: 60% 40% 57% 43% / 48% 49% 51% 52%  ; 
+} 
+
+.propsDiagram-drop2{
+  position: absolute;
+  top: -15%;
+  left: -30%;
+  z-index: -1;
+  width: 600px;
+  height: 600px;
+  background: rgba(245, 245, 245, 0.699);
+  border-radius: 35% 65% 45% 55% / 45% 38% 62% 55%; 
+}
+
+#propsDiagram-container
+ {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: inherit;
+  width: inherit;
+}
+
+.damageDiagram-wrapper{
+  position: relative;
+  height: 400px;
+  width: 400px;
+  margin: auto;
+  padding: 0 15% 0 0;
+   /* -2% auto auto auto; */
+  /* margin: -2% auto auto -15%; */
+}
+
+
+#damageDiagram-container
+ {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* border: 1px solid gray; */
+  height: inherit;
+  width: inherit;
+}
+
+.damageDiagram-drop
+{
+  display: block;
+  width: 400px;
+  height: 400px;
+  background: white;
+  border-radius: 65% 35% 36% 64% / 55% 52% 48% 45%;
+} 
+
+.damageDiagram-drop2
+{
+  position: absolute;
+  top: -15%;
+  left: -30%;
+  z-index: -2;
+  width: 800px;
+  height: 800px;
+  background: rgba(243, 243, 243, 0.897);
+  border-radius: 65% 35% 36% 64% / 55% 52% 48% 45%;
+} 
+
+.howto-wrapper{
+  background-color:rgb(228, 228, 228); 
+  padding: 50px;
+  font-weight: 400;
+  color: #2d533c;
+  line-height: 1.5em;
+  font-family: "Raleway", sans-serif;
+}
+
+
+
+.selector-annotation
+{
+  height:250px;
+  float: right;
+  margin: 10px;
+}
+
+.stats-annotation
+{
+  height:260px;
+  float: right;
+  margin: 10px;
+}
+
+.elem-annotation
+{
+  width: 300px;
+  float: left;
+  margin: 10px;
+}
+
+.combat-annotation
+{
+  height:300px;
+  float: left;
+  margin: 10px;
+}
+
+footer{
+  font-size: 12px;
+  background-color: rgb(202, 202, 202);
+  text-align:  right;
+  padding: 50px;
+}
+
+sup{
+  color: black;
+}
+
+.span-bold{
+  font-weight: bolder;
+}
+
+a{
+  text-decoration: none;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+.heart_icon
+{
+  color: rgb(117, 1, 1);
+}
+
+@media(max-width: 1100px){
+  .damageDiagram-wrapper{
+    padding: 0;
   }
-	#statsDia_svg, #propsDia_svg, #damageDia_svg,#distDia_svg {
-		/* write only numbers - to be parsed in d3 */
-		height: 500px;
-		width: 500px;
-		border: 1px solid gray;
-	}
+
+  #mobFacts-container{
+    width: 45%;
+    height: 280px;
+    margin: 0 0 0 0 ;
+  }
+
+  .header-text-wrapper{
+    width: 40%;
+  }
+
+  .selector-wrapper{
+    margin-bottom: 5%;
+    margin-left: auto;
+  }
+
+  .statsDiagram-wrapper{
+    margin-top: -20%;
+  }
+
+  .damageDiagram-wrapper{
+    margin-top: -20%;
+    margin-left: 13%;
+  }
+
+}
+
+@media(max-width: 980px){
+  .header-text-wrapper{
+    width: 100%;
+  }
+
+  #mobFacts-container{
+    width: 100%;
+    height: 150px;
+    vertical-align: middle;
+    margin: 0 auto;
+  }
+
+  .distDiagram-wrapper{
+    width:100%;
+  }
+
+  .header-wrapper{
+     justify-content: center;
+  }
+
+  .distButtons-wrapper{
+    padding-top: 50px;
+  }
+
+  .statsDiagram-wrapper{
+    margin:auto;
+  }
+
+  .damageDiagram-wrapper{
+    margin:auto
+  }
+
+}
+ 
+
+@media(max-width: 590px){
+
+  #mobFacts-container{
+    width: 100%;
+    height: 250px;
+  }
+
+  .distDiagram-wrapper{
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  
+  .distButtons-wrapper{
+    padding-top: 0;
+    padding-bottom: 50px;
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2
+  }
+
+}
