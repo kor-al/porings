@@ -4,6 +4,8 @@ class PropsDiagram {
     // load in arguments from config object
     this.element = opts.element;
 
+    this.Properties = ["Wind", "Holy", "Fire", "Water", "Ghost", "Earth", "Shadow", "Undead", "Poison", "Neutral"];
+
     this.TotalMaxLvl = 4,
       this.minPropValue = -200,
       this.maxPropValue = 200,
@@ -16,7 +18,7 @@ class PropsDiagram {
       this.LeftAngleLimit = this.OriginAngle - Math.PI,
       this.helper_pad = 20 * 0.8,
       this.NumArcs = 3,
-      this.grid_ticks = [-100,0 ,100, 200],
+      this.grid_ticks = [-100, 0, 100, 200],
       this.grid_label_pad = 10;
 
     // create the chart
@@ -48,6 +50,8 @@ class PropsDiagram {
 
   createScales() {
 
+
+
     this.level2radius = d3.scaleLinear()
       .domain([1, this.TotalMaxLvl])
       .range([this.firstR, this.largestR]);
@@ -57,7 +61,7 @@ class PropsDiagram {
       .range([this.LeftAngleLimit, this.RightAngleLimit]);
 
     this.startR = this.level2radius(this.TotalMaxLvl),
-      this.endR = this.startR + (this.arc_width - 1) * Properties.length;
+      this.endR = this.startR + (this.arc_width - 1) * this.Properties.length;
 
     this.CurMaxRadius = this.startR;
 
@@ -66,9 +70,12 @@ class PropsDiagram {
       .range([0, 2 * Math.PI]);
 
     this.name2innerRadius = d3.scaleOrdinal()
-      .domain(Properties)
+      .domain(this.Properties)
       .range([this.startR, this.endR])
 
+    this.colorProp = d3.scaleOrdinal()
+      .domain(this.Properties)
+      .range(["#ffb3ff", "#ffd699", "#ccf2ff", "#ccccff", "#e6ccb3", "#d1b3ff", "#ff9999", "#99ff99", "#d9e6f2"])
   }
 
   createDataGroup() {
@@ -100,50 +107,50 @@ class PropsDiagram {
       .attr('r', (d, i) => this.level2radius(d))
       .attr('fill', "#d9d9d9")
       .attr('opacity', 1 / this.TotalMaxLvl);
-    
-    
+
+
     var that = this;
-    const largestPropR = this.arc_width * Properties.length;
+    const largestPropR = this.arc_width * this.Properties.length;
 
     var grid = this.arcs_graph.append('g')
-    .attr('class', 'phi axis')
+      .attr('class', 'phi axis')
 
     grid.selectAll('.axis').data(this.grid_ticks).enter()
-         .append('line')
-         .attr('class', 'axis')
-         .attr("stroke", "#cccccc")
-         .attr('opacity', 0.5)
-         .attr('x1', function(d, i) {
-           return polarToCartesian(that.OriginAngle +  that.scaleProp(d), that.largestR).x
-         })
-         .attr('y1', function(d, i) {
-           return polarToCartesian(that.OriginAngle +  that.scaleProp(d), that.largestR).y
-         })
-         .attr('x2', function(d, i) {
-          return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR + largestPropR).x
-        })
-        .attr('y2', function(d, i) {
-          return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR+ largestPropR).y
-        })
-  
-  grid.selectAll('.axis_label').data(this.grid_ticks).enter()
-        .append('text')
-        .attr('class', 'axis_label')
-        .attr("fill", "#cccccc")
-        .attr("font-weight", 'bold')
-        .attr('x', function(d, i) {
-          var pad = 0;
-          return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR + largestPropR + that.grid_label_pad).x + pad;
-        })
-        .attr('y', function(d, i) {
-          var pad =0// -15;// (that.scaleProp(d)<= that.OriginAngle) ? 12 : -15;
-          return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR + largestPropR + that.grid_label_pad).y + pad;
-        })
-        .text(function(d, i) {
-          return d + '%';
-        });
+      .append('line')
+      .attr('class', 'axis')
+      .attr("stroke", "#cccccc")
+      .attr('opacity', 0.5)
+      .attr('x1', function (d, i) {
+        return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR).x
+      })
+      .attr('y1', function (d, i) {
+        return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR).y
+      })
+      .attr('x2', function (d, i) {
+        return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR + largestPropR).x
+      })
+      .attr('y2', function (d, i) {
+        return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR + largestPropR).y
+      })
 
-    
+    grid.selectAll('.axis_label').data(this.grid_ticks).enter()
+      .append('text')
+      .attr('class', 'axis_label')
+      .attr("fill", "#cccccc")
+      .attr("font-weight", 'bold')
+      .attr('x', function (d, i) {
+        var pad = 0;
+        return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR + largestPropR + that.grid_label_pad).x + pad;
+      })
+      .attr('y', function (d, i) {
+        var pad = 0 // -15;// (that.scaleProp(d)<= that.OriginAngle) ? 12 : -15;
+        return polarToCartesian(that.OriginAngle + that.scaleProp(d), that.largestR + largestPropR + that.grid_label_pad).y + pad;
+      })
+      .text(function (d, i) {
+        return d + '%';
+      });
+
+
   }
 
   reset() {
@@ -192,7 +199,9 @@ class PropsDiagram {
     var petals = pie_group.selectAll(".petal").data(pie_arcs)
       .enter()
       .append("path")
-      .attr("class", "petal")
+      .attr("class", function (d, i) {
+        return "petal " + d.data.monster.PropertyName
+      })
       .attr("transform", function (d) {
         return rot((d.startAngle + d.endAngle) / 2);
       })
@@ -205,18 +214,19 @@ class PropsDiagram {
         }
       })
       .style("stroke", "white")
-      .attr("fill", function (d, i) {
-        return colorProp(d.data.monster.PropertyName);
-      })
+      // .attr("fill", function (d, i) {
+      //   return colorProp(d.data.monster.PropertyName);
+      // })
       .on('mouseover', function (d, i) {
-        d3.select(this).attr('fill', d3.hsl(colorProp(d.data.monster.PropertyName)).darker());
+        // d3.select(this).attr('fill', d3.hsl(colorProp(d.data.monster.PropertyName)).darker());
         that.helper.select('#helper_text')
           .text(d.data.monster.PropertyName)
-          .style('fill', d3.hsl(colorProp(d.data.monster.PropertyName)).darker());
+          .classed(d.data.monster.PropertyName, true)
       })
       .on('mouseout', function (d, i) {
-        d3.select(this).attr('fill', colorProp(d.data.monster.PropertyName));
+        // d3.select(this).attr('fill', colorProp(d.data.monster.PropertyName));
         that.helper.select('#helper_text')
+          .classed(d.data.monster.PropertyName, false)
           .text("");
       });
 
@@ -266,31 +276,34 @@ class PropsDiagram {
       .classed('property_arc', true);
 
     //max values of attr
-    var max_values = Properties.map(function (p) {
+    var max_values = this.Properties.map(function (p) {
       return getMax(data, p);
     });
-    var min_values = Properties.map(function (p) {
+    var min_values = this.Properties.map(function (p) {
       return getMin(data, p);
     });
 
     var property_arc = property_arcs_groups
       .each(function (d, i) {
         var theArcs_group = d3.select(this);
-        var prop_values = Properties.map(function (p) {
+        var prop_values = that.Properties.map(function (p) {
           return +d[p];
         })
 
 
         var data_groups = theArcs_group.selectAll('.arcs').data(prop_values).enter().append('g');
+        // console.log('prop', Properties[0])
 
         data_groups.append("path")
-          .attr('class', 'arcs')
           .datum(function (value, j) {
             return that.arc_property_attr(j);
           })
           .attr('d', d3.arc())
-          .attr('fill', function (value, j) {
-            return colorProp(Properties[j])
+          // .attr('fill', function (value, j) {
+          //   return colorProp(Properties[j])
+          // })
+          .attr('class', function (v, j) {
+            return 'arcs ' + that.Properties[j];
           })
           .attr('opacity', 1 / data.length)
           .attr('stroke', 'white')
@@ -305,9 +318,9 @@ class PropsDiagram {
 
     // add text arc
     var text_arcs_groups = this.arcs_graph.append("g").attr("class", "max_arcs")
-    .selectAll(".max_arcs")
-    .data(Properties)
-    .enter();
+      .selectAll(".max_arcs")
+      .data(this.Properties)
+      .enter();
 
     // length of the arc is l = PI * r * (opening angle of the arc) / 180 grad
     // as we want text to have the same length
@@ -330,7 +343,7 @@ class PropsDiagram {
 
 
     var text = this.arcs_graph.append('g').attr("class", "PropText")
-      .selectAll('text').data(Properties).enter()
+      .selectAll('text').data(this.Properties).enter()
       .append("text")
       .attr("x", function (v, j) {
         if (max_values[j] >= 0) {
@@ -341,7 +354,7 @@ class PropsDiagram {
       }) //Move the text from the start angle of the arc
       .attr("dy", function (v, j) {
         if (max_values[j] >= 0) {
-          return that.arc_width - 3;
+          return that.arc_width - 2;
         } else {
           return -4;
         }
@@ -365,7 +378,7 @@ class PropsDiagram {
   }
 
   resetArcs() {
-    var this_arcs_graph = this.arcs_graph;
+    // var this_arcs_graph = this.arcs_graph;
 
     var max_arcs = this.arcs_graph.selectAll(".max_arcs");
     var text = this.arcs_graph.selectAll(".PropText");

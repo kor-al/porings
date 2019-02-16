@@ -22,9 +22,10 @@ class DistDiagram {
       "PropertyLevel"
     ])
     this.quant_features = d3.set(["Level", "Def", "AtkDelay", "HP"]);
-    this.circleRadius = 150*0.9,
+    this.circleRadius = 150*0.8,
       this.circleTextPadding = 25,
       this.threshold = 0.01;
+    this.grid_pad = 40;
 
     //create buttons
     this.createButtons();
@@ -59,7 +60,7 @@ class DistDiagram {
   createScales() {
     this.rScale = d3.scalePoint().range([3, 10]).domain(this.Sizes);
     this.angleScale = d3.scalePoint().padding(0.5).range([0, 2 * Math.PI]);
-    this.centerScale = d3.scalePoint().padding(1).range([-this.width / 2, this.width / 2]);
+    this.centerScale = d3.scalePoint().padding(3).range([-this.width / 2, this.width / 2]);
   }
 
   createDataGroup() {
@@ -72,8 +73,8 @@ class DistDiagram {
 
   start() {
 
-    this.containerH = this.height;
-    this.containerW = this.width;
+    this.containerH = this.height-40;
+    this.containerW = this.width-40;
     var that = this;
 
     this.graph.append("g")
@@ -137,22 +138,54 @@ class DistDiagram {
           .force('y', d3.forceY().y(function(d, i) {
             return xy_points[i].y
           }))
+          .force('charge', d3.forceManyBody().strength(5))
       } else {
 
         var unique = d3.set(this.data.map(function(d) {
           return +d[choice];
-        })).values().sort(function(a, b) {
+        }))
+        .values()
+        .sort(function(a, b) {
           return +a < +b ? -1 : +a > +b ? 1 : 0;
         }) //}d3.ascending)
 
         this.unique = unique;
+        console.log(unique);
         this.centerScale.domain(unique);
 
-        simulation.force('x', d3.forceX().x(function(d) {
+        simulation
+        .force('x', d3.forceX().x(function(d) {
           return that.centerScale(+d[choice]);
         }))
+        .force('charge', d3.forceManyBody().strength(0))
 
         //AXIS
+        // var axis = this.grid.append('g').classed('group_label', true)
+        
+        // axis.append('line')
+        // .attr('x1', -that.containerW/2 + this.grid_margin).attr('y1', -that.containerH/2+this.grid_margin)
+        // .attr('x2', that.containerW/2 - this.grid_margin).attr('y2', -that.containerH/2+this.grid_margin)
+        // .style('stroke', '#cccccc')
+        // .attr("stroke-width", 2);
+
+        // axis.append("text").attr('y', -that.containerH / 2+ 2*this.grid_margin).attr('x', that.centerScale(unique[0]))
+        // .text(format_value(unique[0], true))
+
+
+
+        // var rect = this.grid.append('g').classed('group_label', true).append('rect')
+        // rect = rect.attr('y', -that.containerH/2+this.grid_margin).attr('x', -that.containerW/2+this.grid_margin)
+        // .attr('height', 50).attr('width', that.containerW-2*this.grid_margin)
+
+        // var axis = d3.axisTop(this.centerScale).tickSize([0]);
+        // this.grid.append('g').classed('group_label', true)
+        // .attr("transform", "translate(0," + (-that.containerH/2 + this.grid_margin) + ")")
+        // .call(axis);
+
+
+
+
+
         var ticks = unique.filter(function(d, i) {
           if (unique.length > 12)
             return !(i % 5);
@@ -162,17 +195,22 @@ class DistDiagram {
         });
 
 
-        var rects = this.grid.append('g').classed('group_label', true)
+        // var rects = this.grid.append('g').classed('group_label', true)
         var ticks_text = this.grid.append('g').classed('group_label', true)
+        ticks_text.append('line')
+        .attr('x1', -that.containerW/2 ).attr('y1', -that.containerH/2+this.grid_pad)
+        .attr('x2', that.containerW/2 ).attr('y2', -that.containerH/2+this.grid_pad)
+        .style('stroke', '#cccccc')
+        .attr("stroke-width", 1);
         ticks.forEach(function(t, i) {
           // labels.append('line')
           // .attr("stroke", "#cccccc").attr('y2', -containerH/2).attr('x2', centerScale(+t))
           // .attr('y1', containerH/2).attr('x1', centerScale(+t));
-          rects.append('rect').attr('fill', "#cccccc").attr('fill-opacity', 1 / ticks.length)
-            .attr('y', -that.containerH / 2).attr('x', -that.containerW / 2).attr('height', that.containerH)
-            .attr('width', that.containerW / 2 + that.centerScale(+t))
+          // rects.append('rect').attr('fill', "#cccccc").attr('fill-opacity', 1 / ticks.length)
+          //   .attr('y', -that.containerH / 2).attr('x', -that.containerW / 2).attr('height', that.containerH)
+          //   .attr('width', that.containerW / 2 + that.centerScale(+t))
           // console.log(that.centerScale(+t))
-          ticks_text.append('text').attr('y', that.containerH / 2 - 20).attr('x', that.centerScale(+t))
+          ticks_text.append('text').attr('y', -that.containerH / 2 + that.grid_pad - 12).attr('x', that.centerScale(+t))
             .text(format_value(t, true))
         })
       }
@@ -188,8 +226,8 @@ class DistDiagram {
 
     function ticked() {
       // without boundaries
-      // node.attr("cx", d => d.x)
-      //   .attr("cy", d => d.y);
+      that.node.attr("cx", d => d.x)
+      .attr("cy", d => d.y);
 
       // console.log(this.alpha())
       if (this.alpha() < 0.5 & !labels_shown) {
@@ -197,17 +235,17 @@ class DistDiagram {
         that.showGrid();
       }
 
-      //now WITH boundaries
-      that.node.attr("cx", function(d) {
-          var radius = that.rScale(d.Size)
-          d.x = that.containerW / 2 + d.x
-          return d.x = Math.max(radius, Math.min(that.containerW - radius, d.x)) - that.containerW / 2;
-        })
-        .attr("cy", function(d) {
-          var radius = that.rScale(d.Size)
-          d.y = that.containerW / 2 + d.y
-          return d.y = Math.max(radius, Math.min(that.containerH - radius, d.y)) - that.containerH / 2;
-        });
+      // //now WITH boundaries
+      // that.node.attr("cx", function(d) {
+      //     var radius = that.rScale(d.Size)
+      //     d.x = that.containerW / 2 + d.x
+      //     return d.x = Math.max(radius, Math.min(that.containerW - radius, d.x)) - that.containerW / 2;
+      //   })
+      //   .attr("cy", function(d) {
+      //     var radius = that.rScale(d.Size)
+      //     d.y = that.containerW / 2 + d.y
+      //     return d.y = Math.max(radius, Math.min(that.containerH - radius, d.y)) - that.containerH / 2;
+      //   });
 
 
     }
@@ -293,15 +331,15 @@ class DistDiagram {
   highlight(selectedVal, isType = true) {
     this.node.each(function(d, i) {
       if (d.name == selectedVal) {
-        d3.select(this).classed('isHovered', true)
+        d3.select(this).classed('isClicked', true)
       } else {
-        d3.select(this).classed('isHovered', false)
+        d3.select(this).classed('isClicked', false)
       }
     })
   }
 
   removeHighlight() {
-    this.node.classed('isHovered', false);
+    this.node.classed('isClicked', false);
   }
 
   createButtons() {
@@ -338,7 +376,7 @@ class DistDiagram {
     //update('All');
 
     that.buttons.on('change', function(d) {
-      console.log('button changed to ' + this.value);
+      // console.log('button changed to ' + this.value);
       that.update(this.value);
     });
   }

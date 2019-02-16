@@ -1,12 +1,19 @@
 
-  var data = d3.csv("../poring_family_facts.csv")
-    .then(function(data) {
-      main(data);
-    });
+  
+  // d3.csv("../poring_family_facts.csv")
+  // .then(function(data) {
+  //     main(data);
+  //   });
+
+  Promise.all([
+    d3.csv("../poring_family.csv"),
+    d3.json("../facts.json"),
+]).then(function(files) {
+  main(files[0], files[1]);
+})
 
 
-
-  function main(inData) {
+  function main(inData, factsData) {
 
     var nestedData = d3.nest()
       .key(function(d) {
@@ -54,7 +61,8 @@
     });
 
     const facts_elem = new FactsBox({
-      element: document.querySelector('#mobFacts-container')
+      element: document.querySelector('#mobFacts-container'),
+      facts_data: factsData
     });
 
     const selector = new PoringSelector({
@@ -66,15 +74,5 @@
                  distDiagram: distdia ,
                  factsBox: facts_elem}
     });
-
-
-
-
-    //createStatsDiagram("#statsDia_svg");
-    //createPropsDiagram("#propsDia_svg");
-    //createDamageDiagram("#damageDia_svg");
-    //createDistDiagram("#distDia_svg",inData);
-    //createSelector(nestedData, "#selector_svg", {statsDiagram: statsdia});
-    //handle_buttons(inData);
 
   };

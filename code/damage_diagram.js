@@ -4,11 +4,11 @@ class DamageDiagram {
     // load in arguments from config object
     this.element = opts.element;
 
-    this.heartMaxR = 30*0.8,
-      this.borderMobR = 100*0.8,
-      this.maxAttackR = 250*0.8,
+    this.heartMaxR = 30 * 0.8,
+      this.borderMobR = 100 * 0.8,
+      this.maxAttackR = 250 * 0.8,
       this.numPoints = 30, //# of random values of attack
-      this.atk_padding = 30*0.8,
+      this.atk_padding = 30 * 0.8,
       this.MinDef = 0,
       this.MaxDef = 255,
       this.MaxLogHP = 20;
@@ -47,7 +47,7 @@ class DamageDiagram {
 
     this.xScale = d3.scaleLinear()
       .domain([0, this.MaxLogHP])
-      .range([0, this.heartMaxR]);
+      .range([5, this.heartMaxR]);
 
     this.angleScale = d3.scaleLinear()
       .domain([0, this.numPoints])
@@ -61,20 +61,20 @@ class DamageDiagram {
 
 
     this.radialAreaGenerator = d3.radialArea()
-      .angle(function(d) {
+      .angle(function (d) {
         return d.angle;
       })
-      .innerRadius(function(d) {
+      .innerRadius(function (d) {
         return d.r0;
       })
-      .outerRadius(function(d) {
+      .outerRadius(function (d) {
         return d.r1;
       })
       .curve(d3.curveCatmullRomClosed.alpha(1));
 
 
     var that = this;
-    this.randomPoints0 = d3.range(this.numPoints).map(function(v) {
+    this.randomPoints0 = d3.range(this.numPoints).map(function (v) {
       return {
         r0: 0,
         r1: 0,
@@ -131,11 +131,11 @@ class DamageDiagram {
     def_grid.selectAll('.def_ticks').data(def_ticks).enter()
       .append('text').attr('fill', "#cccccc")
       .attr('class', 'def_ticks')
-      .attr('x', function(d, i) {
+      .attr('x', function (d, i) {
         return that.innerScale(d) - 10
       })
       .attr('y', +15)
-      .text(function(d, i) {
+      .text(function (d, i) {
         return d
       })
 
@@ -160,14 +160,14 @@ class DamageDiagram {
 
     range_helper.append('text')
       .attr('id', 'helper_var')
-      .attr('x', this.maxAttackR - 80)
+      .attr('x', this.maxAttackR - 100)
       .attr('y', this.maxAttackR - 50)
       .attr('text-anchor', 'start')
       .text("")
 
     range_helper.append('text')
       .attr('id', 'helper_var_range')
-      .attr('x', this.maxAttackR - 80)
+      .attr('x', this.maxAttackR - 100)
       .attr('y', this.maxAttackR - 30)
       .attr('text-anchor', 'start')
       .text("")
@@ -175,7 +175,9 @@ class DamageDiagram {
 
 
   createDataGroup() {
-    this.graph = this.plot.append('g').attr('id', 'data_viz')
+    this.graph = this.plot.append('g').attr('id', 'data_viz');
+    //additional ticks for attack - they are gonna change in update() func
+    this.atk_grid_ingraph = this.graph.append('g').attr('id', 'atk_grid_ingraph');
   }
 
   update(data) {
@@ -186,14 +188,14 @@ class DamageDiagram {
     var maxAtk = -Infinity,
       minAtk = Infinity;
 
-    var extentDef = d3.extent(data, function(d) {
-      return d.Def;
+    var extentDef = d3.extent(data, function (d) {
+      return +d.Def;
     });
-    var extentLogHP = d3.extent(data, function(d) {
-      return d.logHP;
+    var extentHP = d3.extent(data, function (d) {
+      return +d.HP;
     });
 
-    var limAtk = data.map(function(d) {
+    var limAtk = data.map(function (d) {
       var limits = +d.MaxAttack >= +d.MinAttack ? [+d.MinAttack, +d.MaxAttack] : [+d.MaxAttack, +d.MinAttack]
       maxAtk = limits[1] > maxAtk ? limits[1] : maxAtk;
       minAtk = limits[0] < minAtk ? limits[0] : minAtk;
@@ -209,10 +211,10 @@ class DamageDiagram {
 
     var atk_ticks = this.attackScale.nice().ticks(3);
 
-    var atk_grid_ingraph = this.graph.append('g').attr('id', 'atk_grid_ingraph');
+    var atk_grid_ingraph =  this.atk_grid_ingraph;
 
     function repeat(d, i) {
-      if (d.logHP == extentLogHP[1]) {
+      if (d.HP == extentHP[1]) {
         var circle = d3.select(this)
         var r = that.xScale(d.logHP)
         circle = circle.transition()
@@ -231,16 +233,16 @@ class DamageDiagram {
       helper_var = d3.select('#helper_var'),
       helper_var_range = d3.select('#helper_var_range')
 
-    var data_enter = this.graph.selectAll('.def_arc').data(data).enter()
+    // var data_enter = this.graph.selectAll('.def_arc').data(data).enter()
 
     atk_grid_ingraph.selectAll('text').data(atk_ticks).enter()
       .append('text').attr('fill', "#cccccc")
       .attr('class', 'atk_ticks')
-      .attr('x', function(d, i) {
+      .attr('x', function (d, i) {
         return that.attackScale(d) + 10
       })
       .attr('y', -5)
-      .text(function(d, i) {
+      .text(function (d, i) {
         if ((d / 1000) >= 1) {
           d = d / 1000 + "K";
         }
@@ -252,68 +254,65 @@ class DamageDiagram {
       .attr('x1', this.attackScale(maxAtk));
 
 
-
-    d3.select('#maxTick').text(function() {
-      return format_value(Math.exp(extentLogHP[1]));
+    d3.select('#maxTick').text(function () {
+      return format_value(extentHP[1]);
     });
 
 
-    data_enter.append('path')
-      .attr('d', function(d) {
+    this.graph.selectAll('.def_arc').data(data).enter()
+    .append('path')
+      .attr('d', function (d) {
         return arc_R(that.borderMobR, that.borderMobR).startAngle(0).endAngle(2 * Math.PI)(d)
       })
-      .attr('class', function(d) {
+      .attr('class', function (d) {
         return 'def_arc'; // + d.viz_group
       })
       .style('fill-opacity', 1 / data.length)
-      .on("mouseover", function(d) {
+      .on("mouseover", function (d) {
         var theArc = d3.select(this);
         helper.style('fill-opacity', 1)
-          .style('fill', function() {
+          .style('fill', function () {
             return theArc.style('fill');
           })
         helper_var.text("Defence")
         helper_var_range.text(extentDef[0] + ' - ' + extentDef[1])
       })
-      .on("mouseout", function(d) {
+      .on("mouseout", function (d) {
         helper.style('fill-opacity', 0)
       })
       .transition().duration(1000)
-      .attr('d', function(d) {
+      .attr('d', function (d) {
         return arc_R(that.borderMobR, that.innerScale(d.Def)).startAngle(0).endAngle(2 * Math.PI)(d)
       })
 
-    data_enter.append('circle')
+      this.graph.selectAll('.HP_circle').data(data).enter()
+      .append('circle')
       .attr('r', 0)
-      .on("mouseover", function(d) {
+      .attr('cx', 0).attr('cy', 0)
+      .attr('fill', 'transparent')
+      .attr('class', 'HP_circle')
+      .attr('stroke', 'darkred')
+      .attr('opacity', 1 / data.length)
+      .on("mouseover", function (d) {
         var theCircle = d3.select(this);
         helper.style('fill-opacity', 1)
           .style('fill', 'darkred')
         helper_var.text("Health")
-        helper_var_range.text(format_value(Math.exp(extentLogHP[0])) +
-          ' - ' + format_value(Math.exp(extentLogHP[1])))
+        helper_var_range.text(format_value(extentHP[0]) +
+          ' - ' + format_value(extentHP[1]))
       })
-      .on("mouseout", function(d) {
+      .on("mouseout", function (d) {
         helper.style('fill-opacity', 0)
       })
-      .transition().duration(1000)
-      .attr('d', function(d) {
-        return arc_R(that.borderMobR, that.innerScale(d.Def)).startAngle(0).endAngle(2 * Math.PI)(d)
-      })
-      .transition().duration(1000)
-      .attr('class', 'HP_circle')
-      .attr('stroke', 'darkred')
-      .attr('opacity', 1 / data.length)
-      .attr('r', function(d) {
+      .transition().duration(500)
+      .attr('r', function (d) {
         return that.xScale(d.logHP)
       })
-      .attr('cx', 0).attr('cy', 0)
-      .attr('fill', 'transparent')
       //.attr('stroke', 'red')
       .on('end', repeat);
 
-    limAtk.forEach(function(d, i) {
-      var randomPoints = d3.range(that.numPoints).map(function(v) {
+    limAtk.forEach(function (d, i) {
+      var randomPoints = d3.range(that.numPoints).map(function (v) {
         return {
           r0: that.attackScale(d.downLim),
           r1: that.attackScale(d3.randomUniform(d.downLim, d.upLim)()),
@@ -329,7 +328,7 @@ class DamageDiagram {
         .classed('attack_path', true)
         .classed(data[i].viz_group, true)
         .attr('opacity', 1 / data.length > 0.5 ? 0.5 : 1 / data.length)
-        .on("mouseover", function() {
+        .on("mouseover", function () {
           var path = d3.select(this);
           helper.style('fill-opacity', 1)
             .style('fill', path.style('fill'))
@@ -337,7 +336,7 @@ class DamageDiagram {
           helper_var_range.text(format_value(d.downLim) +
             ' - ' + format_value(d.upLim))
         })
-        .on("mouseout", function() {
+        .on("mouseout", function () {
           helper.style('fill-opacity', 0)
         })
         .transition().duration(1000)
@@ -350,29 +349,34 @@ class DamageDiagram {
 
     var ticks = this.graph.selectAll('.atk_ticks')
     var that = this;
+    var atk_path =  this.graph.selectAll('.attack_path');
+    const hp_circles = this.graph.selectAll('.HP_circle').classed('HP_circle', false);
+    var def_arcs = this.graph.selectAll('.def_arc').classed('def_arc', false);
 
-    ticks.transition().duration(100)
-      .attr('fill-opacity', 0).remove();
+    ticks.remove();
 
     this.graph.select('#atk_line')
       .transition().duration(200)
       .attr('x1', this.borderMobR).remove()
 
-    this.graph.selectAll('.HP_circle').transition().duration(500)
-      .attr('r', 0).remove();
+    hp_circles.transition().duration(500)
+      .attr('r', 0);
 
-    this.graph.selectAll('.attack_path').transition().duration(1000)
+    def_arcs.transition().duration(800)
+      .attr('d', function (d) {
+        return arc_R(that.borderMobR, that.borderMobR).startAngle(0).endAngle(2 * Math.PI)(d)
+      });
+
+    atk_path.transition().duration(1000)
       .attr('d', this.pathData0).remove()
-      .on('end', function() {
-        that.graph.select('#atk_grid_ingraph').remove();
+      .on('end', function () {
+        // that.graph.select('#atk_grid_ingraph').remove();
+        hp_circles.remove();
+        def_arcs.remove();
       })
     //
     //
     //
-    this.graph.selectAll('.def_arc').transition().duration(800)
-      .attr('d', function(d) {
-        return arc_R(that.borderMobR, that.borderMobR).startAngle(0).endAngle(2 * Math.PI)(d)
-      }).remove()
 
   }
 

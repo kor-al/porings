@@ -12,6 +12,7 @@ body {
   width: 100%;
   margin: 0 auto;
   background: rgb(243, 243, 243);
+  /* rgb(240, 248, 230); */
 }
 
 h1 {
@@ -36,6 +37,8 @@ h3 {
 
 .header-wrapper{
   background: rgb(255, 223, 228);
+  /* rgb(240, 201, 214); */
+  /* rgb(255, 223, 228); */
   /* #fadfe5; */
   display: flex;
   flex-flow: row wrap;
@@ -43,12 +46,12 @@ h3 {
   max-width: 1700px;
   justify-content: space-between;
   /* justify-content: center; */
-  padding-top: 50px;
   vertical-align: top;
 }
 
 .header-text-wrapper{
-  padding: 0 50px;
+  padding: 50px;
+  /* padding-top: 50px; */
   /* display: inline-block; */
   width:45%;
   margin: 0;
@@ -67,7 +70,7 @@ h3 {
 
 #distDiagram-container
  {
-  height: 300px;
+  height: 400px;
   width: 400px;
   margin: 0 auto;
   /* display: inline-block; */
@@ -75,15 +78,16 @@ h3 {
 }
 
 .distButtons-wrapper{
-  vertical-align: top;
+  vertical-align: bottom;
   /* display: inline-block; */
-  padding: 0 50px 0 0 ;
+  padding: 50px 50px 0 0 ;
 }
 
 .distButtons-wrapper span {
   display: block;
   color: #629677;
   font-size: 80%;
+  /* margin-top:50px; */
 }
 
 
@@ -236,8 +240,8 @@ input:checked {
 
 .propsDiagram-wrapper{
   position: relative;
-  height: 425px;
-  width: 440px;
+  height: 440px;
+  width: 450px;
   margin: auto;
   padding: 0;
   /* margin: -5% auto auto 5%; */
@@ -245,11 +249,9 @@ input:checked {
 
 .propsDiagram-drop
 {
-  left: 0;
-  top: 0;
   display: block;
-  width: 440px;
-  height: 425px;
+  width: 450px;
+  height: 435px;
   background: white;
   border-radius: 60% 40% 57% 43% / 48% 49% 51% 52%  ; 
 } 
@@ -323,6 +325,36 @@ input:checked {
   color: #2d533c;
   line-height: 1.5em;
   font-family: "Raleway", sans-serif;
+}
+
+
+
+.selector-annotation
+{
+  height:250px;
+  float: right;
+  margin: 10px;
+}
+
+.stats-annotation
+{
+  height:260px;
+  float: right;
+  margin: 10px;
+}
+
+.elem-annotation
+{
+  width: 300px;
+  float: left;
+  margin: 10px;
+}
+
+.combat-annotation
+{
+  height:300px;
+  float: left;
+  margin: 10px;
 }
 
 footer{
