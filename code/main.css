@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: "Raleway", sans-serif;
   font-size: 14px;
+  color: #315659;
   /* background: rgb(255, 223, 228);  */
   /* #fac7c2; */
   width: 100%;
@@ -20,24 +21,28 @@ h1 {
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
   font-size: 42px;
-  color: #324e3d;
+  color: #253031;
+   /* #324e3d; */
   margin-top: 0;
 }
 
 h2 {
   font-weight: 400;
   font-size: 22px;
-  color: #2d533c;
+  color: #253031;
+  /* #2d533c; */
   /* grey; */
 }
 
 h3 {
-  color: #2d533c;
+  color: #253031;
+   /* #2d533c; */
   /* grey; */
 }
 
 .header-wrapper {
-  background: rgb(255, 223, 228);
+  background: #f7d8d8;
+  /* #ffdfe4;  */
   /* rgb(240, 201, 214); */
   /* rgb(255, 223, 228); */
   /* #fadfe5; */
@@ -74,8 +79,12 @@ h3 {
   width: 400px;
   margin: 0 auto;
   /* display: inline-block; */
-
 }
+
+#distDiagram-container text{
+  fill: #315659;
+}
+
 
 .distButtons-wrapper {
   vertical-align: bottom;
@@ -85,7 +94,8 @@ h3 {
 
 .distButtons-wrapper span {
   display: block;
-  color: #629677;
+  color: #315659;
+  /* #629677; */
   font-size: 80%;
   /* margin-top:50px; */
 }
@@ -93,7 +103,7 @@ h3 {
 
 .intro {
   font-weight: 400;
-  color: #629677;
+  /* #629677; */
   line-height: 1.5em;
   font-family: "Raleway", sans-serif;
   /* grey; */
@@ -127,7 +137,7 @@ input {
 }
 
 input:checked {
-  border: 6px solid #2d533c;
+  border: 6px solid #315659;
   /* black; */
 }
 
@@ -153,7 +163,7 @@ input:checked {
   padding: 0 30px 0 50px;
   box-sizing: border-box;
   vertical-align: bottom;
-  color: #2d533c;
+  /* #2d533c; */
 
 }
 
@@ -310,7 +320,6 @@ input:checked {
   background-color: rgb(228, 228, 228);
   padding: 50px;
   font-weight: 400;
-  color: #2d533c;
   line-height: 1.5em;
   font-family: "Raleway", sans-serif;
 }
