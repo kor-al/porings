@@ -19,8 +19,9 @@ body {
 
 h1 {
   font-family: "Montserrat", sans-serif;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 42px;
+  font-kerning: normal;
   color: #253031;
    /* #324e3d; */
   margin-top: 0;
@@ -386,8 +387,13 @@ a:active {
   color: inherit;
 }
 
-.heart_icon {
-  color: rgb(117, 1, 1);
+.poring_icon {
+  width: 50px;
+}
+
+/* .porings_title  */
+.cls-1{
+  fill: red;
 }
 
 @media(max-width: 1100px) {
