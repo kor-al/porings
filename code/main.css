@@ -13,7 +13,7 @@ body {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  background: rgb(243, 243, 243);
+  background: #f3f3f3;
   /* rgb(240, 248, 230); */
 }
 
@@ -365,18 +365,40 @@ footer {
 }
 
 sup {
-  color: black;
+  color: #e57e7c;
+  position: relative;
 }
 
-.span-bold {
+
+/* https://www.w3schools.com/css/css_tooltip.asp */
+.ref_text{
+
+  visibility: hidden;
+  width: 180px;
+  background-color:#f3f3f3;
+  color:#315659;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  position: absolute;
+  z-index: 1;
+
+  top: -2px;
+  left: 105%; 
+}
+
+
+/* Show the tooltip text when you mouse over the tooltip container */
+sup:hover .ref_text {
+  visibility: visible;
+}
+
+.span-bold, .git {
   font-weight: bolder;
 }
 
 a {
-  text-decoration: none;
-}
-
-footer a {
   text-decoration: underline;
 }
 
@@ -389,12 +411,10 @@ a:active {
 
 .poring_icon {
   width: 50px;
+  float : right;
+  margin: 10px;
 }
 
-/* .porings_title  */
-.cls-1{
-  fill: red;
-}
 
 @media(max-width: 1100px) {
 

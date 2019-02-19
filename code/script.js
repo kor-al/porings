@@ -1,12 +1,7 @@
 
-  
-  // d3.csv("../poring_family_facts.csv")
-  // .then(function(data) {
-  //     main(data);
-  //   });
 
-  Promise.all([
-    d3.csv("./viz_data/poring_family.csv"),
+Promise.all([
+    d3.csv("./viz_data/poring_family_local.csv"),
     d3.json("./viz_data/facts.json"),
 ]).then(function(files) {
   main(files[0], files[1]);

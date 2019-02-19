@@ -60,7 +60,7 @@ class DistDiagram {
   createScales() {
     this.rScale = d3.scalePoint().range([3, 10]).domain(this.Sizes);
     this.angleScale = d3.scalePoint().padding(0.5).range([0, 2 * Math.PI]);
-    this.centerScale = d3.scalePoint().padding(3).range([-this.width / 2, this.width / 2]);
+    this.centerScale = d3.scalePoint().padding(3).range([-this.width / 2+this.grid_pad, this.width / 2-this.grid_pad]);
   }
 
   createDataGroup() {
