@@ -537,6 +537,12 @@ a:active {
     width: 50%;
   }
 
+  .ref_text{
+    left: auto;
+    right: -100%;
+    top: -150%;
+  }
+
 }
 
 
