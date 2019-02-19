@@ -83,7 +83,7 @@ class PropsDiagram {
 
     this.arcs_graph = graph.append('g').attr('id', 'data_arcs');
     this.flower_graph = graph.append('g').attr('id', 'data_flower');
-    this.helper = graph.append('g').attr('id', 'propHelper').style("font-weight", "bold");
+    this.helper = graph.append('g').attr('id', 'propHelper');//;
 
     this.helper.append('text')
       .attr('id', 'helper_text')
@@ -95,6 +95,7 @@ class PropsDiagram {
       .attr('y', this.largestR)
       .attr('x', this.largestR)
       .style("fill", "transparent")
+      .style("font-weight", "bold")
   }
 
   createAxis() {
