@@ -21,11 +21,11 @@ function rot(angle) {
   }
 
 function getMax(data,variable = 'PropertyLevel') {
-  return d3.max(data, function(d) {return d[variable];});
+  return d3.max(data, function(d) {return parseInt(d[variable]);});
 }
 
 function getMin(data,variable = 'PropertyLevel') {
-  return d3.min(data, function(d) {return d[variable];})
+  return d3.min(data, function(d) {return  parseInt(d[variable]);})
 }
 
 
