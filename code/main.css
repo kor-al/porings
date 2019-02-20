@@ -21,7 +21,6 @@ h1 {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 42px;
-  font-kerning: normal;
   color: #253031;
    /* #324e3d; */
   margin-top: 0;
@@ -47,11 +46,18 @@ h3 {
   /* rgb(240, 201, 214); */
   /* rgb(255, 223, 228); */
   /* #fadfe5; */
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
   width: 100%;
   max-width: 1700px;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   /* justify-content: center; */
   vertical-align: top;
 }
@@ -62,14 +68,18 @@ h3 {
   /* display: inline-block; */
   width: 45%;
   margin: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .distDiagram-wrapper {
   /* display: inline-block; */
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   min-width: 55%;
   text-align: right;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   vertical-align: top;
   /* justify-content: space-between; */
@@ -129,6 +139,8 @@ input {
   height: 16px;
 
   border: 2px solid #999;
+  -webkit-transition: 0.2s all linear;
+  -o-transition: 0.2s all linear;
   transition: 0.2s all linear;
   outline: none;
   margin-right: 5px;
@@ -145,9 +157,18 @@ input:checked {
 
 .content-wrapper {
 
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding: 50px 0;
 }
 
@@ -162,7 +183,8 @@ input:checked {
   /* width: 250px; */
   margin: 0 auto auto 0;
   padding: 0 30px 0 50px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   vertical-align: bottom;
   /* #2d533c; */
 
@@ -467,7 +489,9 @@ a:active {
   }
 
   .header-wrapper {
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 
   .header-text-wrapper,
@@ -518,8 +542,13 @@ a:active {
   }
 
   .distDiagram-wrapper {
-    flex-flow: row wrap;
-    justify-content: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 
   .distButtons-wrapper {

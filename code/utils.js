@@ -29,25 +29,6 @@ function getMin(data,variable = 'PropertyLevel') {
 }
 
 
-
-// function getMax(d,variable = 'PropertyLevel') {
-//   //max = accumulator, v = cur value
-//   var maxCallback = ( max, cur ) => Math.max( max, +cur[variable] );
-//   return +d.reduce( maxCallback, -Infinity );
-//   //return +data.reduce((max, v) => v[variable] > max ? v[variable] : max, data[0][variable]);
-// }
-
-// function getMin(data, var){
-//   return d3.min(data, function(d) {return d[var];})
-// }
-
-// function getMin(d,variable = 'PropertyLevel') {
-//   //min = accumulator, v = cur value
-//   var minCallback = ( min, cur ) => Math.min( min, +cur[variable] );
-//   return +d.reduce( minCallback, Infinity );
-// }
-
-
 function format_value(v, keep_float = false){
   if ((v / 1000) >= 1) {
     v = Math.round(v / 1000) + "K";

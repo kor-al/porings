@@ -15,7 +15,6 @@ class FactsBox{
 
         var div = d3.select(this.element);
 
-        // this.text = div.append('p').classed('factText', true).append("text");
         this.text = div.select('.factText');
         this.start_text = this.text.html();
         this.list = div.append('div').classed('factList-container', true).append('ul').classed('factList', true);
@@ -37,8 +36,6 @@ class FactsBox{
 
     reset()
     {
-        // this.text = this.text.html(this.start_text);
-        // this.text.html("");
         this.text.html(this.start_text)
         this.list.html("");
     }

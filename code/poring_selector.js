@@ -407,13 +407,6 @@ class PoringSelector {
           })
           .attr('r', 0)
           .attr("transform", "rotate(" + toDegrees(dangle) + "," + circleij_x + "," + circleij_y + ")")
-          // .on("mouseover", function(dangle, j) {
-          //   console.log('small circle mouse over')
-          //   d3.select('#helper').text('Observed types');
-          // })
-          // .on("mouseout", function(dangle, j) {
-          //   d3.select('#helper').text('');
-          // })
       })
 
   }

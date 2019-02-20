@@ -163,6 +163,7 @@ class DamageDiagram {
       .attr('x', this.maxAttackR - 100)
       .attr('y', this.maxAttackR - 50)
       .attr('text-anchor', 'start')
+      .attr('font-weight', 'bold')
       .text("")
 
     range_helper.append('text')
