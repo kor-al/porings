@@ -8,6 +8,8 @@ The data has been scraped from the database (available on http://ratemyserver.ne
 The descriptions of porings are from [ratemyserver.net](http://ratemyserver.net/), [iRO wiki](http://db.irowiki.org), [Ragnarök Wiki](https://ragnarok.gamepedia.com/Ragnarok_Wiki), [ROGuard](https://www.roguard.net/) Ragnarok Databases and [The Ragnarok Monster Lore](https://forums.warpportal.com/index.php?/topic/106898-encyclopaedia-ragnarok-monster-lore-mitten/), a fan made encyclopedia.
 
 The results are available on https://kor-al.github.io/porings/.<br>
-Some intermediate results: https://beta.observablehq.com/@kor-al/poring-family.
+Some intermediate results on Observable: https://beta.observablehq.com/@kor-al/poring-family.<br>
+
+The article on Medium: https://medium.com/@korinalice/porings-4345b46aaa64
 
 ![screenshot](./screenshot.png)
