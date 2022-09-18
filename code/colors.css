@@ -22,6 +22,10 @@ line.Angeling {
   stroke: #d4d8d8;
 }
 
+.poly{
+  filter: brightness(90%);
+}
+
 .poly.Angeling.isHovered {
   fill: #d4d8d8;
   stroke: #b9c0c0;
